@@ -1,5 +1,5 @@
 # What is it?
-21 Days is an application that uses behavioral analytics to intelligently deliver a mechanism that prompts users at exactly the right time to ensure that they follow through on behaviors and solidify them until they become real habits.
+21.Days is an application that uses behavioral analytics to intelligently deliver a mechanism that prompts users at exactly the right time to ensure that they follow through on behaviors and solidify them until they become real habits.
 
 # Features
 ## Create habits
@@ -19,3 +19,6 @@
 - Steven Jiang
 - Chenghui Li
 
+# The original pitch
+Some individuals who want to delve into the history of this venture have requested that we share a little our archives. Our original pitch can be found at this link:
+[Pitch slides](https://docs.google.com/presentation/d/1LqYHAFYNit3Wd_bE9uATRXGYYwExH9Xo0qOO0rtN3oY/edit#slide=id.p)
