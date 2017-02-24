@@ -6,10 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f409dace-f3af-4b51-82b9-e64f99d9bfbb" name="Default" comment="-Updated folder hierarchy to reflect android MVC architecture">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="f409dace-f3af-4b51-82b9-e64f99d9bfbb" name="Default" comment="-Updated folder hierarchy to reflect android MVC architecture" />
     <ignored path="21-Days.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
