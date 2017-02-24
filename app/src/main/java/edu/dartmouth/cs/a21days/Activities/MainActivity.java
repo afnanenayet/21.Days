@@ -1,7 +1,9 @@
-package edu.dartmouth.cs.a21days;
+package edu.dartmouth.cs.a21days.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import edu.dartmouth.cs.a21days.R;
 
 public class MainActivity extends AppCompatActivity {
 
