@@ -1,4 +1,4 @@
-package edu.dartmouth.cs.a21days.activities;
+package edu.dartmouth.cs.a21days.views;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
