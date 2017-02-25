@@ -10,6 +10,7 @@ import edu.dartmouth.cs.a21days.R;
 
 /**
  * A placeholder fragment containing a simple view.
+ * todo complete
  */
 public class ProfileActivityFragment extends Fragment {
 
