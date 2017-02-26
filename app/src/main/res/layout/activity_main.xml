@@ -17,4 +17,8 @@
         app:itemIconTint="@color/icons"
         app:itemTextColor="@color/icons"
         app:menu="@menu/bottom_nav_items" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 </RelativeLayout>
