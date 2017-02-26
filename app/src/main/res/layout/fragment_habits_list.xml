@@ -4,10 +4,18 @@
     android:layout_height="match_parent"
     tools:context="edu.dartmouth.cs.a21days.views.HabitsListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <cn.fanrunqi.waveprogress.WaveProgressView
+        android:id="@+id/waveProgressbar"
+        android:background="@drawable/shape"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Habits" />
+        android:id="@+id/habits_list_view"
+        android:layout_height="wrap_content">
+    </ListView>
 
 </FrameLayout>

@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import cn.fanrunqi.waveprogress.WaveProgressView;
 import edu.dartmouth.cs.a21days.R;
 
 /**
@@ -61,7 +64,27 @@ public class HabitsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_habits_list, container, false);
+
+        View mView = inflater.inflate(R.layout.fragment_habits_list, container, false);
+        ListView mListView = (ListView) mView.findViewById(R.id.habits_list_view);
+
+        WaveProgressView waveProgressbar = (WaveProgressView) mView.findViewById(R.id.waveProgressbar);
+        waveProgressbar.setCurrent(10, "10/21"); // 77, "788M/1024M"
+        waveProgressbar.setMaxProgress(21);
+        waveProgressbar.setText("#FFFF00",10);
+        waveProgressbar.setWaveColor("#5b9ef4"); //"#5b9ef4"
+
+        // waveProgressbar.setWave(float mWaveHight,float mWaveWidth);
+        waveProgressbar.setmWaveSpeed(10);//The larger the value, the slower the vibration
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(final AdapterView<?> parent, View v, final int position, long id) {
+
+            }
+        });
+
+        return mView;
     }
 
 }

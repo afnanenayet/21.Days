@@ -33,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mFragments = new ArrayList<Fragment>();
 
-        mFragments.add(new AnalyticsFragment());
+
         mFragments.add(new HabitsListFragment());
+        mFragments.add(new AnalyticsFragment());
         mFragments.add(new SettingsFragment());
 
 
