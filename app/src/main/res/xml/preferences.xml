@@ -4,42 +4,44 @@
     <PreferenceCategory
         android:title="User Preferences">
 
-        <PreferenceScreen
-            android:title="View Profile">
-            <intent android:action="edu.dartmouth.cs.a21days.ProfileFragment"/>
-        </PreferenceScreen>
-
         <CheckBoxPreference
             android:key="privacy_preference"
             android:title="Privacy Setting"
             android:summary="Posting your records anonymously" />
+        <CheckBoxPreference
+            android:key="quiet_hours_preference"
+            android:title="Enable Quiet Hours" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Quiet Hours"
+        android:key="quiet_hours">
+
         <edu.dartmouth.cs.a21days.views.TimePreference
-            android:title="Do Not Disturb" />
+            android:key="start_time"
+            android:title="Start Time" />
+        <edu.dartmouth.cs.a21days.views.TimePreference
+            android:key="end_time"
+            android:title="End Time" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="Additional Settings">
-        <ListPreference
-            android:key="unit_preference"
-            android:title="Unit Preferences"
-            android:summary="Select the units"
-            android:dialogTitle="Unit Preference" />
 
         <EditTextPreference
-            android:key="comments_preference"
-            android:title="Comments"
+            android:key="feedback_preference"
+            android:title="Feedback"
             android:summary="Please enter your comments"
             android:dialogTitle="Comments" />
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:title="Misc.">
+
+
         <PreferenceScreen
             android:title="Webpage"
-            android:summary="http://web.cs.dartmouth.edu">
+            android:summary="http://minigma.com/21.Days/">
 
             <intent android:action="android.intent.action.VIEW"
-                android:data="http://web.cs.dartmouth.edu/" />
+                android:data="http://minigma.com/21.Days/" />
 
         </PreferenceScreen>
     </PreferenceCategory>

@@ -1,7 +1,7 @@
 package edu.dartmouth.cs.a21days.views;
 
 /**
- * Created by Steven on 2/26/17.
+ * https://gist.github.com/nickaknudson/5024416
  */
 
         import java.text.DateFormat;
@@ -16,8 +16,6 @@ package edu.dartmouth.cs.a21days.views;
         import android.util.AttributeSet;
         import android.view.View;
         import android.widget.TimePicker;
-
-// Based on http://stackoverflow.com/a/7484289/922168
 
 public class TimePreference extends DialogPreference {
     private int mHour = 0;
