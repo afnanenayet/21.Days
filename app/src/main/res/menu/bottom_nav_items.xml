@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/action_habits"
-        android:title="Habits"
+        android:title="@string/habits_fragment_title"
         android:enabled="true"
         android:icon="@drawable/ic_habits" />
     <item android:id="@+id/action_analytics"
-        android:title="Analytics"
+        android:title="@string/analytics_fragment_title"
         android:enabled="true"
         android:icon="@drawable/ic_analytics" />
     <item android:id="@+id/action_settings"
-        android:title="Settings"
+        android:title="@string/settings_fragment_title"
         android:enabled="true"
         android:icon="@drawable/ic_settings" />
 </menu>
