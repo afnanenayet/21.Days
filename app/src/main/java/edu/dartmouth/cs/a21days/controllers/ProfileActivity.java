@@ -1,4 +1,4 @@
-package edu.dartmouth.cs.a21days.activities;
+package edu.dartmouth.cs.a21days.controllers;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

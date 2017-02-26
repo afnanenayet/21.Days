@@ -1,4 +1,4 @@
-package edu.dartmouth.cs.a21days.activities;
+package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
 import edu.dartmouth.cs.a21days.views.HabitsListFragment;
 import edu.dartmouth.cs.a21days.views.SettingsFragment;
 
+/**
+ * The Main controller for the application. Utilizes a bottom navigation bar
+ */
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNavigationView;
@@ -22,23 +25,23 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPageAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Setting up bottom navigation view
         mBottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mFragments = new ArrayList<Fragment>();
 
-
+        // Making list of fragments to swipe through
+        mFragments = new ArrayList<>();
         mFragments.add(new HabitsListFragment());
         mFragments.add(new AnalyticsFragment());
         mFragments.add(new SettingsFragment());
 
-
+        // Viewpage adapter so we can swipe through tabs with the bottom layout
         mViewPageAdapter = new ViewPagerAdapter(getFragmentManager(), mFragments);
         mViewPager.setAdapter(mViewPageAdapter);
 

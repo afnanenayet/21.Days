@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> fragments;
 
-    // Tab positions and names
+    // Tab enumerations
     public static final int HABITS = 0;
     public static final int ANALYTICS = 1;
     public static final int SETTINGS = 2;
