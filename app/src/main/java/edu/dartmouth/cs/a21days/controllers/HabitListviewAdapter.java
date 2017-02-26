@@ -8,10 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import cn.fanrunqi.waveprogress.WaveProgressView;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.R;
 
@@ -46,13 +49,21 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
         LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.habit_item_view, parent, false);
 
-        HabitViewHolder viewHolder = new HabitViewHolder(linearLayout);
-        return viewHolder;
+        return new HabitViewHolder(linearLayout);
     }
 
+    /**
+     * Replace the contents of a view
+     * @param holder The holder for that view
+     * @param position the position to fill contents with
+     */
     @Override
     public void onBindViewHolder(HabitViewHolder holder, int position) {
-
+        // Load contents for that position
+        // TODO debug replace with real data
+        holder.habitNameTv.setText(Integer.toString(position));
+        holder.progressView.setMaxProgress(100);
+        holder.progressView.setCurrent(position, "TEST DEBUG");
     }
 
     /**
@@ -75,6 +86,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
         public TextView habitCategoryTv;
         public TextView habitFrequency;
         public TextView habitLocation;
+        public WaveProgressView progressView;
 
         public HabitViewHolder(View itemView) {
             super(itemView);
@@ -84,8 +96,16 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
             LinearLayout internalLinearLayout = (LinearLayout)
                     itemView.findViewById(R.id.habits_list_view);
 
-            // Binding textviews
-            
+            // Binding internal views
+            habitNameTv = (TextView) internalLinearLayout.findViewById(R.id.habit_name);
+            habitCurrentStreakTv = (TextView) internalLinearLayout
+                    .findViewById(R.id.habit_current_streak);
+            habitPriorityTv = (TextView) internalLinearLayout.findViewById(R.id.habit_priority);
+            habitCategoryTv = (TextView) internalLinearLayout.findViewById(R.id.habit_category);
+            habitFrequency = (TextView) internalLinearLayout.findViewById(R.id.habit_frequency);
+            habitLocation = (TextView) internalLinearLayout.findViewById(R.id.habit_location);
+            progressView = (WaveProgressView) parentLinearLayout
+                    .findViewById(R.id.habit_progress_bar);
         }
     }
 }
