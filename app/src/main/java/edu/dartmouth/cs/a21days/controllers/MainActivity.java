@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import edu.dartmouth.cs.a21days.views.SettingsFragment;
 /**
  * The Main controller for the application. Utilizes a bottom navigation bar
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
 
     private BottomNavigationView mBottomNavigationView;
     private ArrayList<Fragment> mFragments;
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         mViewPageAdapter = new ViewPagerAdapter(getFragmentManager(), mFragments);
         mViewPager.setAdapter(mViewPageAdapter);
 
+        // Allows us to set the selected item in bottompagelistener
+        mViewPager.addOnPageChangeListener(this);
+
         mBottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -61,10 +65,28 @@ public class MainActivity extends AppCompatActivity {
                                 break;
 
                         }
+
                         return true;
                     }
                 });
     }
 
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        // Empty function required to implement OnPageChangedListener
+    }
+
+    // Set bottom bar nav item to be selected when viewpager is swiped/selected
+    @Override
+    public void onPageSelected(int position) {
+        Menu menu = mBottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(position);
+        menuItem.setChecked(true);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        // Empty function required to implement OnPageChangedListener
+    }
 }
