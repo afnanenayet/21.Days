@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:title="User Preferences">
+
+        <PreferenceScreen
+            android:title="View Profile">
+            <intent android:action="edu.dartmouth.cs.a21days.ProfileFragment"/>
+        </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:key="privacy_preference"
+            android:title="Privacy Setting"
+            android:summary="Posting your records anonymously" />
+        <edu.dartmouth.cs.a21days.views.TimePreference
+            android:title="Do Not Disturb" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Additional Settings">
+        <ListPreference
+            android:key="unit_preference"
+            android:title="Unit Preferences"
+            android:summary="Select the units"
+            android:dialogTitle="Unit Preference" />
+
+        <EditTextPreference
+            android:key="comments_preference"
+            android:title="Comments"
+            android:summary="Please enter your comments"
+            android:dialogTitle="Comments" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Misc.">
+        <PreferenceScreen
+            android:title="Webpage"
+            android:summary="http://web.cs.dartmouth.edu">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://web.cs.dartmouth.edu/" />
+
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+</PreferenceScreen>
