@@ -21,4 +21,9 @@
         <item>Medium priority</item>
         <item>Low priority</item>
     </string-array>
+
+    <string name="delete">Delete Habit</string>
+    <string name="category">Category</string>
+    <string name="priority">Priority</string>
+    <string name="location">Locations</string>
 </resources>
