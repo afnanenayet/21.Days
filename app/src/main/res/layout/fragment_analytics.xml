@@ -4,10 +4,131 @@
     android:layout_height="match_parent"
     tools:context="edu.dartmouth.cs.a21days.views.AnalyticsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Analytics" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- a bar graph to show all of the streaks attained -->
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/analytics_chart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+
+            <!-- show num of ongoing and completed habits -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/analytics_ongoing_habits"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/analytics_completed_habits"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/analytics_ongoing_habits_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="22sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:text="21"/>
+
+                <TextView
+                    android:id="@+id/analytics_completed_habits_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="22sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:text="3"/>
+
+            </LinearLayout>
+
+            <!-- show longest streak and most neglected habits -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/analytics_longest_streak"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/analytics_most_neglected"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/analytics_longest_streak_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="22sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:text="33\nGo To Gym"/>
+
+                <TextView
+                    android:id="@+id/analytics_most_neglected_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="22sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:text="40\nDo Not Procrastinate"/>
+
+            </LinearLayout>
+
+
+            <!-- an encouraging comment to the user -->
+            <TextView
+                android:id="@+id/analytics_comment_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryText"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>
