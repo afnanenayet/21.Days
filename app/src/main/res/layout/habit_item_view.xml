@@ -5,31 +5,37 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/habit_parent_view" >
 
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="5sp"
+        card_view:cardElevation="5sp"
         android:id="@+id/habit_item_card_view">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5sp"
-            card_view:cardCornerRadius="5sp">
+            android:layout_margin="20sp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/habits_list_view"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20sp"
                 android:layout_toEndOf="@+id/habit_progress_bar">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/habit_name" />
+                    android:id="@+id/habit_name"
+                    android:typeface="sans"
+                    android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -67,8 +73,7 @@
                 android:background="@drawable/shape"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
+                android:layout_margin="5sp"
                 android:layout_centerVertical="true" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>

@@ -4,14 +4,22 @@ import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.fanrunqi.waveprogress.WaveProgressView;
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.controllers.HabitListviewAdapter;
+import edu.dartmouth.cs.a21days.models.Habit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,14 +28,7 @@ import edu.dartmouth.cs.a21days.R;
  * create an instance of this fragment.
  */
 public class HabitsListFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    //@BindView(R.id.habits_recycler_view) RecyclerView mRecyclerView;
 
     public HabitsListFragment() {
         // Required empty public constructor
@@ -37,27 +38,15 @@ public class HabitsListFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HabitsListFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static HabitsListFragment newInstance(String param1, String param2) {
+    public static HabitsListFragment newInstance() {
         HabitsListFragment fragment = new HabitsListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -66,24 +55,41 @@ public class HabitsListFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View mView = inflater.inflate(R.layout.fragment_habits_list, container, false);
-        ListView mListView = (ListView) mView.findViewById(R.id.habits_list_view);
+        //ButterKnife.bind(mView);
+        RecyclerView mRecyclerView = (RecyclerView) mView.findViewById(R.id.habits_recycler_view);
 
-        WaveProgressView waveProgressbar = (WaveProgressView) mView.findViewById(R.id.waveProgressbar);
-        waveProgressbar.setCurrent(10, "10/21"); // 77, "788M/1024M"
-        waveProgressbar.setMaxProgress(21);
-        waveProgressbar.setText("#FFFF00",10);
-        waveProgressbar.setWaveColor("#5b9ef4"); //"#5b9ef4"
+        // Initializing test data
+        Habit habit1 = new Habit();
+        habit1.setName("20 push ups");
+        habit1.setPriority(1);
+        habit1.setCategory("Fitness");
+        habit1.setStreak(10);
 
-        // waveProgressbar.setWave(float mWaveHight,float mWaveWidth);
-        waveProgressbar.setmWaveSpeed(10);//The larger the value, the slower the vibration
+        Habit habit2 = new Habit();
+        habit2.setName("Meditate");
+        habit2.setPriority(3);
+        habit2.setCategory("Wellness");
+        habit2.setStreak(2);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(final AdapterView<?> parent, View v, final int position, long id) {
+        Habit habit3 = new Habit();
+        habit3.setName("Make an app");
+        habit3.setPriority(0);
+        habit3.setCategory("Life");
+        habit3.setStreak(20);
 
-            }
-        });
+        // Setting up adapter with test data
+        ArrayList<Habit> list = new ArrayList<>();
+        list.add(habit1);
+        list.add(habit2);
+        list.add(habit3);
 
+        // Initializing recyclerview
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+
+        HabitListviewAdapter adapter = new HabitListviewAdapter(list);
+        /// mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.habits_recycler_view);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(adapter);
         return mView;
     }
 

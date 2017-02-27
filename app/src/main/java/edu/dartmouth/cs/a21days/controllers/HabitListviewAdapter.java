@@ -14,6 +14,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.fanrunqi.waveprogress.WaveProgressView;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.R;
@@ -61,9 +62,14 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     public void onBindViewHolder(HabitViewHolder holder, int position) {
         // Load contents for that position
         // TODO debug replace with real data
-        holder.habitNameTv.setText(Integer.toString(position));
-        holder.progressView.setMaxProgress(100);
-        holder.progressView.setCurrent(position, "TEST DEBUG");
+        Habit habit = mHabitList.get(position);
+
+        holder.habitNameTv.setText(habit.getName());
+        holder.habitPriorityTv.setText(Integer.toString(habit.getPriority()));
+        holder.habitCategoryTv.setText(habit.getCategory());
+        holder.habitCurrentStreakTv.setText(habit.getStreak() + " out of 21 days complete");
+        holder.progressView.setMaxProgress(21);
+        holder.progressView.setCurrent(habit.getStreak(), Integer.toString(habit.getStreak()));
     }
 
     /**
@@ -80,13 +86,13 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
      * Provides a reference to the view for each data item
      */
     public static class HabitViewHolder extends RecyclerView.ViewHolder {
-        public TextView habitNameTv;
-        public TextView habitCurrentStreakTv;
-        public TextView habitPriorityTv;
-        public TextView habitCategoryTv;
-        public TextView habitFrequency;
-        public TextView habitLocation;
-        public WaveProgressView progressView;
+        @BindView(R.id.habit_name) TextView habitNameTv;
+        @BindView(R.id.habit_current_streak) TextView habitCurrentStreakTv;
+        @BindView(R.id.habit_priority) TextView habitPriorityTv;
+        @BindView(R.id.habit_category) TextView habitCategoryTv;
+        @BindView(R.id.habit_frequency) TextView habitFrequency;
+        @BindView(R.id.habit_location) TextView habitLocation;
+        WaveProgressView progressView;
 
         public HabitViewHolder(View itemView) {
             super(itemView);
@@ -97,15 +103,9 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
                     itemView.findViewById(R.id.habits_list_view);
 
             // Binding internal views
-            habitNameTv = (TextView) internalLinearLayout.findViewById(R.id.habit_name);
-            habitCurrentStreakTv = (TextView) internalLinearLayout
-                    .findViewById(R.id.habit_current_streak);
-            habitPriorityTv = (TextView) internalLinearLayout.findViewById(R.id.habit_priority);
-            habitCategoryTv = (TextView) internalLinearLayout.findViewById(R.id.habit_category);
-            habitFrequency = (TextView) internalLinearLayout.findViewById(R.id.habit_frequency);
-            habitLocation = (TextView) internalLinearLayout.findViewById(R.id.habit_location);
             progressView = (WaveProgressView) parentLinearLayout
                     .findViewById(R.id.habit_progress_bar);
+            ButterKnife.bind(this, internalLinearLayout);
         }
     }
 }
