@@ -1,5 +1,4 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,21 +12,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <!-- chart for habit streaks -->
             <android.support.v7.widget.CardView
+                android:id="@+id/analytics_graph_card_view"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 card_view:cardCornerRadius="5sp"
                 card_view:cardElevation="5sp"
-                android:id="@+id/habit_chart_view"
                 android:layout_height="250dp">
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/analytics_chart"
-                android:layout_width="match_parent"
-                android:layout_height="250dp" />
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/analytics_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
 
             </android.support.v7.widget.CardView>
 
@@ -39,19 +39,19 @@
                 card_view:cardElevation="5sp"
                 android:id="@+id/habit_analysis_card_view">
 
-            <LinearLayout
+                <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:background="#ffffff"
                     android:layout_height="wrap_content"
-                android:layout_weight="0.04">
+                    android:layout_weight="0.04">
 
-                <LinearLayout
+                    <LinearLayout
                         android:orientation="horizontal"
                         android:layout_marginTop="20dp"
                         android:layout_width="match_parent"
                         android:layout_weight="0.04"
-                    android:layout_height="100dp">
+                        android:layout_height="100dp">
 
                         <Space
                             android:layout_width="0dp"
@@ -67,18 +67,18 @@
                             android:layout_height="100dp">
 
                             <TextView
-                                android:text="Ongoing Habits"
+                                android:text="@string/analytics_ongoing_habits"
                                 android:textAlignment="center"
                                 android:textColor="#ffffff"
                                 android:layout_width="match_parent"
                                 android:layout_gravity="top"
                                 android:layout_marginTop="10dp"
                                 android:drawableLeft="@drawable/smile"
-                                android:id="@+id/textView4"
+                                android:id="@+id/analytics_ongoing_habits_title_textview"
                                 android:layout_height="wrap_content" />
 
                             <TextView
-                                android:id="@+id/myRectangleView"
+                                android:id="@+id/analytics_ongoing_habits_num_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -95,7 +95,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:textAlignment="center"
                                 android:textColor="#ffffff"
-                                android:id="@+id/textView5"
+                                android:id="@+id/analytics_ongoing_habits_comment_textview"
                                 android:text="Good job!" />
                         </FrameLayout>
 
@@ -112,17 +112,17 @@
                             android:background="@drawable/blue_rectangle">
 
                             <TextView
-                                android:text="Completed Habits"
+                                android:text="@string/analytics_completed_habits"
                                 android:textAlignment="center"
                                 android:textColor="#ffffff"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="top"
                                 android:layout_marginTop="10dp"
-                                android:id="@+id/textView6"/>
+                                android:id="@+id/analytics_completed_habits_title_textview"/>
 
                             <TextView
-                                android:id="@+id/myRectangleView2"
+                                android:id="@+id/analytics_completed_habits_num_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -140,14 +140,15 @@
                                 android:layout_marginBottom="10dp"
                                 android:textAlignment="center"
                                 android:textColor="#ffffff"
-                                android:id="@+id/textView8"/>
+                                android:id="@+id/analytics_completed_habits_comment_textview"/>
                         </FrameLayout>
 
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"/>
-                    </LinearLayout>
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:orientation="horizontal"
@@ -170,18 +171,18 @@
                                 android:layout_height="100dp">
 
                                 <TextView
-                                    android:text="Longest Streak"
+                                    android:text="@string/analytics_longest_streak"
                                     android:textAlignment="center"
                                     android:textColor="#ffffff"
                                     android:layout_width="match_parent"
                                     android:layout_gravity="top"
                                     android:layout_marginTop="10dp"
                                     android:drawableStart="@drawable/smile"
-                                    android:id="@+id/textView9"
+                                    android:id="@+id/analytics_longest_streak_habit_title_textview"
                                     android:layout_height="wrap_content" />
 
                                 <TextView
-                                    android:id="@+id/myRectangleView3"
+                                    android:id="@+id/analytics_longest_streak_num_textview"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -199,7 +200,7 @@
                                     android:layout_marginBottom="10dp"
                                     android:textAlignment="center"
                                     android:textColor="#ffffff"
-                                    android:id="@+id/textView10"/>
+                                    android:id="@+id/analytics_longest_streak_habit_name_textview"/>
                             </FrameLayout>
 
                             <Space
@@ -215,17 +216,17 @@
                                 android:background="@drawable/blue_rectangle">
 
                                 <TextView
-                                    android:text="Neglected Streak"
+                                    android:text="@string/analytics_most_neglected"
                                     android:textAlignment="center"
                                     android:textColor="#ffffff"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="top"
                                     android:layout_marginTop="10dp"
-                                    android:id="@+id/textView11"/>
+                                    android:id="@+id/analytics_neglected_habit_title_textview"/>
 
                                 <TextView
-                                    android:id="@+id/myRectangleView4"
+                                    android:id="@+id/analytics_neglected_days_textview"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -243,37 +244,38 @@
                                     android:layout_marginBottom="10dp"
                                     android:textAlignment="center"
                                     android:textColor="#ffffff"
-                                    android:id="@+id/textView12"/>
+                                    android:id="@+id/analytics_neglected_habit_name_textview"/>
                             </FrameLayout>
 
                             <Space
                                 android:layout_width="0dp"
                                 android:layout_height="50dp"
                                 android:layout_weight="1"/>
+
+                            </LinearLayout>
                         </LinearLayout>
-        </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/analytics_comment_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 card_view:cardCornerRadius="5sp"
-                card_view:cardElevation="5sp"
-                android:id="@+id/habit_comment_card_view">
-            <TextView
-                android:textColor="@color/colorPrimaryText"
-                android:layout_width="match_parent"
-                android:background="#ffffff"
-                android:id="@+id/analytics_comment_textview"
-                android:layout_weight="0.04"
-                android:layout_height="80dp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
+                card_view:cardElevation="5sp" >
 
+                <TextView
+                    android:id="@+id/analytics_comment_textview"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_width="match_parent"
+                    android:background="#ffffff"
+                    android:layout_weight="0.04"
+                    android:layout_height="80dp"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+            </android.support.v7.widget.CardView>
 
         </LinearLayout>
 
