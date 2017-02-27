@@ -24,4 +24,4 @@ Some individuals who want to delve into the history of this venture have request
 [Pitch slides](https://docs.google.com/presentation/d/1LqYHAFYNit3Wd_bE9uATRXGYYwExH9Xo0qOO0rtN3oY/edit#slide=id.p)
 
 # MVC Diagram
-![alt text](https://github.com/afnanenayet/21.Days/blob/master/docs/images/MVC.jpg)
+![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/MVC.jpg?token=ARpKavc22tgoQx1jVjW6MulirliHG6tSks5YvZgIwA%3D%3D)
