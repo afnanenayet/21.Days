@@ -43,7 +43,7 @@
                             android:orientation="vertical"
                             android:layout_width="100dp"
                             android:layout_weight="1"
-                            android:background="@drawable/orange_rectangle"
+                            android:background="@drawable/blue_rectangle"
                             android:layout_height="100dp">
 
                             <TextView
@@ -65,7 +65,7 @@
                                 android:text="14"
                                 android:textSize="30sp"
                                 android:gravity="center"
-                                android:textColor="#dec97e"
+                                android:textColor="#ffffff"
                                 android:textAlignment="center"/>
 
                             <TextView
@@ -89,7 +89,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_weight="1"
-                            android:background="@drawable/green_rectangle">
+                            android:background="@drawable/blue_rectangle">
 
                             <TextView
                                 android:text="Completed Habits"
@@ -109,7 +109,7 @@
                                 android:text="5"
                                 android:textSize="30sp"
                                 android:gravity="center"
-                                android:textColor="#3aab3e"
+                                android:textColor="#ffffff"
                                 android:textAlignment="center"/>
 
                             <TextView
@@ -169,7 +169,7 @@
                                     android:text="10 Days"
                                     android:textSize="30sp"
                                     android:gravity="center"
-                                    android:textColor="#2df795"
+                                    android:textColor="#ffffff"
                                     android:textAlignment="center"/>
 
                                 <TextView
@@ -193,7 +193,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/deep_rectangle">
+                                android:background="@drawable/blue_rectangle">
 
                                 <TextView
                                     android:text="Neglected Streak"
@@ -213,7 +213,7 @@
                                     android:text="7 Days"
                                     android:textSize="30sp"
                                     android:gravity="center"
-                                    android:textColor="#f51616"
+                                    android:textColor="#ffffff"
                                     android:textAlignment="center"/>
 
                                 <TextView
