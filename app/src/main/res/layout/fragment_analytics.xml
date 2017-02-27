@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,21 +16,39 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                card_view:cardCornerRadius="5sp"
+                card_view:cardElevation="5sp"
+                android:id="@+id/habit_chart_view"
+                android:layout_height="250dp">
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/analytics_chart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="250dp" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardCornerRadius="5sp"
+                card_view:cardElevation="5sp"
+                android:id="@+id/habit_analysis_card_view">
 
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:background="#a0d4d69c"
+                    android:background="#ffffff"
                     android:layout_height="wrap_content"
                 android:layout_weight="0.04">
 
                 <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="20dp"
                         android:layout_width="match_parent"
                         android:layout_weight="0.04"
                     android:layout_height="100dp">
@@ -39,9 +58,10 @@
                             android:layout_weight="1"
                             android:layout_height="0dp" />
 
+
                         <FrameLayout
                             android:orientation="vertical"
-                            android:layout_width="100dp"
+                            android:layout_width="120dp"
                             android:layout_weight="1"
                             android:background="@drawable/blue_rectangle"
                             android:layout_height="100dp">
@@ -86,7 +106,7 @@
 
                         <FrameLayout
                             android:orientation="vertical"
-                            android:layout_width="100dp"
+                            android:layout_width="120dp"
                             android:layout_height="100dp"
                             android:layout_weight="1"
                             android:background="@drawable/blue_rectangle">
@@ -123,7 +143,6 @@
                                 android:id="@+id/textView8"/>
                         </FrameLayout>
 
-
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="50dp"
@@ -132,8 +151,8 @@
 
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
                             android:layout_width="match_parent"
                             android:layout_weight="0.04"
                             android:layout_height="100dp">
@@ -145,7 +164,7 @@
 
                             <FrameLayout
                                 android:orientation="vertical"
-                                android:layout_width="100dp"
+                                android:layout_width="120dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/blue_rectangle"
                                 android:layout_height="100dp">
@@ -190,7 +209,7 @@
 
                             <FrameLayout
                                 android:orientation="vertical"
-                                android:layout_width="100dp"
+                                android:layout_width="120dp"
                                 android:layout_height="100dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/blue_rectangle">
@@ -227,24 +246,37 @@
                                     android:id="@+id/textView12"/>
                             </FrameLayout>
 
-
                             <Space
                                 android:layout_width="0dp"
                                 android:layout_height="50dp"
                                 android:layout_weight="1"/>
                         </LinearLayout>
+        </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-            <TextView
-                android:text="Comments"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:background="#bdde9e69"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardCornerRadius="5sp"
+                card_view:cardElevation="5sp"
+                android:id="@+id/habit_comment_card_view">
+            <TextView
+                android:textColor="@color/colorPrimaryText"
+                android:layout_width="match_parent"
+                android:background="#ffffff"
                 android:id="@+id/analytics_comment_textview"
                 android:layout_weight="0.04"
                 android:layout_height="80dp"
+                android:gravity="center"
+                android:textAlignment="center"
                 android:textSize="20sp" />
+            </android.support.v7.widget.CardView>
+
+
         </LinearLayout>
+
     </ScrollView>
 
 </FrameLayout>
