@@ -25,3 +25,10 @@ Some individuals who want to delve into the history of this venture have request
 
 # MVC Diagram
 ![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/MVC.jpg?token=ARpKavc22tgoQx1jVjW6MulirliHG6tSks5YvZgIwA%3D%3D)
+
+# Work Distribution
+
+|               | Complete      | Incomplete  |
+| ------------- |:-------------:| -----:|
+| Nan and Leo   | Analytics     | Habit Details, Google Sign in, Location Services, Database |
+| Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment     |   Notification Service, Machine Learning, Google Fit Integration |
