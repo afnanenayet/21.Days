@@ -35,7 +35,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/habit_name"
                     android:typeface="sans"
-                    android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title" />
+                    android:textAppearance=
+                        "@android:style/TextAppearance.Material.Widget.Toolbar.Title" />
 
                 <TextView
                     android:layout_width="match_parent"

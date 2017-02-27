@@ -1,5 +1,6 @@
 package edu.dartmouth.cs.a21days.controllers;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import butterknife.ButterKnife;
 import cn.fanrunqi.waveprogress.WaveProgressView;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 
 /**
  * Created by aenayet on 2/26/17.
@@ -30,12 +32,15 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
         .HabitViewHolder> {
     // Holds all the habit data for view
     private ArrayList<Habit> mHabitList;
+    private Context mContext;
 
     /**
      * Constructor
+     * @param context The context of the activity
      * @param habitArrayList A list of habit objects that we want to display
      */
-    public HabitListviewAdapter(ArrayList<Habit> habitArrayList) {
+    public HabitListviewAdapter(Context context, ArrayList<Habit> habitArrayList) {
+        this.mContext = context;
         this.mHabitList = habitArrayList;
     }
 
@@ -61,11 +66,12 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     @Override
     public void onBindViewHolder(HabitViewHolder holder, int position) {
         // Load contents for that position
-        // TODO debug replace with real data
+        // TODO put in all data when applicable
         Habit habit = mHabitList.get(position);
 
         holder.habitNameTv.setText(habit.getName());
-        holder.habitPriorityTv.setText(Integer.toString(habit.getPriority()));
+        holder.habitPriorityTv.setText(HabitUtility
+                .getPriorityString(mContext, habit.getPriority()));
         holder.habitCategoryTv.setText(habit.getCategory());
         holder.habitCurrentStreakTv.setText(habit.getStreak() + " out of 21 days complete");
         holder.progressView.setMaxProgress(21);
