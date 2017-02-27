@@ -32,3 +32,7 @@ Some individuals who want to delve into the history of this venture have request
 | ------------- |:-------------:| :------:|
 | Nan and Leo   | Analytics     | Habit Details, Google Sign in, Location Services, Database |
 | Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment     |   Notification Service, Machine Learning, Google Fit Integration |
+
+# Build status
+[![Build Status](https://travis-ci.com/afnanenayet/21.Days.svg?token=QtxzrX3Qc2BDQfwx8D1K&branch=master)](https://travis-ci.com/afnanenayet/21.Days)
+Continuous integration support is provided by Travis CI
