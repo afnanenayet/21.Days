@@ -45,4 +45,19 @@
             android:theme="@style/ThemeOverlay.MyDarkButton" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/skip_sign_in_button"
+            android:onClick="onSkipClicked"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:theme="@style/ThemeOverlay.MyDarkButton"
+            android:text="Skip for now"/>
+    </RelativeLayout>
+
 </LinearLayout>
