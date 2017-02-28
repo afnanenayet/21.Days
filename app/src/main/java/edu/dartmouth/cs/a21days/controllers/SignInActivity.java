@@ -160,6 +160,10 @@ public class SignInActivity extends AppCompatActivity implements
                                     Toast.LENGTH_SHORT).show();
                         }
 
+                        // notify that user sign in is successful
+                        Toast.makeText(SignInActivity.this, "User has signed in.",
+                                Toast.LENGTH_SHORT).show();
+
                         // launch main activity
                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -186,6 +190,10 @@ public class SignInActivity extends AppCompatActivity implements
                         updateUI(null);
                     }
                 });
+
+        // show message user has signed out
+        Toast.makeText(SignInActivity.this, "User has signed out.",
+                Toast.LENGTH_SHORT).show();
     }
 
 
@@ -202,6 +210,10 @@ public class SignInActivity extends AppCompatActivity implements
                         updateUI(null);
                     }
                 });
+
+        // show message that user has revoked access
+        Toast.makeText(SignInActivity.this, "User has disconnected.",
+                Toast.LENGTH_SHORT).show();
     }
 
     // update the buttons that are shown depending on whether a user is signed in or not
