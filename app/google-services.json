@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "650880753316",
+    "firebase_url": "https://days-b1a4c.firebaseio.com",
+    "project_id": "days-b1a4c",
+    "storage_bucket": "days-b1a4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650880753316:android:c74b0fa9c12e4df4",
+        "android_client_info": {
+          "package_name": "edu.dartmouth.cs.a21days"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650880753316-vgap5n1crbfod9l03mpukcl4sa3do72h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.dartmouth.cs.a21days",
+            "certificate_hash": "ed1718c2845743e4b4c7a64ecdaad9daa15241e8"
+          }
+        },
+        {
+          "client_id": "650880753316-rlbga3d6leprc1tglb1lhkfb619n7dua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZxvOVUkFyVJHjzc5bqm3HJVEccLeqpVM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650880753316-rlbga3d6leprc1tglb1lhkfb619n7dua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -54,6 +54,7 @@ public class SignInActivity extends AppCompatActivity implements
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.disconnect_button).setOnClickListener(this);
 
+
         // configure Google sign in options
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -89,6 +90,8 @@ public class SignInActivity extends AppCompatActivity implements
         // set size of sign in button
         SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+
     }
 
     // what to do when a button is clicked
@@ -134,6 +137,7 @@ public class SignInActivity extends AppCompatActivity implements
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
+                Log.i(TAG, "onActivityResult: here");
                 // Google Sign In failed, update UI appropriately
                 updateUI(null);
             }
@@ -159,6 +163,10 @@ public class SignInActivity extends AppCompatActivity implements
                             Toast.makeText(SignInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
+
+                        // notify that user sign in is successful
+                        Toast.makeText(SignInActivity.this, "User has signed in.",
+                                Toast.LENGTH_SHORT).show();
 
                         // launch main activity
                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
@@ -186,6 +194,10 @@ public class SignInActivity extends AppCompatActivity implements
                         updateUI(null);
                     }
                 });
+
+        // show message user has signed out
+        Toast.makeText(SignInActivity.this, "User has signed out.",
+                Toast.LENGTH_SHORT).show();
     }
 
 
@@ -202,6 +214,10 @@ public class SignInActivity extends AppCompatActivity implements
                         updateUI(null);
                     }
                 });
+
+        // show message that user has revoked access
+        Toast.makeText(SignInActivity.this, "User has disconnected.",
+                Toast.LENGTH_SHORT).show();
     }
 
     // update the buttons that are shown depending on whether a user is signed in or not
@@ -209,8 +225,10 @@ public class SignInActivity extends AppCompatActivity implements
         if (user != null) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            findViewById(R.id.skip_sign_in_button).setVisibility(View.GONE);
         } else {
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.skip_sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
     }
@@ -222,6 +240,13 @@ public class SignInActivity extends AppCompatActivity implements
         // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+    }
+
+    // Called when skip button is clicked
+    public void onSkipClicked(View view){
+        // Starts main activity
+        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
 }

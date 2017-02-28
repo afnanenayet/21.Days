@@ -34,4 +34,7 @@
     <string name="loading">Loading…</string>
     <string name="google_status_fmt">Google User: %s</string>
 
+    <string name="signin_greeting">Welcome to 21.Days</string>
+    <string name="skip_signin">Skip Sign In For Now</string>
+
 </resources>
