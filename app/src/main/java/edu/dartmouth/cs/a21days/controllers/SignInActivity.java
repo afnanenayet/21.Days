@@ -167,10 +167,6 @@ public class SignInActivity extends AppCompatActivity implements
                         // notify that user sign in is successful
                         Toast.makeText(SignInActivity.this, "User has signed in.",
                                 Toast.LENGTH_SHORT).show();
-
-                        // launch main activity
-                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                        startActivity(intent);
                     }
                 });
     }
