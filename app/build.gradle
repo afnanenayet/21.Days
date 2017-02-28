@@ -8,7 +8,7 @@ android {
         buildToolsVersion "25.0.2"
         defaultConfig {
             applicationId "edu.dartmouth.cs.a21days"
-                minSdkVersion 23
+                minSdkVersion 22
                 targetSdkVersion 25
                 versionCode 1
                 versionName "0.1"
