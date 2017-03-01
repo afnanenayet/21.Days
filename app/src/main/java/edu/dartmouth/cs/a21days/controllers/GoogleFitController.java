@@ -1,8 +1,16 @@
 package edu.dartmouth.cs.a21days.controllers;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
+
+import edu.dartmouth.cs.a21days.utilities.PermissionRequestUtility;
 
 /**
  * Created by aenayet on 3/1/17.
@@ -14,10 +22,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class GoogleFitController {
     // Lets us keep track of client connection status
     private GoogleApiClient mClient = null;
-    private Context mContext;
+    private MainActivity mActivity;
+    private static final String DEBUG_TAG = "GoogleFitController";
 
-    public GoogleFitController(Context context) {
-        mContext = context;
+    public GoogleFitController(MainActivity mainActivity) {
+        mActivity = mainActivity;
     }
 
     /**
@@ -28,44 +37,39 @@ public class GoogleFitController {
      * can address. Examples of this include the user never having signed in before, or having
      * multiple accounts on the device and needing to specify which account to use, etc.
      */
-    private void buildFitnessClient() {
-        if (mClient == null && checkPermissions()) {
-            mClient = new GoogleApiClient.Builder(this)
-                    .addApi(Fitness.SENSORS_API)
+    public void buildFitnessClient() {
+        if (mClient == null) {
+            mClient = new GoogleApiClient.Builder(mActivity.getApplicationContext())
+                    // .addApi()
                     .addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
                     .addConnectionCallbacks(
                             new GoogleApiClient.ConnectionCallbacks() {
                                 @Override
                                 public void onConnected(Bundle bundle) {
-                                    Log.i(TAG, "Connected!!!");
+                                    Log.i(DEBUG_TAG, "Connected!!!");
                                     // Now you can make calls to the Fitness APIs.
-                                    findFitnessDataSources();
+                                    // findFitnessDataSources();
                                 }
 
                                 @Override
                                 public void onConnectionSuspended(int i) {
                                     // If your connection to the sensor gets lost at some point,
                                     // you'll be able to determine the reason and react to it here.
-                                    if (i == ConnectionCallbacks.CAUSE_NETWORK_LOST) {
-                                        Log.i(TAG, "Connection lost.  Cause: Network Lost.");
+                                    if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST) {
+                                        Log.i(DEBUG_TAG, "Connection lost.  Cause: Network Lost.");
                                     } else if (i
-                                            == ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
-                                        Log.i(TAG,
+                                            == GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
+                                        Log.i(DEBUG_TAG,
                                                 "Connection lost.  Reason: Service Disconnected");
                                     }
                                 }
                             }
                     )
-                    .enableAutoManage(this, 0, new GoogleApiClient.OnConnectionFailedListener() {
+                    .enableAutoManage(mActivity, 0, new GoogleApiClient.OnConnectionFailedListener() {
                         @Override
                         public void onConnectionFailed(ConnectionResult result) {
-                            Log.i(TAG, "Google Play services connection failed. Cause: " +
+                            Log.i(DEBUG_TAG, "Google Play services connection failed. Cause: " +
                                     result.toString());
-                            Snackbar.make(
-                                    MainActivity.this.findViewById(R.id.main_activity_view),
-                                    "Exception while connecting to Google Play services: " +
-                                            result.getErrorMessage(),
-                                    Snackbar.LENGTH_INDEFINITE).show();
                         }
                     })
                     .build();

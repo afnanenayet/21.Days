@@ -15,4 +15,9 @@ public class PermissionRequestUtility {
     public void requestPermissions() {
 
     }
+
+
+    public boolean checkPermissions() {
+        return false;
+    }
 }
