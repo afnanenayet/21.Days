@@ -4,18 +4,18 @@ package edu.dartmouth.cs.a21days.views;
  * https://gist.github.com/nickaknudson/5024416
  */
 
-        import java.text.DateFormat;
-        import java.text.ParseException;
-        import java.text.SimpleDateFormat;
-        import java.util.Date;
-        import java.util.Locale;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-        import android.content.Context;
-        import android.content.res.TypedArray;
-        import android.preference.DialogPreference;
-        import android.util.AttributeSet;
-        import android.view.View;
-        import android.widget.TimePicker;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.preference.DialogPreference;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TimePicker;
 
 public class TimePreference extends DialogPreference {
     private int mHour = 0;
@@ -37,17 +37,17 @@ public class TimePreference extends DialogPreference {
         this(context, null);
     }
 
-    public TimePreference(Context context, AttributeSet attrs) {
+     TimePreference(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TimePreference(Context context, AttributeSet attrs, int defStyle) {
+     TimePreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setPositiveButtonText("Set");
         setNegativeButtonText("Cancel");
     }
 
-    public void setTime(int hour, int minute) {
+     void setTime(int hour, int minute) {
         mHour = hour;
         mMinute = minute;
         String time = toTime(mHour, mMinute);
@@ -56,11 +56,11 @@ public class TimePreference extends DialogPreference {
         notifyChanged();
     }
 
-    public String toTime(int hour, int minute) {
+     String toTime(int hour, int minute) {
         return String.valueOf(hour) + ":" + String.valueOf(minute);
     }
 
-    public void updateSummary() {
+     void updateSummary() {
         String time = String.valueOf(mHour) + ":" + String.valueOf(mMinute);
         setSummary(time24to12(time));
     }
@@ -124,7 +124,7 @@ public class TimePreference extends DialogPreference {
         updateSummary();
     }
 
-    public static Date toDate(String inTime) {
+     static Date toDate(String inTime) {
         try {
             DateFormat inTimeFormat = new SimpleDateFormat("HH:mm", Locale.US);
             return inTimeFormat.parse(inTime);
@@ -133,7 +133,7 @@ public class TimePreference extends DialogPreference {
         }
     }
 
-    public static String time24to12(String inTime) {
+     static String time24to12(String inTime) {
         Date inDate = toDate(inTime);
         if(inDate != null) {
             DateFormat outTimeFormat = new SimpleDateFormat("hh:mm a", Locale.US);

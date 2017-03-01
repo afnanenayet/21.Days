@@ -4,6 +4,8 @@ package edu.dartmouth.cs.a21days.controllers;
  * Created by aenayet on 2/26/17.
  */
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.models.Habit;
@@ -46,5 +48,22 @@ public class HabitDataSource {
         list.add(habit3);
 
         return list;
+    }
+
+    /**
+     * Add a habit to the internal data store
+     * @param habit The habit object to add
+     */
+    public void addHabit(Habit habit) {
+
+    }
+
+    /**
+     * Get a particular habit based on its id
+     * @param id the id to add
+     * @throws IndexOutOfBoundsException on invalid id
+     */
+    public void getHabit(Long id) throws IndexOutOfBoundsException {
+
     }
 }

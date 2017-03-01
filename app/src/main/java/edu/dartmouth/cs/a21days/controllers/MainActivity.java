@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
-import edu.dartmouth.cs.a21days.controllers.ViewPagerAdapter;
 import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
 import edu.dartmouth.cs.a21days.views.HabitsListFragment;
 import edu.dartmouth.cs.a21days.views.SettingsFragment;
