@@ -37,4 +37,22 @@
     <string name="signin_greeting">Welcome to 21.Days</string>
     <string name="skip_signin">Skip Sign In For Now</string>
 
+    <string-array name="weekdays">
+        <item>S</item>
+        <item>M</item>
+        <item>T</item>
+        <item>W</item>
+        <item>T</item>
+        <item>F</item>
+        <item>S</item>
+    </string-array>
+
+    <string-array name="priority_array">
+        <item>Set Priority</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+
+
 </resources>

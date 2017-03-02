@@ -1,7 +1,9 @@
 package edu.dartmouth.cs.a21days.views;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -59,7 +61,18 @@ public class HabitsListFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(adapter);
+
+        FloatingActionButton createHabitButton = (FloatingActionButton) mView.findViewById(R.id.fab);
+        createHabitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), NewHabit.class);
+                startActivity(intent);
+            }
+        });
+
         return mView;
     }
+
 
 }

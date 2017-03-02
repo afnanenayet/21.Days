@@ -58,6 +58,7 @@ dependencies {
     compile 'com.google.firebase:firebase-core:9.6.1'
     compile 'com.snappydb:snappydb-lib:0.5.2'
     compile 'com.esotericsoftware.kryo:kryo:2.24.0'
+    compile 'com.nex3z:toggle-button-group:0.2.2'
 
     // Testing frameworks
     androidTestCompile 'com.android.support:support-annotations:25.2.0'
