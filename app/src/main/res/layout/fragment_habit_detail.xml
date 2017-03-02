@@ -5,8 +5,7 @@
     android:id="@+id/activity_habit_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="edu.dartmouth.cs.a21days.controllers.HabitDetailActivity">
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"

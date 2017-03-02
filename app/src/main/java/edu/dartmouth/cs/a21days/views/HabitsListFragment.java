@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,8 @@ import edu.dartmouth.cs.a21days.models.Habit;
  * create an instance of this fragment.
  */
 public class HabitsListFragment extends Fragment {
+
+    private static String TAG = "HabitsListFragment";
 
     public HabitsListFragment() {
         // Required empty public constructor
@@ -71,6 +75,7 @@ public class HabitsListFragment extends Fragment {
                 dialogFragment.show(getFragmentManager(), "Test");
             }
         });
+
 
         return mView;
     }

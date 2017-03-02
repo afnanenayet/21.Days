@@ -9,67 +9,85 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/habit_name_input"
-                android:hint="Habit Name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:textStyle="bold"
-                android:background="@android:color/transparent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:maxLines="1"
-                android:inputType="text"/>
+        <EditText
+            android:id="@+id/habit_name_input"
+            android:hint="Habit Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:maxLines="1"
+            android:inputType="text"/>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp">
-                <Spinner
-                    android:layout_marginLeft="15dp"
-                    android:id="@+id/priority_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
-                </Spinner>
-                <SearchView
-                    android:id="@+id/category_search"
-                    android:queryHint="Category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:iconifiedByDefault="false"/>
-
-            </TableRow>
-            <Switch
-                android:id="@+id/all_day_switch"
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+            <Spinner
+                android:layout_marginLeft="15dp"
+                android:id="@+id/priority_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="15dp"
-                android:text="All Day"
-                android:textSize="18dp"
-                android:fontFamily="Arial"
-                android:layout_marginBottom="10dp"
-                android:switchPadding="15dp"/>
-            <TimePicker
-                android:id="@+id/time_picker_habit"
+                android:layout_gravity="center_vertical">
+            </Spinner>
+            <SearchView
+                android:id="@+id/category_search"
+                android:queryHint="Category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:timePickerMode="clock">
-            </TimePicker>
-            <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
-                android:id="@+id/multi_selection_group"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:textSize="20dp"
-                android:textColor="@drawable/selector_text"
-                android:saveEnabled="true"
-                app:tbgTextButtons="@array/weekdays"
-                app:tbgFlow="false"
-                app:tbgButtonSpacing="auto"
-                app:tbgAnimationType="scale"/>
+                android:iconifiedByDefault="false"/>
+        </TableRow>
+        <Switch
+            android:id="@+id/all_day_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            android:text="All Day"
+            android:textSize="18dp"
+            android:fontFamily="Arial"
+            android:layout_marginBottom="10dp"
+            android:switchPadding="15dp"/>
+        <TimePicker
+            android:id="@+id/time_picker_habit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:timePickerMode="clock">
+        </TimePicker>
+        <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+            android:id="@+id/multi_selection_group"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="20dp"
+            android:textColor="@drawable/selector_text"
+            android:saveEnabled="true"
+            app:tbgTextButtons="@array/weekdays"
+            app:tbgFlow="false"
+            app:tbgButtonSpacing="auto"
+            app:tbgAnimationType="scale"/>
+        <Switch
+            android:id="@+id/location_requirement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            android:text="Enable Location Check In"
+            android:textSize="18dp"
+            android:fontFamily="Arial"
+            android:layout_marginBottom="10dp"
+            android:switchPadding="15dp"/>
+        <SearchView
+            android:id="@+id/location_search"
+            android:queryHint="Enter address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:visibility="gone"/>
+
 
     </LinearLayout>
 </ScrollView>

@@ -81,6 +81,20 @@ public class NewHabitDialogFragment extends DialogFragment {
             }
         });
 
+        Switch enableLocation = (Switch) view.findViewById(R.id.location_requirement);
+        enableLocation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SearchView locationSearch = (SearchView) view.findViewById(R.id.location_search);
+                if (!compoundButton.isChecked()){
+                    locationSearch.setVisibility(View.GONE);
+                }
+                else {
+                    locationSearch.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

@@ -1,13 +1,18 @@
 package edu.dartmouth.cs.a21days.controllers;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -20,6 +25,8 @@ import cn.fanrunqi.waveprogress.WaveProgressView;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
+import edu.dartmouth.cs.a21days.views.HabitDetailsFragment;
+import edu.dartmouth.cs.a21days.views.NewHabitDialogFragment;
 
 /**
  * Created by aenayet on 2/26/17.
@@ -33,6 +40,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     // Holds all the habit data for view
     private ArrayList<Habit> mHabitList;
     private Context mContext;
+    private static final String TAG = "HabitListviewAdapter";
 
     /**
      * Constructor
@@ -76,6 +84,16 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
         holder.habitCurrentStreakTv.setText(habit.getStreak() + " out of 21 days complete");
         holder.progressView.setMaxProgress(21);
         holder.progressView.setCurrent(habit.getStreak(), Integer.toString(habit.getStreak()));
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                HabitDetailsFragment dialogFragment = new HabitDetailsFragment();
+                FragmentManager manager = ((Activity)mContext).getFragmentManager();
+                dialogFragment.show(manager, "Habit Details");
+                return false;
+            }
+        });
     }
 
     /**
@@ -112,6 +130,8 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
             progressView = (WaveProgressView) parentLinearLayout
                     .findViewById(R.id.habit_progress_bar);
             ButterKnife.bind(this, internalLinearLayout);
+
+
         }
-    }
+    };
 }
