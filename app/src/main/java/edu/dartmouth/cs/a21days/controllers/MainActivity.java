@@ -1,17 +1,24 @@
 package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
 import java.util.ArrayList;
 
+import edu.dartmouth.cs.a21days.Manifest;
 import edu.dartmouth.cs.a21days.R;
-import edu.dartmouth.cs.a21days.controllers.ViewPagerAdapter;
+import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
 import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
 import edu.dartmouth.cs.a21days.views.HabitsListFragment;
 import edu.dartmouth.cs.a21days.views.SettingsFragment;
@@ -69,6 +76,19 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                         return true;
                     }
                 });
+
+        PermissionsListener permissionsListener = new PermissionsListener(this);
+
+        // TODO implement permissions when necessary
+        /* Dexter.withActivity(this)
+                .withPermissions()
+                .withListener(permissionsListener)
+                .check(); */
+
+        // Setting up binding for Dexter to request permissions
+        Dexter.withActivity(this).continueRequestingPendingPermissions(permissionsListener);
+
+        // Initialize Google Fit connection
     }
 
 
@@ -88,5 +108,39 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageScrollStateChanged(int state) {
         // Empty function required to implement OnPageChangedListener
+    }
+
+    /**
+     * Shows rationale dialog in order to request permissions
+     */
+    public void showPermissionRationale(final PermissionToken token) {
+        new AlertDialog.Builder(this).setTitle(R.string.permission_rationale_title)
+                .setMessage(R.string.permission_rationale_message)
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        token.cancelPermissionRequest();
+                    }
+                })
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        token.continuePermissionRequest();
+                    }
+                })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override public void onDismiss(DialogInterface dialog) {
+                        token.cancelPermissionRequest();
+                    }
+                })
+                .show();
+    }
+
+    /**
+     * Connects to Google Fit
+     */
+    private void connectToGoogleFit() {
+        GoogleFitController fitController = new GoogleFitController(this);
+        fitController.buildFitnessClient();
     }
 }

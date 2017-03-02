@@ -6,6 +6,7 @@ def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+
     defaultConfig {
         applicationId "edu.dartmouth.cs.a21days"
         minSdkVersion 22
@@ -17,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled = !travisBuild
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -30,6 +31,7 @@ android {
     lintOptions {
         abortOnError false
     }
+
 }
 
 dependencies {
@@ -59,6 +61,7 @@ dependencies {
     compile 'com.snappydb:snappydb-lib:0.5.2'
     compile 'com.esotericsoftware.kryo:kryo:2.24.0'
     compile 'com.nex3z:toggle-button-group:0.2.2'
+    compile 'com.karumi:dexter:3.0.2'
 
     // Testing frameworks
     androidTestCompile 'com.android.support:support-annotations:25.2.0'
