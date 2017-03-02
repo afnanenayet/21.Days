@@ -31,6 +31,8 @@ import edu.dartmouth.cs.a21days.R;
  * activity for users to sign in to the app
  * based off of example code from Firebase
  */
+
+// TODO close activity when user is signed in
 public class SignInActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
