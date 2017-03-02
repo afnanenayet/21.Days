@@ -1,5 +1,6 @@
 package edu.dartmouth.cs.a21days.views;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -66,8 +67,8 @@ public class HabitsListFragment extends Fragment {
         createHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), NewHabit.class);
-                startActivity(intent);
+                NewHabitDialogFragment dialogFragment = new NewHabitDialogFragment();
+                dialogFragment.show(getFragmentManager(), "Test");
             }
         });
 
