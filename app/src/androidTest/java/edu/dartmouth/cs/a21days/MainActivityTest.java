@@ -51,6 +51,7 @@ public class MainActivityTest {
      * corresponding with the resource
      * @throws Exception on error
      */
+    /*
     @Test
     public void intToPriorityString() throws Exception {
         Context context = getInstrumentation().getContext();
@@ -62,5 +63,5 @@ public class MainActivityTest {
             assertThat(HabitUtility.getPriorityString(context, i), is(priorityStrings[i]));
         }
     }
-
+    */
 }
