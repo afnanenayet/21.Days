@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         Dexter.withActivity(this).continueRequestingPendingPermissions(permissionsListener);
 
         // Initialize Google Fit connection
+        // connectToGoogleFit(); // todo get Fitness APIs
     }
 
 

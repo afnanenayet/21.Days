@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "650880753316",
-    "firebase_url": "https://days-b1a4c.firebaseio.com",
-    "project_id": "days-b1a4c",
-    "storage_bucket": "days-b1a4c.appspot.com"
+    "project_number": "568417073656",
+    "firebase_url": "https://days-a1b27.firebaseio.com",
+    "project_id": "days-a1b27",
+    "storage_bucket": "days-a1b27.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:650880753316:android:c74b0fa9c12e4df4",
+        "mobilesdk_app_id": "1:568417073656:android:c74b0fa9c12e4df4",
         "android_client_info": {
           "package_name": "edu.dartmouth.cs.a21days"
         }
       },
       "oauth_client": [
         {
-          "client_id": "650880753316-vgap5n1crbfod9l03mpukcl4sa3do72h.apps.googleusercontent.com",
+          "client_id": "568417073656-n9geg8o36hohj2ec3pmeh0h1p05r086u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "edu.dartmouth.cs.a21days",
-            "certificate_hash": "ed1718c2845743e4b4c7a64ecdaad9daa15241e8"
+            "certificate_hash": "eca7bf635b4e840bb9905e779f2d9b009dce33d8"
           }
         },
         {
-          "client_id": "650880753316-rlbga3d6leprc1tglb1lhkfb619n7dua.apps.googleusercontent.com",
+          "client_id": "568417073656-ooamm38prenv5r4fv9d8a1cecu0va1cn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDZxvOVUkFyVJHjzc5bqm3HJVEccLeqpVM"
+          "current_key": "AIzaSyAKwGrfpNW6faWUe12-R9AQgq-hSzUTB0s"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "650880753316-rlbga3d6leprc1tglb1lhkfb619n7dua.apps.googleusercontent.com",
+              "client_id": "568417073656-ooamm38prenv5r4fv9d8a1cecu0va1cn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

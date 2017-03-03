@@ -39,11 +39,8 @@ public class SignInActivity extends AppCompatActivity implements
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
-
     private FirebaseAuth mAuth;
-
     private FirebaseAuth.AuthStateListener mAuthListener;
-
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -92,8 +89,6 @@ public class SignInActivity extends AppCompatActivity implements
         // set size of sign in button
         SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
-
-
     }
 
     // what to do when a button is clicked
@@ -139,7 +134,7 @@ public class SignInActivity extends AppCompatActivity implements
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
-                Log.i(TAG, "onActivityResult: here");
+                Log.i(TAG, "onActivityResult: failed to sign in");
                 // Google Sign In failed, update UI appropriately
                 updateUI(null);
             }
@@ -169,6 +164,24 @@ public class SignInActivity extends AppCompatActivity implements
                         // notify that user sign in is successful
                         Toast.makeText(SignInActivity.this, "User has signed in.",
                                 Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void createAccount(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(SignInActivity.this, R.string.auth_failed,
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
@@ -246,5 +259,4 @@ public class SignInActivity extends AppCompatActivity implements
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         startActivity(intent);
     }
-
 }
