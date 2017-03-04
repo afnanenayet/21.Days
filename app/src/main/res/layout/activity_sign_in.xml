@@ -28,18 +28,26 @@
 
     <!-- sign in button for Google -->
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
+        android:id="@+id/google_sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp" />
+
+    <!-- sign in button for Facebook -->
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 
     <!-- sign out and disconnect buttons -->
     <LinearLayout
         android:id="@+id/sign_out_and_disconnect"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_marginTop="50dp"
         android:orientation="horizontal"
         android:paddingLeft="16dp"
@@ -64,20 +72,15 @@
             android:theme="@style/ThemeOverlay.MyDarkButton" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/skip_sign_in_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
             android:layout_marginBottom="50dp"
             android:onClick="onSkipClicked"
             android:text="@string/skip_signin"
             android:theme="@style/ThemeOverlay.MyDarkButton" />
-    </RelativeLayout>
+
 
 </LinearLayout>
