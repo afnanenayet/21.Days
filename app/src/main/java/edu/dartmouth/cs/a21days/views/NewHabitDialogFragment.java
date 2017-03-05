@@ -70,8 +70,10 @@ public class NewHabitDialogFragment extends DialogFragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        // Call helper function to set up search view
         setUpSearchView(view);
 
+        // Set up switch to show and hide time picker view
         Switch enableAllDay = (Switch) view.findViewById(R.id.all_day_switch);
         enableAllDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -86,7 +88,7 @@ public class NewHabitDialogFragment extends DialogFragment {
             }
         });
 
-
+        // Hid autocompleteView and set up switch to show and hide it
         final View autocompleteView = (View) view.findViewById(R.id.place_autocomplete_fragment);
         autocompleteView.setVisibility(View.GONE);
 
@@ -103,6 +105,7 @@ public class NewHabitDialogFragment extends DialogFragment {
             }
         });
 
+        // Set up autocomplete fragment
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
@@ -120,7 +123,7 @@ public class NewHabitDialogFragment extends DialogFragment {
             }
         });
 
-
+        // Set save and cancel buttons
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -140,6 +143,7 @@ public class NewHabitDialogFragment extends DialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
 
+        // Remove the PlaceAutocompleteFragment if when closing the dialog fragment
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
