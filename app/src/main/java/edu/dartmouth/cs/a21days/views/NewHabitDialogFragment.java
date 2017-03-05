@@ -147,7 +147,6 @@ public class NewHabitDialogFragment extends DialogFragment {
             getFragmentManager().beginTransaction()
                     .remove(autocompleteFragment)
                     .commit();
-
         }
 
     }
