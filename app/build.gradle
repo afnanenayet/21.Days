@@ -63,6 +63,7 @@ dependencies {
     compile 'com.karumi:dexter:3.0.2'
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.google.android.gms:play-services-places:10.2.0'
 
     // Testing frameworks
     androidTestCompile 'com.android.support:support-annotations:25.2.0'

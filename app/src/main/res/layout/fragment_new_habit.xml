@@ -80,13 +80,12 @@
             android:fontFamily="Arial"
             android:layout_marginBottom="10dp"
             android:switchPadding="15dp"/>
-        <SearchView
-            android:id="@+id/location_search"
-            android:queryHint="Enter address"
-            android:layout_width="wrap_content"
+        <fragment
+            android:id="@+id/place_autocomplete_fragment"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:visibility="gone"/>
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            />
 
 
     </LinearLayout>
