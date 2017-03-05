@@ -20,6 +20,11 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TimePicker;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
@@ -81,19 +86,40 @@ public class NewHabitDialogFragment extends DialogFragment {
             }
         });
 
+
+        final View autocompleteView = (View) view.findViewById(R.id.place_autocomplete_fragment);
+        autocompleteView.setVisibility(View.GONE);
+
         Switch enableLocation = (Switch) view.findViewById(R.id.location_requirement);
         enableLocation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                SearchView locationSearch = (SearchView) view.findViewById(R.id.location_search);
                 if (!compoundButton.isChecked()){
-                    locationSearch.setVisibility(View.GONE);
+                    autocompleteView.setVisibility(View.GONE);
                 }
                 else {
-                    locationSearch.setVisibility(View.VISIBLE);
+                    autocompleteView.setVisibility(View.VISIBLE);
                 }
             }
         });
+
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+
 
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
@@ -108,6 +134,22 @@ public class NewHabitDialogFragment extends DialogFragment {
             }
         });
         return builder.create();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        if (autocompleteFragment != null) {
+            getFragmentManager().beginTransaction()
+                    .remove(autocompleteFragment)
+                    .commit();
+
+        }
+
     }
 
     private void setUpSearchView(View view){
