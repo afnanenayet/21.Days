@@ -56,6 +56,7 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:10.2.0'
     compile 'com.google.android.gms:play-services-auth:10.2.0'
     compile 'com.google.firebase:firebase-core:9.6.1'
+    compile 'com.google.firebase:firebase-database:10.2.0'
     compile 'com.snappydb:snappydb-lib:0.5.2'
     compile 'com.esotericsoftware.kryo:kryo:2.24.0'
     compile 'com.nex3z:toggle-button-group:0.2.2'

@@ -10,11 +10,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="5sp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5sp"
             android:orientation="vertical">
 
 
@@ -23,14 +25,15 @@
                 android:id="@+id/details_progress_card_view"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
-                card_view:cardCornerRadius="5sp"
-                card_view:cardElevation="5sp"
+                card_view:cardCornerRadius="3sp"
+                card_view:cardElevation="3sp"
                 android:layout_height="70dp">
 
             <LinearLayout
                 android:layout_height="70dp"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
+                android:layout_margin="5sp"
                 android:orientation="vertical" >
 
 
@@ -55,15 +58,16 @@
                 android:id="@+id/details_piechart_card_view"
                 android:layout_margin="10dp"
                 android:layout_weight="0.5"
-                card_view:cardCornerRadius="5sp"
-                card_view:cardElevation="5sp"
+                card_view:cardCornerRadius="3sp"
+                card_view:cardElevation="3sp"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_margin="5sp">
 
                     <!-- TextView showing how many days completed -->
 
@@ -107,14 +111,15 @@
                     android:layout_width="wrap_content"
                     android:layout_weight="0.5"
                     android:layout_margin="10dp"
-                    card_view:cardCornerRadius="5sp"
-                    card_view:cardElevation="5sp"
+                    card_view:cardCornerRadius="3sp"
+                    card_view:cardElevation="3sp"
                     android:layout_height="100dp">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_margin="5sp">
 
                         <TextView
                             android:id="@+id/detail_days_left_textview"
@@ -146,15 +151,16 @@
             <android.support.v7.widget.CardView
                         android:id="@+id/detail_category_card_view"
                         android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                        card_view:cardCornerRadius="5sp"
-                        card_view:cardElevation="5sp"
-                android:layout_height="70dp">
+                android:layout_margin="10sp"
+                        card_view:cardCornerRadius="3sp"
+                        card_view:cardElevation="3sp"
+                android:layout_height="70sp">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_margin="5sp">
 
                     <TextView
                             android:layout_width="match_parent"
@@ -179,15 +185,16 @@
             <android.support.v7.widget.CardView
                         android:id="@+id/detail_priority_card_view"
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:layout_margin="10dp"
-                        card_view:cardCornerRadius="5sp"
-                        card_view:cardElevation="5sp">
+                        android:layout_height="70sp"
+                        android:layout_margin="10sp"
+                        card_view:cardCornerRadius="3sp"
+                        card_view:cardElevation="3sp">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
 
                     <TextView
                             android:layout_width="match_parent"
@@ -214,13 +221,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_margin="10dp"
-                        card_view:cardCornerRadius="5sp"
-                        card_view:cardElevation="5sp">
+                        card_view:cardCornerRadius="3sp"
+                        card_view:cardElevation="3sp">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
 
                     <TextView
                             android:layout_width="match_parent"
@@ -238,8 +246,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                card_view:cardCornerRadius="5sp"
-                card_view:cardElevation="5sp">
+                card_view:cardCornerRadius="3sp"
+                card_view:cardElevation="3sp">
 
                 <!-- Delete button -->
                 <Button
@@ -248,7 +256,7 @@
                     android:layout_gravity="center"
                     android:background="@color/colorPrimaryDark"
                     android:text="@string/delete"
-                    android:textColor="@color/colorPrimaryText"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="22sp" />
 
             </android.support.v7.widget.CardView>
