@@ -3,39 +3,42 @@
 
 # Features
 ## Easy sign in
-- Sign in with your Google or Facebook account
-
 21.Days is dedicated to making your habit-building process fun and simple. That's why we don't need you to create another account just for us. 
+- Sign in with your Google or Facebook account
+- Use 21.Days withouth creating an account
 
 ## Create habits
-- Reward system based on behavior for reinforcement
-- Streaks: track how long you've been maintaining your habits
-
-21.Days is an application that uses behavioral analytics to intelligently deliver a mechanism that prompts the user at exactly the right time, ensuring that behaviors are solidified into real habits.
+21.Days uses behavioral analytics to intelligently construct a mechanism that prompts you at the exact right time to ensure your habit-building success.
+- Behavior-based reward system to reinforce your commitment
+- Track how long you've been completing your habits with our streaks system
 
 ## Make yourself accountable
+21.Days doesn't just let you check your habits off. You have to show 21.Days that you've done what you needed.
 - Check in requirements:
     - Set a location-based geofence so 21.Days reminds you until you're where you need to be
     - Take a photo with your tasks to give yourself a visual history
 - Intelligent notifications will use machine learning adapt to your behavior and fire at the most optimal times so you can reinforce your habits
 
+## Google Fit integration
+Have a fitness habit you want to form? 21.Days makes it easy to see your exercise activities and stats through Google Fit integration.
+
 ## View your stats
+We believe in letting you see what you've accomplished. See how you're doing and get motivated!
 - See aggregate analytics of all of your habits, current and completed
 - See seprate data for each individual habit
 
-See how you're doing and get motivated!
-
-# Who are we?
+# Our team?
 - Nan Hu
 - Afnan Enayet
 - Steven Jiang
 - Chenghui Li
 
-# The original pitch
-Some individuals who want to delve into the history of this venture have requested that we share a little our archives. Our original pitch can be found at this link:
+# Our original pitch
+Some individuals who want to delve into the history of this venture have requested that we share a little of our archives. Our original pitch can be found at this link:
 [Pitch slides](https://docs.google.com/presentation/d/1LqYHAFYNit3Wd_bE9uATRXGYYwExH9Xo0qOO0rtN3oY/edit#slide=id.p)
 
 # MVC Diagram
+Below we preseng our MVC diagram, outlining the behind-the-scenes view for 21.Days.
 ![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/MVC.jpg?token=ARpKavc22tgoQx1jVjW6MulirliHG6tSks5YvZgIwA%3D%3D)
 
 # Work Distribution
