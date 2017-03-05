@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.Manifest;
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
 import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
 import edu.dartmouth.cs.a21days.views.HabitsListFragment;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private ArrayList<Fragment> mFragments;
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPageAdapter;
+
+    private static final String DEBUG_TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,19 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         // Initialize Google Fit connection
         // connectToGoogleFit(); // todo get Fitness APIs
+
+        // TODO DEBUG REMOVE (example of how to add habit to db)
+        DatabaseHelper dbHelper = DatabaseHelper.getInstance("example");
+        ArrayList<Habit> habits = HabitDataSource.getAllHabits();
+
+        Log.d(DEBUG_TAG, "Adding habits to database");
+        for (Habit habit : habits) {
+            habit.setId(dbHelper.put(habit));
+        }
+
+        // retrieving all habits from dbHelper
+        habits = dbHelper.getAll();
+
     }
 
 

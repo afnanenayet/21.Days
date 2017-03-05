@@ -46,8 +46,6 @@ public class SignInActivity extends AppCompatActivity implements
     private FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleApiClient mGoogleApiClient;
 
-    // Facebook objects
-    private LoginButton facebookLoginButton;
     private CallbackManager callbackManager;
 
     @Override
@@ -98,7 +96,7 @@ public class SignInActivity extends AppCompatActivity implements
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         // setting up facebook login button
-        facebookLoginButton = (LoginButton) findViewById(R.id.facebook_sign_in_button);
+        LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.facebook_sign_in_button);
         facebookLoginButton.setReadPermissions("email");
 
         // Setting up facebook callback
