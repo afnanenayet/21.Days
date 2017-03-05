@@ -4,11 +4,13 @@
 # Features
 ## Easy sign in
 - Sign in with your Google or Facebook account
+
 21.Days is dedicated to making your habit-building process fun and simple. That's why we don't need you to create another account just for us. 
 
 ## Create habits
 - Reward system based on behavior for reinforcement
 - Streaks: track how long you've been maintaining your habits
+
 21.Days is an application that uses behavioral analytics to intelligently deliver a mechanism that prompts the user at exactly the right time, ensuring that behaviors are solidified into real habits.
 
 ## Make yourself accountable
@@ -20,6 +22,7 @@
 ## View your stats
 - See aggregate analytics of all of your habits, current and completed
 - See seprate data for each individual habit
+
 See how you're doing and get motivated!
 
 # Who are we?
