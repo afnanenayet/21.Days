@@ -136,7 +136,8 @@ public class NewHabitDialogFragment extends DialogFragment {
         mHabit.setPriority(prioritySpinner.getSelectedItemPosition());
         mHabit.setCategory(String.valueOf(categoryView.getQuery()));
         mHabit.setName(String.valueOf(habitName.getText()));
-        if (enableLocation.isEnabled()){
+
+        if (enableLocation.isEnabled()) {
             mHabit.setLocation(HabitUtility.locationToLatLng(mLocation));
         }
     }

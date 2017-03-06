@@ -64,4 +64,13 @@ public class HabitUtility {
 
         return serialLatLng;
     }
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    public static String hashId(String userId) {
+        return ((Integer) userId.hashCode()).toString();
+    }
 }

@@ -107,6 +107,7 @@ public class SignInActivity extends AppCompatActivity implements
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(DEBUG_TAG, "Facebook login successful");
+
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);
             }
