@@ -1,7 +1,5 @@
 package edu.dartmouth.cs.a21days.models;
 
-import android.icu.util.Calendar;
-
 import java.util.ArrayList;
 
 /**
@@ -35,66 +33,82 @@ public class Habit {
 
     /************************************** Getters and setters *********************************/
 
+    // get habit time
     public int getTime() {
         return time;
     }
 
+    // set habit time
     public void setTime(int time) {
         this.time = time;
     }
 
+    // get habit category
     public String getCategory() {
         return category;
     }
 
+    // set habit category
     public void setCategory(String category) {
         this.category = category;
     }
 
+    // get habit priority
     public int getPriority() {
         return priority;
     }
 
+    // set habit priority
     public void setPriority(int priority) {
         this.priority = priority;
     }
 
+    // get habit streak
     public int getStreak() {
         return streak;
     }
 
+    // set habit streak
     public void setStreak(int streak) {
         this.streak = streak;
     }
 
+    // get habit frequency
     public ArrayList<Integer> getFrequency() {
         return frequency;
     }
 
+    // set habit frequency
     public void setFrequency(ArrayList<Integer> frequency) {
         this.frequency = frequency;
     }
 
+    // get habit location
     public SerialLatLng getLocation() {
         return location;
     }
 
+    // set habit location
     public void setLocation(SerialLatLng serialLatLng) {
         this.location = serialLatLng;
     }
 
+    // get habit name
     public String getName() {
         return name;
     }
 
+    // set habit name
     public void setName(String name) {
         this.name = name;
     }
 
+    // get habit id
     public String getId() {
         return id;
     }
 
+    // set habit id
     public void setId(String id) {
         this.id = id;
     }
