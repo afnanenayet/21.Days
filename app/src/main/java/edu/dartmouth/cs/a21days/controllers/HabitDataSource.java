@@ -96,6 +96,8 @@ public class HabitDataSource {
      *               use the string "INVALID"
      */
     public void setUser(@Nullable String userId) {
+        Log.d(DEBUG_TAG, "Setting user");
+
         // Setting a new user means we are looking at a different set of habits
         // thus reset the running list of all entries
         habitMap = new HashMap<String, Habit>();
