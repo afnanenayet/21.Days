@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -23,7 +24,10 @@ import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
@@ -41,6 +45,7 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
 
     private static final int PERMISSION_REQUEST_CODE = 0;
     Habit mHabit;
+    Geocoder geocoder;
     private TextView HabitName;
     private TextView Category;
     private TextView Priority;
@@ -52,13 +57,12 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
     private String[] RequestString = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION};
     private boolean locationcheckin = false;
-    private boolean enablecheckin = false;
+    private boolean enablecheckin = true;
 
     //Get the current location and compare it with the setting location
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent i) {
-            Log.d("TTAG", "onReceive: ");
             if (mHabit.getLocation()!=null)
                 CheckLocation((Location)i.getParcelableExtra(TrackingService.KEY_LOCATION));
         }
@@ -67,12 +71,6 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
     private int position;
     private HabitDataSource dbHelper;
 
-    public HabitDetailsFragment(){
-        mHabit = dbHelper.getAll().get(0);
-    }
-    public HabitDetailsFragment(Habit habit) {
-        mHabit = habit;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,13 +78,15 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
 
         position = getArguments().getInt("Position");
         dbHelper = HabitDataSource.getInstance("example");
+        ArrayList<Habit> habits = dbHelper.getAll();
+        mHabit = habits.get(position);
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        if (locationcheckin == true) {
+        if (locationcheckin) {
             mService = new Intent(getActivity(), TrackingService.class);
             getActivity().startService(mService);
             Log.d(TAG, "onResume: TrackingService Started");
@@ -99,7 +99,7 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
     @Override
     public void onPause() {
         super.onPause();
-        if (locationcheckin == true){
+        if (locationcheckin){
             getActivity().stopService(mService);
             Log.d(TAG, "onPause: Stop Service");
             LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mReceiver);
@@ -131,8 +131,10 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
 
         checkPermission();
 
-        if (mHabit.getLocation()!=null)
+        if (mHabit.isHasLocation()) {
             locationcheckin = true;
+            enablecheckin = false;
+        }
 
         HabitName = (TextView)view.findViewById(R.id.details_habit_name);
         Category = (TextView)view.findViewById(R.id.details_category_textview);
@@ -167,7 +169,19 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
         else
             Left.setText("0 Days");
         Completed.setText(String.valueOf(mHabit.getStreak())+" Days");
-
+        if (locationcheckin){
+            Location mlocation = HabitUtility.latLngToLocation(mHabit.getLocation());
+            try {
+                String address = (geocoder.getFromLocation(mlocation.getLatitude(),mlocation.getLongitude(),1))
+                        .get(0).getAddressLine(0);
+                Location.setText(address);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            Location.setText("No location check-in is required");
+        }
         progress.setMax(21);
         progress.setProgress(mHabit.getStreak());
 
@@ -219,8 +233,25 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
     //Check-in Button Click listener
     @Override
     public void onIconClick() {
-        mHabit.setStreak(mHabit.getStreak()+1);
-        SetupFragment();
-        Toast.makeText(getActivity(), "Congratulations! Check-in successful!", Toast.LENGTH_SHORT).show();
+        //Get the current date and store it to habit
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
+        int cdate = Integer.valueOf(df.format(c.getTime()));
+
+        if ( ( cdate!=mHabit.getTimeStamp() ) && enablecheckin) {
+            mHabit.setStreak(mHabit.getStreak() + 1);
+            mHabit.setTimeStamp(cdate);
+            SetupFragment();
+            Toast.makeText(getActivity(), "Congratulations! Check-in successful!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            if (!enablecheckin)
+                Toast.makeText(getActivity(), "Check-in falied, you falied location test!",
+                        Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getActivity(), "Check-in falied, you have checked in today!",
+                        Toast.LENGTH_SHORT).show();
+
+        }
     }
 }
