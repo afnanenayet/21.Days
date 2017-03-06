@@ -31,6 +31,7 @@ import com.nex3z.togglebuttongroup.ToggleButtonGroup;
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.controllers.AddToDBThread;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
@@ -121,7 +122,8 @@ public class NewHabitDialogFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 setHabitInfo(view);
-                mHabit.setId(dbHelper.put(mHabit));
+                AddToDBThread add = new AddToDBThread(mHabit);
+                add.run();
                 dismissAllowingStateLoss();
             }
         });
