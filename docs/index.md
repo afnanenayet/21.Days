@@ -38,8 +38,12 @@ Some individuals who want to delve into the history of this venture have request
 [Pitch slides](https://docs.google.com/presentation/d/1LqYHAFYNit3Wd_bE9uATRXGYYwExH9Xo0qOO0rtN3oY/edit#slide=id.p)
 
 # MVC Diagram
-Below we preseng our MVC diagram, outlining the behind-the-scenes view for 21.Days.
+Below we present our MVC diagram, outlining the behind-the-scenes view for 21.Days.
 ![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/MVC.jpg?token=ARpKavc22tgoQx1jVjW6MulirliHG6tSks5YvZgIwA%3D%3D)
+
+# Threaded Design Diagram
+![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/Threaded%20Design%20Diagram.jpg?token=ARpKatSv5jIV2uj72_uUYUCM0YRruv9tks5Yxi5awA%3D%3D)
+
 
 # Work Distribution
 
