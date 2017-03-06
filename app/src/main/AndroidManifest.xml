@@ -13,20 +13,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBQh-dElmVXw0ff6kwlhTRsGAHayEuL8y8" />
 
-        <activity android:name=".controllers.MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".controllers.SignInActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".controllers.MainActivity"/>
+
+        <activity android:name=".controllers.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
@@ -47,5 +48,4 @@
         <service android:name=".controllers.TrackingService" />
 
     </application>
-
 </manifest>

@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     // ViewPager and adapter
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPageAdapter;
+    public HabitListviewAdapter adapter;
 
     // tag for debugging use
     private static final String DEBUG_TAG = "MainActivity";
@@ -106,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         // Initializing bindings for evernote job creator library
         JobManager.create(this).addJobCreator(new NotificationJobCreator());
+
+        // Listview adapter needs new context on every orientation change because it outlives
+        // MainActivity
+        HabitsListFragment.getInstance().refreshAdapter(this);
     }
 
     @Override

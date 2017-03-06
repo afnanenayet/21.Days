@@ -1,6 +1,7 @@
 package edu.dartmouth.cs.a21days.views;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,30 +15,35 @@ import java.util.ArrayList;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.controllers.HabitListviewAdapter;
+import edu.dartmouth.cs.a21days.controllers.MainActivity;
 import edu.dartmouth.cs.a21days.models.Habit;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * Use the {@link HabitsListFragment#newInstance} factory method to
+ * Use the {@link HabitsListFragment#getInstance()} factory method to
  * create an instance of this fragment.
  */
 public class HabitsListFragment extends Fragment {
     // tag for debugging
     private static String TAG = "HabitsListFragment";
+    private static HabitsListFragment instance = null;
+    HabitListviewAdapter adapter;
 
     // constructor
     public HabitsListFragment() {
-        // empty, required
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
-    public static HabitsListFragment newInstance() {
-        HabitsListFragment fragment = new HabitsListFragment();
-        return fragment;
+    public static HabitsListFragment getInstance() {
+        if (instance == null) {
+            instance = new HabitsListFragment();
+        }
+
+        return instance;
     }
 
     @Override
@@ -52,13 +58,13 @@ public class HabitsListFragment extends Fragment {
         View mView = inflater.inflate(R.layout.fragment_habits_list, container, false);
         RecyclerView mRecyclerView = (RecyclerView) mView.findViewById(R.id.habits_recycler_view);
 
+        // Initializing empty arraylist for adapter in main activity so context is not lost
+        // on state change
+        ArrayList<Habit> dataList = new ArrayList<>();
+        adapter = HabitListviewAdapter.getInstance(getActivity(), dataList);
+
         // Initializing recyclerview
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-
-        // Initializing empty arraylist for adapter
-        ArrayList<Habit> dataList = new ArrayList<>();
-
-        HabitListviewAdapter adapter = HabitListviewAdapter.getInstance(getContext(), dataList);
 
         // set up RecyclerView
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -76,6 +82,13 @@ public class HabitsListFragment extends Fragment {
         });
 
         return mView;
+    }
+
+    /**
+     * Re-initialize the context for the data adapter
+     */
+    public void refreshAdapter(Context context) {
+        HabitListviewAdapter.setContext(context);
     }
 
 }

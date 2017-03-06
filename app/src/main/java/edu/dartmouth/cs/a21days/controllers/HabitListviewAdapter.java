@@ -3,6 +3,7 @@ package edu.dartmouth.cs.a21days.controllers;
 import android.app.Activity;
 import android.app.FragmentManager;
 
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 import cn.fanrunqi.waveprogress.WaveProgressView;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.models.Habit;
+import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 import edu.dartmouth.cs.a21days.views.HabitDetailsFragment;
 
@@ -88,6 +90,18 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     }
 
     /**
+     * Turn the {@link HabitListviewAdapter} into a singleton
+     * @return an instance of the recycler view adapter
+     */
+    public static HabitListviewAdapter setContext(Context context) {
+        if (instance != null) {
+            instance.mContext = context;
+        }
+
+        return instance;
+    }
+
+    /**
      * Get instance of recycler view adapter
      * @return a possibly null instance
      */
@@ -106,7 +120,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     public void onBindViewHolder(HabitViewHolder holder, final int position) {
         // Load contents for that position
         // TODO put in all data when applicable
-        final Habit habit = mHabitList.get(position);
+        final Habit habit = mHabitList.get(holder.getAdapterPosition());
 
         holder.habitNameTv.setText(habit.getName());
         holder.habitPriorityTv.setText(HabitUtility
@@ -120,11 +134,19 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
             @Override
             public boolean onLongClick(View view) {
                 HabitDetailsFragment dialogFragment = new HabitDetailsFragment();
-                FragmentManager manager = ((Activity) mContext).getFragmentManager();
+                FragmentManager manager = ((Activity) mContext)
+                        .getFragmentManager();
                 Bundle bundle = new Bundle();
-                bundle.putInt("Position", position);
+                bundle.putInt(Globals.POSITION_TAG, position);
                 dialogFragment.setArguments(bundle);
-                dialogFragment.show(manager, "Habit Details");
+
+                FragmentTransaction transaction = manager.beginTransaction();
+
+                if (!((Activity) mContext).isDestroyed()) {
+                    transaction.add(dialogFragment, Globals.POPUP_DIALOG_TAG);
+                    transaction.commitAllowingStateLoss();
+                }
+
                 return false;
             }
         });
@@ -144,7 +166,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
      * View holder for {@link Habit} object to feed into ListView
      * Provides a reference to the view for each data item
      */
-    public static class HabitViewHolder extends RecyclerView.ViewHolder {
+    static class HabitViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.habit_name)
         TextView habitNameTv;
         @BindView(R.id.habit_current_streak)
@@ -159,7 +181,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
         TextView habitLocation;
         WaveProgressView progressView;
 
-        public HabitViewHolder(View itemView) {
+        HabitViewHolder(View itemView) {
             super(itemView);
 
             // Setting up static references to internal textviews
