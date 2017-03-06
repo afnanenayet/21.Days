@@ -1,33 +1,28 @@
 package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.app.FragmentManager;
+<<<<<<< HEAD
 import android.os.Bundle;
+=======
+import android.content.Context;
+>>>>>>> aa6c5eb57535e1ff3e1d2a7aa443dda95f5c9405
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.fanrunqi.waveprogress.WaveProgressView;
-import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 import edu.dartmouth.cs.a21days.views.HabitDetailsFragment;
-import edu.dartmouth.cs.a21days.views.NewHabitDialogFragment;
 
 /**
  * Created by aenayet on 2/26/17.
@@ -76,7 +71,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     public void onBindViewHolder(HabitViewHolder holder, final int position) {
         // Load contents for that position
         // TODO put in all data when applicable
-        Habit habit = mHabitList.get(position);
+        final Habit habit = mHabitList.get(position);
 
         holder.habitNameTv.setText(habit.getName());
         holder.habitPriorityTv.setText(HabitUtility
@@ -89,7 +84,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                HabitDetailsFragment dialogFragment = new HabitDetailsFragment();
+                HabitDetailsFragment dialogFragment = new HabitDetailsFragment(habit);
                 FragmentManager manager = ((Activity)mContext).getFragmentManager();
                 Bundle bundle = new Bundle();
                 bundle.putInt("Position", position);

@@ -1,9 +1,5 @@
 package edu.dartmouth.cs.a21days.controllers;
 
-/**
- * Created by aenayet on 3/5/17.
- */
-
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -19,11 +15,15 @@ import java.util.HashMap;
 import edu.dartmouth.cs.a21days.models.Habit;
 
 /**
- * Helper class for Firebase realtime database
+ * Helper class for Firebase realtime database.
+ *
+ * Created by aenayet on 3/5/17.
  */
 public class HabitDataSource {
+    // database instance
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    // instance of this class
     private static HabitDataSource instance = null;
     private HashMap<String, Habit> habitMap;
 

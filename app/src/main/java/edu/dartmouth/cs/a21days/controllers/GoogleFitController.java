@@ -1,8 +1,6 @@
 package edu.dartmouth.cs.a21days.controllers;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -10,14 +8,10 @@ import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 
-import edu.dartmouth.cs.a21days.utilities.PermissionRequestUtility;
-
 /**
+ * Controller that allows access to Google fit.
+ *
  * Created by aenayet on 3/1/17.
- */
-
-/**
- * Controller that allows access to Google fit
  */
 public class GoogleFitController {
     // Lets us keep track of client connection status
@@ -25,6 +19,7 @@ public class GoogleFitController {
     private MainActivity mActivity;
     private static final String DEBUG_TAG = "GoogleFitController";
 
+    // constructor
     public GoogleFitController(MainActivity mainActivity) {
         mActivity = mainActivity;
     }
@@ -38,7 +33,9 @@ public class GoogleFitController {
      * multiple accounts on the device and needing to specify which account to use, etc.
      */
     public void buildFitnessClient() {
+        // check if client exists
         if (mClient == null) {
+            // build new client
             mClient = new GoogleApiClient.Builder(mActivity.getApplicationContext())
                     // .addApi()
                     .addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
