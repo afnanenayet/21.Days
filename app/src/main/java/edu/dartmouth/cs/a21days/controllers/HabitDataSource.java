@@ -106,11 +106,11 @@ public class HabitDataSource {
         if (userId == null) {
             DatabaseReference databaseReference = mDatabase.getReference();
             DatabaseReference offlineUser = databaseReference.push();
-            Globals.userId = offlineUser.getKey();
+            Globals.betaUserId = offlineUser.getKey();
 
         } else {
             // Getting firebase space from a user ID reference
-            Globals.userId = userId;
+            Globals.betaUserId = userId;
             mReference = mDatabase.getReference(userId);
             mReference.addChildEventListener(childListener);
         }

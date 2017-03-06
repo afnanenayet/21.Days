@@ -91,7 +91,7 @@ public class SignInActivity extends AppCompatActivity implements
                     Log.d(DEBUG_TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
                     // setting user ID
-                    Globals.userId = HabitUtility.hashId(user.getUid());
+                    Globals.betaUserId = HabitUtility.hashId(user.getUid());
 
                     // launch main activity
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);

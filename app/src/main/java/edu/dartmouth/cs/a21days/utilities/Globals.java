@@ -11,7 +11,10 @@ public class Globals {
     private Globals() { }
 
     // Static dynamic vars
-    public static String userId;
+
+    // todo for the sake of demonstration, we are using the "example" user ID
+    public final static String userId = "example";
+    public static String betaUserId;
 
     // Global tags
     public static final String NOTIFICATION = "notification";
