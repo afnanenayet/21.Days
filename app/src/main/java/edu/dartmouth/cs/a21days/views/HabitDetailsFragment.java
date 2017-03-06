@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.controllers.DeleteFromDBThread;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.controllers.TrackingService;
 import edu.dartmouth.cs.a21days.models.Habit;
@@ -122,10 +123,10 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
         deleteHabit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Delete the habit from teh data source
-                ArrayList<Habit> habits = dbHelper.getAll();
-                dbHelper.delete(habits.get(position).getId());
+                DeleteFromDBThread delete = new DeleteFromDBThread(position);
+                delete.run();
                 dismiss();
+
             }
         });
 
