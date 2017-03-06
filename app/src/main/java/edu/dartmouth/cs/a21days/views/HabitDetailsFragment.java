@@ -147,6 +147,7 @@ public class HabitDetailsFragment extends DialogFragment
         progress.setMax(21);
         progress.setIconImageResource(R.drawable.check_icon);
         progress.setOnIconClickListener(this);
+        progress.setProgress(progress.getProgress());
 
         SetupFragment();
 
