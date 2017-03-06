@@ -21,7 +21,7 @@ import edu.dartmouth.cs.a21days.controllers.MainActivity;
  */
 public class NotificationJobScheduler extends Job {
     // tag for debugging
-    private static final String TAG = "notif_job_sched";
+    protected static final String TAG = "notif_job_sched";
 
     /**
      * Set up notification from available data
