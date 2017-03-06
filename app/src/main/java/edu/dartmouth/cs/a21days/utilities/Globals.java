@@ -14,7 +14,12 @@ public class Globals {
      */
     private Globals() { }
 
+    // Static dynamic vars
     public static String userId;
+
+    // Global tags
+    public static final String NOTIFICATION = "notification";
+    public static final String NOTIFICATION_HABIT_ID = "notification_habit_id";
 
 
 }
