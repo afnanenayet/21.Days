@@ -173,6 +173,7 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
         if (locationcheckin){
             Location mlocation = HabitUtility.latLngToLocation(mHabit.getLocation());
             try {
+                geocoder = new Geocoder(getContext());
                 String address = (geocoder.getFromLocation(mlocation.getLatitude(),mlocation.getLongitude(),1))
                         .get(0).getAddressLine(0);
                 Location.setText(address);
