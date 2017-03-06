@@ -40,6 +40,9 @@ public class HabitDataSource {
 
             Habit newHabit = dataSnapshot.getValue(Habit.class);
             habitMap.put(newHabit.getId(), newHabit);
+
+            // Update UI to reflect this change
+            updateAdapter();
         }
 
         @Override
@@ -49,6 +52,8 @@ public class HabitDataSource {
             Habit habit = dataSnapshot.getValue(Habit.class);
             habitMap.put(habit.getId(), habit);
 
+            // Update UI to reflect this change
+            updateAdapter();
         }
 
         @Override
@@ -57,11 +62,17 @@ public class HabitDataSource {
 
             Habit habit = dataSnapshot.getValue(Habit.class);
             habitMap.remove(habit.getId());
+
+            // Update UI to reflect this change
+            updateAdapter();
         }
 
         @Override
         public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             Log.d(DEBUG_TAG, "Child was moved");
+
+            // Update UI to reflect this change
+            updateAdapter();
         }
 
         @Override
@@ -171,5 +182,17 @@ public class HabitDataSource {
         Log.d(DEBUG_TAG, "Retrieving all habits");
 
         return new ArrayList<>(habitMap.values());
+    }
+
+    /**
+     * Updates listviewadapter with current data
+     */
+    private void updateAdapter() {
+        HabitListviewAdapter adapter = HabitListviewAdapter.getInstance();
+
+        // If the adapter has been initialized, update visible data
+        if (adapter != null) {
+            adapter.updateData(this.getAll());
+        }
     }
 }
