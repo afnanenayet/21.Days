@@ -2,6 +2,7 @@ package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
@@ -96,32 +97,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         // Initialize Google Fit connection
         // connectToGoogleFit(); // todo get Fitness APIs
-
-        /*
-        // TODO DEBUG REMOVE (example of how to add habit to db)
-        HabitDataSource dbHelper = HabitDataSource.getInstance("example");
-        ArrayList<Habit> habits = dbHelper.getAll();
-
-        Log.d(DEBUG_TAG, "Adding habits to database");
-
-        // retrieving all habits from dbHelper
-        habits = dbHelper.getAll();
-        // Get a list of habit names
-        ArrayList<String> habitsNames = new ArrayList<>();
-        for (int i = 0; i < habits.size(); i++) {
-            habitsNames.add(habits.get(i).getName());
-        }
-
-        // Only add habit to db if it
-        for (Habit habit : habits) {
-            if (!habitsNames.contains(habit.getName())) {
-                habit.setId(dbHelper.put(habit));
-            }
-        }
-        */
-
-        AddAllToDB add = new AddAllToDB();
-        add.run();
     }
 
 

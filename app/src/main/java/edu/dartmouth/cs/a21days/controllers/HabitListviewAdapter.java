@@ -2,8 +2,13 @@ package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Context;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
+
+import android.content.Context;
+
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +37,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     private ArrayList<Habit> mHabitList;
     private Context mContext;
     private static final String TAG = "HabitListviewAdapter";
+    private static HabitListviewAdapter instance = null;
 
     /**
      * Constructor
@@ -57,6 +63,37 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
                 .inflate(R.layout.habit_item_view, parent, false);
 
         return new HabitViewHolder(linearLayout);
+    }
+
+    /**
+     * Updates the list and refreshes the listview
+     * @param list The new list of data
+     */
+    public void updateData(ArrayList<Habit> list) {
+        mHabitList.clear();
+        mHabitList = list;
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Turn the {@link HabitListviewAdapter} into a singleton
+     * @return an instance of the recycler view adapter
+     */
+    public static HabitListviewAdapter getInstance(Context context, ArrayList<Habit> list) {
+        if (instance == null) {
+            instance = new HabitListviewAdapter(context, list);
+        }
+
+        return instance;
+    }
+
+    /**
+     * Get instance of recycler view adapter
+     * @return a possibly null instance
+     */
+    @Nullable
+    public static HabitListviewAdapter getInstance() {
+        return instance;
     }
 
     /**
@@ -136,6 +173,4 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
             ButterKnife.bind(this, internalLinearLayout);
         }
     }
-
-    ;
 }
