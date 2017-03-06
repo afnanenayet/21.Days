@@ -33,6 +33,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.utilities.Globals;
+import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 
 /**
  * activity for users to sign in to the app
@@ -87,6 +89,10 @@ public class SignInActivity extends AppCompatActivity implements
                 if (user != null) {
                     // User is signed in
                     Log.d(DEBUG_TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+
+                    // setting user ID
+                    Globals.userId = HabitUtility.hashId(user.getUid());
+
                     // launch main activity
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     startActivity(intent);

@@ -13,4 +13,8 @@ public class Globals {
      * Private constructor to prevent class initialization
      */
     private Globals() { }
+
+    public static String userId;
+
+
 }
