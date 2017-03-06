@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.models.Habit;
+import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
 import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
 import edu.dartmouth.cs.a21days.views.HabitsListFragment;
@@ -97,8 +98,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         // Initialize Google Fit connection
         // connectToGoogleFit(); // todo get Fitness APIs
-    }
 
+        // TODO DEBUG REMOVE (example of how to add habit to db)
+        HabitDataSource dbHelper = HabitDataSource.getInstance("example");
+    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

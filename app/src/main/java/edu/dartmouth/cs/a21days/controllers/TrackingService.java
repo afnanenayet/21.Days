@@ -71,7 +71,6 @@ public class TrackingService extends Service implements LocationListener {
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            Log.d("TTAG", "StartLocationUpdate: Permission denied");
             return;
         }
         Location location = mLocationManager.getLastKnownLocation(provider);
@@ -89,7 +88,6 @@ public class TrackingService extends Service implements LocationListener {
     public void onLocationChanged(Location location) {
         Intent onLocationUpdated = new Intent(TRACKING_ACTION);
         onLocationUpdated.putExtra(KEY_LOCATION, location);
-        Log.d("TTAG", "onLocationChanged: Location");
         LocalBroadcastManager.getInstance(this).sendBroadcast(onLocationUpdated);
     }
 
