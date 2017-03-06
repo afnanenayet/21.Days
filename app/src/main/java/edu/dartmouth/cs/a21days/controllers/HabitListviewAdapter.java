@@ -2,8 +2,8 @@ package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.os.Bundle;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +22,11 @@ import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 import edu.dartmouth.cs.a21days.views.HabitDetailsFragment;
 
 /**
- * ListView Adapter for recycler view that displays habit information.
- * <p>
  * Created by aenayet on 2/26/17.
+ */
+
+/**
+ * Listview Adapter for recycler view that displays habit information
  */
 public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdapter
         .HabitViewHolder> {
@@ -35,8 +37,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
 
     /**
      * Constructor
-     *
-     * @param context        The context of the activity
+     * @param context The context of the activity
      * @param habitArrayList A list of habit objects that we want to display
      */
     public HabitListviewAdapter(Context context, ArrayList<Habit> habitArrayList) {
@@ -46,7 +47,6 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
 
     /**
      * Creates {@link HabitViewHolder} for class
-     *
      * @return An instance of {@link HabitViewHolder} with internal views bound
      * to class
      */
@@ -61,15 +61,14 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
 
     /**
      * Replace the contents of a view
-     *
-     * @param holder   The holder for that view
+     * @param holder The holder for that view
      * @param position the position to fill contents with
      */
     @Override
     public void onBindViewHolder(HabitViewHolder holder, final int position) {
         // Load contents for that position
         // TODO put in all data when applicable
-        final Habit habit = mHabitList.get(position);
+        Habit habit = mHabitList.get(position);
 
         holder.habitNameTv.setText(habit.getName());
         holder.habitPriorityTv.setText(HabitUtility
@@ -83,7 +82,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
             @Override
             public boolean onLongClick(View view) {
                 HabitDetailsFragment dialogFragment = new HabitDetailsFragment();
-                FragmentManager manager = ((Activity) mContext).getFragmentManager();
+                FragmentManager manager = ((Activity)mContext).getFragmentManager();
                 Bundle bundle = new Bundle();
                 bundle.putInt("Position", position);
                 dialogFragment.setArguments(bundle);
@@ -95,7 +94,6 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
 
     /**
      * Calculates number of habit items that are being displayed
-     *
      * @return The number of habit items currently being rendered in the {@link RecyclerView}
      */
     @Override
@@ -108,18 +106,12 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
      * Provides a reference to the view for each data item
      */
     public static class HabitViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.habit_name)
-        TextView habitNameTv;
-        @BindView(R.id.habit_current_streak)
-        TextView habitCurrentStreakTv;
-        @BindView(R.id.habit_priority)
-        TextView habitPriorityTv;
-        @BindView(R.id.habit_category)
-        TextView habitCategoryTv;
-        @BindView(R.id.habit_frequency)
-        TextView habitFrequency;
-        @BindView(R.id.habit_location)
-        TextView habitLocation;
+        @BindView(R.id.habit_name) TextView habitNameTv;
+        @BindView(R.id.habit_current_streak) TextView habitCurrentStreakTv;
+        @BindView(R.id.habit_priority) TextView habitPriorityTv;
+        @BindView(R.id.habit_category) TextView habitCategoryTv;
+        @BindView(R.id.habit_frequency) TextView habitFrequency;
+        @BindView(R.id.habit_location) TextView habitLocation;
         WaveProgressView progressView;
 
         public HabitViewHolder(View itemView) {
@@ -135,7 +127,5 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
                     .findViewById(R.id.habit_progress_bar);
             ButterKnife.bind(this, internalLinearLayout);
         }
-    }
-
-    ;
+    };
 }
