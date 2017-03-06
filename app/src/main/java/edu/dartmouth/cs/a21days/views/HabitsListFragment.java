@@ -59,10 +59,10 @@ public class HabitsListFragment extends Fragment {
         // Initializing recyclerview
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
 
-        // Retrieving habit objects
-        ArrayList<Habit> dataList = HabitDataSource.getInstance().getAll();
+        // Initializing empty arraylist for adapter
+        ArrayList<Habit> dataList = new ArrayList<>();
 
-        HabitListviewAdapter adapter = new HabitListviewAdapter(getContext(), dataList);
+        HabitListviewAdapter adapter = HabitListviewAdapter.getInstance(getContext(), dataList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(adapter);
@@ -76,9 +76,7 @@ public class HabitsListFragment extends Fragment {
             }
         });
 
-
         return mView;
     }
-
 
 }
