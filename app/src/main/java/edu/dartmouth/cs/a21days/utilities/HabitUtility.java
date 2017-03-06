@@ -10,11 +10,9 @@ import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.models.SerialLatLng;
 
 /**
- * Created by aenayet on 2/26/17.
- */
-
-/**
  * Helper class to translate or discern data for a {@link Habit} object
+ *
+ * Created by aenayet on 2/26/17.
  */
 public class HabitUtility {
     /**
@@ -43,7 +41,7 @@ public class HabitUtility {
         // Initializing location object
         Location location = new Location(LocationManager.GPS_PROVIDER);
 
-        // Setting properties
+        // Set lat and long coordinates
         location.setLatitude(serialLatLng.getLatitude());
         location.setLongitude(serialLatLng.getLongitude());
 
@@ -58,7 +56,7 @@ public class HabitUtility {
     public static SerialLatLng locationToLatLng(Location location) {
         SerialLatLng serialLatLng = new SerialLatLng();
 
-        // Setting properties
+        // Set lat and long coordinates
         serialLatLng.setLongitude(location.getLongitude());
         serialLatLng.setLatitude(location.getLatitude());
 
@@ -66,7 +64,7 @@ public class HabitUtility {
     }
 
     /**
-     *
+     * get the hash of a user's ID
      * @param userId
      * @return
      */
