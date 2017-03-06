@@ -130,8 +130,6 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
             progressView = (WaveProgressView) parentLinearLayout
                     .findViewById(R.id.habit_progress_bar);
             ButterKnife.bind(this, internalLinearLayout);
-
-
         }
     };
 }

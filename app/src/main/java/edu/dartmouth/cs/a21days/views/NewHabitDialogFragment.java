@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.database.MatrixCursor;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
@@ -28,6 +30,8 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.controllers.DatabaseHelper;
+import edu.dartmouth.cs.a21days.models.Habit;
 
 /**
  * Created by Steven on 3/1/17.
@@ -38,6 +42,9 @@ public class NewHabitDialogFragment extends DialogFragment {
     private ArrayList<String> catagoryList = new ArrayList<String>();
     private SimpleCursorAdapter mAdapter;
     private static final String TAG = "NewHabitDialogFragment";
+    private Habit mHabit;
+    private Location mLocation;
+    private DatabaseHelper dbHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -51,6 +58,8 @@ public class NewHabitDialogFragment extends DialogFragment {
         catagoryList.add("Social");
         catagoryList.add("Health");
 
+        mHabit = new Habit();
+        dbHelper = DatabaseHelper.getInstance("example");
 
     }
 
@@ -64,15 +73,91 @@ public class NewHabitDialogFragment extends DialogFragment {
         builder.setView(view);
 
         // Populate the priority spinner with options "Set Priority", "Low", "Medium", "High"
-        Spinner spinner = (Spinner) view.findViewById(R.id.priority_spinner);
+        final Spinner prioritySpinner = (Spinner) view.findViewById(R.id.priority_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.priority_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        prioritySpinner.setAdapter(adapter);
 
         // Call helper function to set up search view
         setUpSearchView(view);
 
+        // Call helper function to set up switches
+        setUpSwitches(view);
+
+        // Set up autocomplete fragment
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName());
+                mLocation = new Location(LocationManager.GPS_PROVIDER);
+                mLocation.setLatitude(place.getLatLng().latitude);
+                mLocation.setLongitude(place.getLatLng().longitude);
+
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+
+        // Set save and cancel buttons
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                setHabitInfo(view);
+                mHabit.setId(dbHelper.put(mHabit));
+                dismissAllowingStateLoss();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dismissAllowingStateLoss();
+            }
+        });
+        return builder.create();
+    }
+
+    public void setHabitInfo(View view){
+        Spinner prioritySpinner = (Spinner) view.findViewById(R.id.priority_spinner);
+        SearchView categoryView = (SearchView) view.findViewById(R.id.category_search);
+        TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker_habit);
+        Switch enableLocation = (Switch) view.findViewById(R.id.location_requirement);
+        Switch enableAllDay = (Switch) view.findViewById(R.id.all_day_switch);
+        EditText habitName = (EditText) view.findViewById(R.id.habit_name_input);
+        mHabit.setPriority(prioritySpinner.getSelectedItemPosition());
+        mHabit.setCategory(String.valueOf(categoryView.getQuery()));
+        mHabit.setName(String.valueOf(habitName.getText()));
+        if (enableLocation.isEnabled()){
+            mHabit.setLocation(mLocation);
+        }
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        // Remove the PlaceAutocompleteFragment if when closing the dialog fragment
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        if (autocompleteFragment != null) {
+            getFragmentManager().beginTransaction()
+                    .remove(autocompleteFragment)
+                    .commit();
+        }
+
+    }
+
+    private void setUpSwitches(final View view){
         // Set up switch to show and hide time picker view
         Switch enableAllDay = (Switch) view.findViewById(R.id.all_day_switch);
         enableAllDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -87,6 +172,7 @@ public class NewHabitDialogFragment extends DialogFragment {
                 }
             }
         });
+
 
         // Hid autocompleteView and set up switch to show and hide it
         final View autocompleteView = (View) view.findViewById(R.id.place_autocomplete_fragment);
@@ -104,55 +190,6 @@ public class NewHabitDialogFragment extends DialogFragment {
                 }
             }
         });
-
-        // Set up autocomplete fragment
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.getName());
-            }
-
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
-            }
-        });
-
-        // Set save and cancel buttons
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dismissAllowingStateLoss();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dismissAllowingStateLoss();
-            }
-        });
-        return builder.create();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        // Remove the PlaceAutocompleteFragment if when closing the dialog fragment
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
-        if (autocompleteFragment != null) {
-            getFragmentManager().beginTransaction()
-                    .remove(autocompleteFragment)
-                    .commit();
-        }
-
     }
 
     private void setUpSearchView(View view){
