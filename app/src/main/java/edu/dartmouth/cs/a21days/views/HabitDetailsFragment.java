@@ -75,10 +75,23 @@ public class HabitDetailsFragment extends DialogFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         position = getArguments().getInt("Position");
-        dbHelper = HabitDataSource.getInstance("example");
-        ArrayList<Habit> habits = dbHelper.getAll();
-        mHabit = habits.get(position);
+        mHabit = getHabitFromDB(position);
+
+    }
+
+    // Retrieve habit from database using thread
+    private Habit getHabitFromDB(final int position){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dbHelper = HabitDataSource.getInstance("example");
+                ArrayList<Habit> habits = dbHelper.getAll();
+                mHabit = habits.get(position);
+            }
+        }).start();
+        return mHabit;
     }
 
 
