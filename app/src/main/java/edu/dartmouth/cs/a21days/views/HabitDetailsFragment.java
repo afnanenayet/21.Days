@@ -158,9 +158,12 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
         Location = (TextView)view.findViewById(R.id.details_location_textview);
         progress = (IconRoundCornerProgressBar) view.findViewById(R.id.detail_progress);
 
+        /*
         progress.setProgressColor(Color.parseColor("#56d2c2"));
         progress.setProgressBackgroundColor(Color.parseColor("#757575"));
         progress.setIconBackgroundColor(Color.parseColor("#38c0ae"));
+        */
+
         progress.setMax(21);
         progress.setIconImageResource(R.drawable.check_icon);
         progress.setOnIconClickListener(this);
