@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         HabitDataSource dbHelper = HabitDataSource.getInstance("example");
     }
 
-
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         // Empty function required to implement OnPageChangedListener
