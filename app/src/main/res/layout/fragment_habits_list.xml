@@ -5,10 +5,9 @@
     tools:context="edu.dartmouth.cs.a21days.views.HabitsListFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
         android:id="@+id/habits_recycler_view"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -16,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:tint="@color/icons"
-        android:src="@drawable/add" />
+        android:src="@drawable/add"
+        android:tint="@color/icons" />
 
 </FrameLayout>

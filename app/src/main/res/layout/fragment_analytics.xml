@@ -13,16 +13,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <!-- chart for habit streaks -->
             <android.support.v7.widget.CardView
                 android:id="@+id/analytics_graph_card_view"
                 android:layout_width="match_parent"
+                android:layout_height="250dp"
                 android:layout_margin="10dp"
                 card_view:cardCornerRadius="5sp"
-                card_view:cardElevation="5sp"
-                android:layout_height="250dp">
+                card_view:cardElevation="5sp">
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/analytics_chart"
@@ -32,248 +32,252 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/habit_analysis_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 card_view:cardCornerRadius="5sp"
-                card_view:cardElevation="5sp"
-                android:id="@+id/habit_analysis_card_view">
+                card_view:cardElevation="5sp">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:background="#ffffff"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.04">
+                    android:layout_weight="0.04"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_marginTop="20dp"
                         android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="20dp"
                         android:layout_weight="0.04"
-                        android:layout_height="100dp">
+                        android:orientation="horizontal">
 
                         <Space
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="0dp" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
-
+                        <!-- number of ongoing habits -->
                         <FrameLayout
-                            android:orientation="vertical"
                             android:layout_width="120dp"
+                            android:layout_height="100dp"
                             android:layout_weight="1"
                             android:background="@drawable/blue_rectangle"
-                            android:layout_height="100dp">
+                            android:orientation="vertical">
 
                             <TextView
-                                android:text="@string/analytics_ongoing_habits"
-                                android:textAlignment="center"
-                                android:textColor="#ffffff"
+                                android:id="@+id/analytics_ongoing_habits_title_textview"
                                 android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="top"
                                 android:layout_marginTop="10dp"
                                 android:drawableLeft="@drawable/smile"
-                                android:id="@+id/analytics_ongoing_habits_title_textview"
-                                android:layout_height="wrap_content" />
+                                android:text="@string/analytics_ongoing_habits"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff" />
 
                             <TextView
                                 android:id="@+id/analytics_ongoing_habits_num_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="14"
-                                android:textSize="30sp"
                                 android:gravity="center"
+                                android:text="14"
+                                android:textAlignment="center"
                                 android:textColor="#ffffff"
-                                android:textAlignment="center"/>
+                                android:textSize="30sp" />
 
                             <TextView
+                                android:id="@+id/analytics_ongoing_habits_comment_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:layout_marginBottom="10dp"
+                                android:text="Good job!"
                                 android:textAlignment="center"
-                                android:textColor="#ffffff"
-                                android:id="@+id/analytics_ongoing_habits_comment_textview"
-                                android:text="Good job!" />
+                                android:textColor="#ffffff" />
                         </FrameLayout>
 
                         <Space
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="0dp" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
+                        <!-- number of completed habits -->
                         <FrameLayout
-                            android:orientation="vertical"
                             android:layout_width="120dp"
                             android:layout_height="100dp"
                             android:layout_weight="1"
-                            android:background="@drawable/blue_rectangle">
+                            android:background="@drawable/blue_rectangle"
+                            android:orientation="vertical">
 
                             <TextView
-                                android:text="@string/analytics_completed_habits"
-                                android:textAlignment="center"
-                                android:textColor="#ffffff"
+                                android:id="@+id/analytics_completed_habits_title_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="top"
                                 android:layout_marginTop="10dp"
-                                android:id="@+id/analytics_completed_habits_title_textview"/>
+                                android:text="@string/analytics_completed_habits"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff" />
 
                             <TextView
                                 android:id="@+id/analytics_completed_habits_num_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="5"
-                                android:textSize="30sp"
                                 android:gravity="center"
+                                android:text="5"
+                                android:textAlignment="center"
                                 android:textColor="#ffffff"
-                                android:textAlignment="center"/>
+                                android:textSize="30sp" />
 
                             <TextView
-                                android:text="Decent!"
+                                android:id="@+id/analytics_completed_habits_comment_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:layout_marginBottom="10dp"
+                                android:text="Decent!"
                                 android:textAlignment="center"
-                                android:textColor="#ffffff"
-                                android:id="@+id/analytics_completed_habits_comment_textview"/>
+                                android:textColor="#ffffff" />
                         </FrameLayout>
 
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="50dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
 
-                        </LinearLayout>
+                    </LinearLayout>
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:layout_width="match_parent"
-                            android:layout_weight="0.04"
-                            android:layout_height="100dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="0.04"
+                        android:orientation="horizontal">
 
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="0dp" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
-                            <FrameLayout
-                                android:orientation="vertical"
-                                android:layout_width="120dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/blue_rectangle"
-                                android:layout_height="100dp">
+                        <!-- longest streak, in days -->
+                        <FrameLayout
+                            android:layout_width="120dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/blue_rectangle"
+                            android:orientation="vertical">
 
-                                <TextView
-                                    android:text="@string/analytics_longest_streak"
-                                    android:textAlignment="center"
-                                    android:textColor="#ffffff"
-                                    android:layout_width="match_parent"
-                                    android:layout_gravity="top"
-                                    android:layout_marginTop="10dp"
-                                    android:drawableStart="@drawable/smile"
-                                    android:id="@+id/analytics_longest_streak_habit_title_textview"
-                                    android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/analytics_longest_streak_habit_title_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top"
+                                android:layout_marginTop="10dp"
+                                android:drawableStart="@drawable/smile"
+                                android:text="@string/analytics_longest_streak"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff" />
 
-                                <TextView
-                                    android:id="@+id/analytics_longest_streak_num_textview"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="10 Days"
-                                    android:textSize="30sp"
-                                    android:gravity="center"
-                                    android:textColor="#ffffff"
-                                    android:textAlignment="center"/>
+                            <TextView
+                                android:id="@+id/analytics_longest_streak_num_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="10 Days"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff"
+                                android:textSize="30sp" />
 
-                                <TextView
-                                    android:text="Hiking"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="10dp"
-                                    android:textAlignment="center"
-                                    android:textColor="#ffffff"
-                                    android:id="@+id/analytics_longest_streak_habit_name_textview"/>
-                            </FrameLayout>
+                            <TextView
+                                android:id="@+id/analytics_longest_streak_habit_name_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginBottom="10dp"
+                                android:text="Hiking"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff" />
+                        </FrameLayout>
 
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="0dp" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
-                            <FrameLayout
-                                android:orientation="vertical"
-                                android:layout_width="120dp"
-                                android:layout_height="100dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/blue_rectangle">
+                        <!-- most neglected habit, in terms of days since last completion -->
+                        <FrameLayout
+                            android:layout_width="120dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/blue_rectangle"
+                            android:orientation="vertical">
 
-                                <TextView
-                                    android:text="@string/analytics_most_neglected"
-                                    android:textAlignment="center"
-                                    android:textColor="#ffffff"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="top"
-                                    android:layout_marginTop="10dp"
-                                    android:id="@+id/analytics_neglected_habit_title_textview"/>
+                            <TextView
+                                android:id="@+id/analytics_neglected_habit_title_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top"
+                                android:layout_marginTop="10dp"
+                                android:text="@string/analytics_most_neglected"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff" />
 
-                                <TextView
-                                    android:id="@+id/analytics_neglected_days_textview"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="7 Days"
-                                    android:textSize="30sp"
-                                    android:gravity="center"
-                                    android:textColor="#ffffff"
-                                    android:textAlignment="center"/>
+                            <TextView
+                                android:id="@+id/analytics_neglected_days_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="7 Days"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff"
+                                android:textSize="30sp" />
 
-                                <TextView
-                                    android:text="Breakfast"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="10dp"
-                                    android:textAlignment="center"
-                                    android:textColor="#ffffff"
-                                    android:id="@+id/analytics_neglected_habit_name_textview"/>
-                            </FrameLayout>
+                            <TextView
+                                android:id="@+id/analytics_neglected_habit_name_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginBottom="10dp"
+                                android:text="Breakfast"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff" />
+                        </FrameLayout>
 
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="50dp"
-                                android:layout_weight="1"/>
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1" />
 
-                            </LinearLayout>
-                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
+            <!-- encouraging comment -->
             <android.support.v7.widget.CardView
                 android:id="@+id/analytics_comment_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 card_view:cardCornerRadius="5sp"
-                card_view:cardElevation="5sp" >
+                card_view:cardElevation="5sp">
 
                 <TextView
                     android:id="@+id/analytics_comment_textview"
-                    android:textColor="@color/colorPrimaryText"
                     android:layout_width="match_parent"
-                    android:background="#ffffff"
-                    android:layout_weight="0.04"
                     android:layout_height="80dp"
+                    android:layout_weight="0.04"
+                    android:background="#ffffff"
                     android:gravity="center"
                     android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryText"
                     android:textSize="20sp" />
             </android.support.v7.widget.CardView>
 

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_habit_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,92 +22,93 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/details_piechart_card_view"
-                android:layout_margin="10dp"
-                android:layout_weight="0.5"
-                card_view:cardCornerRadius="3sp"
-                card_view:cardElevation="3sp"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp">
+                <android.support.v7.widget.CardView
+                    android:id="@+id/details_piechart_card_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.5"
+                    card_view:cardCornerRadius="3sp"
+                    card_view:cardElevation="3sp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="5sp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:orientation="vertical">
 
-                    <!-- TextView showing how many days completed -->
+                        <!-- TextView showing how many days completed -->
 
-                    <!--&lt;!&ndash; pie chart with days completed and days left &ndash;&gt;-->
-                    <!--<com.github.mikephil.charting.charts.PieChart-->
+                        <!--&lt;!&ndash; pie chart with days completed and days left &ndash;&gt;-->
+                        <!--<com.github.mikephil.charting.charts.PieChart-->
                         <!--android:id="@+id/detail_pie_chart"-->
                         <!--android:layout_width="match_parent"-->
                         <!--android:layout_height="250dp"-->
                         <!--android:layout_weight="1.25" />-->
 
-                    <!-- TextView showing how many days remaining -->
+                        <!-- TextView showing how many days remaining -->
 
-                    <TextView
-                        android:id="@+id/detail_days_completed_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:drawableBottom="@drawable/textlines"
-                        android:layout_marginTop="10dp"
-                        android:text="Completed Streak"
-                        android:textSize="16sp" />
+                        <!-- number days completed -->
+                        <TextView
+                            android:id="@+id/detail_days_completed_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:drawableBottom="@drawable/textlines"
+                            android:text="Completed Streak"
+                            android:textAlignment="center"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/detail_days_completed"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:text="11 Days"
+                            android:textAlignment="center"
+                            android:textSize="30sp" />
 
 
-                    <TextView
-                        android:id="@+id/detail_days_completed"
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:layout_weight="0.5"
-                        android:text="11 Days"
-                        android:textSize="30sp"
-                        android:layout_height="200dp" />
+                    </LinearLayout>
 
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
+                </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/details_days_left_card_view"
                     android:layout_width="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="100dp"
                     android:layout_margin="10dp"
+                    android:layout_weight="0.5"
                     card_view:cardCornerRadius="3sp"
-                    card_view:cardElevation="3sp"
-                    android:layout_height="100dp">
+                    card_view:cardElevation="3sp">
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="5sp">
+                        android:layout_margin="5sp"
+                        android:orientation="vertical">
 
+                        <!-- number days left -->
                         <TextView
                             android:id="@+id/detail_days_left_textview"
-                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
+                            android:layout_marginTop="10dp"
                             android:drawableBottom="@drawable/textlines"
                             android:text="Days Left"
+                            android:textAlignment="center"
                             android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/detail_days_left"
                             android:layout_width="match_parent"
-                            android:textAlignment="center"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
                             android:layout_weight="0.5"
+                            android:gravity="center"
                             android:text="10 Days"
-                            android:textSize="30sp"
-                            android:layout_height="wrap_content" />
+                            android:textAlignment="center"
+                            android:textSize="30sp" />
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
@@ -119,72 +118,72 @@
 
             <!-- Category -->
             <android.support.v7.widget.CardView
-                        android:id="@+id/detail_category_card_view"
-                        android:layout_width="match_parent"
+                android:id="@+id/detail_category_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10sp"
-                        card_view:cardCornerRadius="3sp"
-                        card_view:cardElevation="3sp"
-                android:layout_height="wrap_content">
+                card_view:cardCornerRadius="3sp"
+                card_view:cardElevation="3sp">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5sp">
+                    android:layout_margin="5sp"
+                    android:orientation="vertical">
 
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorSecondaryText"
-                            android:textSize="20sp"
-                            android:text="@string/category"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/category"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="20sp" />
 
                     <TextView
-                            android:id="@+id/details_category_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimaryText"
-                            android:textSize="21sp"
-                            android:gravity="center"
-                            android:text="Life"/>
-
-
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorSecondaryText"
-                            android:textSize="20sp"
-                            android:text="@string/priority"/>
-
-                    <TextView
-                            android:id="@+id/details_priority_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimaryText"
-                            android:textSize="21sp"
-                            android:gravity="center"
-                            android:text="High"/>
+                        android:id="@+id/details_category_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Life"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="21sp" />
 
 
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorSecondaryText"
-                            android:textSize="20sp"
-                            android:text="@string/location"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/priority"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/details_priority_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="High"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="21sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/location"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
 
-                <!-- Delete button -->
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/delete"
-                    android:theme="@style/ThemeOverlay.MyDarkButton"
-                    android:textSize="22sp" />
+            <!-- Delete button -->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/delete"
+                android:textSize="22sp"
+                android:theme="@style/ThemeOverlay.MyDarkButton" />
 
         </LinearLayout>
 
