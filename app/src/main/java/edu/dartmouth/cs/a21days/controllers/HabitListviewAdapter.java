@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.app.FragmentManager;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,7 +73,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
      * @param position the position to fill contents with
      */
     @Override
-    public void onBindViewHolder(HabitViewHolder holder, int position) {
+    public void onBindViewHolder(HabitViewHolder holder, final int position) {
         // Load contents for that position
         // TODO put in all data when applicable
         Habit habit = mHabitList.get(position);
@@ -90,6 +91,9 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
             public boolean onLongClick(View view) {
                 HabitDetailsFragment dialogFragment = new HabitDetailsFragment();
                 FragmentManager manager = ((Activity)mContext).getFragmentManager();
+                Bundle bundle = new Bundle();
+                bundle.putInt("Position", position);
+                dialogFragment.setArguments(bundle);
                 dialogFragment.show(manager, "Habit Details");
                 return false;
             }
