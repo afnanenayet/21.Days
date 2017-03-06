@@ -72,8 +72,8 @@
                         android:id="@+id/detail_days_completed_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/textlines"
                         android:textAlignment="center"
+                        android:drawableBottom="@drawable/textlines"
                         android:layout_marginTop="10dp"
                         android:text="Completed Streak"
                         android:textSize="16sp" />
@@ -112,7 +112,6 @@
                         <TextView
                             android:id="@+id/detail_days_left_textview"
                             android:layout_marginTop="10dp"
-                            android:background="@drawable/textlines"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
@@ -140,7 +139,6 @@
                 android:id="@+id/detail_category_card_view"
                 android:layout_width="match_parent"
                 android:layout_margin="10sp"
-                android:background="@drawable/borderline"
                 card_view:cardCornerRadius="3sp"
                 card_view:cardElevation="3sp"
                 android:layout_height="wrap_content">
@@ -154,10 +152,7 @@
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textAlignment="center"
-                        android:background="@drawable/borderline"
-                            android:textColor="#ffffff"
+                            android:textColor="@color/colorSecondaryText"
                             android:textSize="20sp"
                             android:text="@string/category"/>
 
@@ -165,8 +160,7 @@
                             android:id="@+id/details_category_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryText"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="21sp"
                             android:gravity="center"
                             android:text="Life"/>
@@ -175,38 +169,30 @@
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textAlignment="center"
-                        android:background="@drawable/borderline"
-                        android:textColor="#ffffff"
+                            android:textColor="@color/colorSecondaryText"
                             android:textSize="20sp"
                             android:text="@string/priority"/>
 
                     <TextView
-                        android:id="@+id/details_priority_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textSize="21sp"
-                        android:gravity="center"
-                        android:text="High"/>
+                            android:id="@+id/details_priority_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="21sp"
+                            android:gravity="center"
+                            android:text="High"/>
 
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/borderline"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp"
-                        android:text="@string/location"/>
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorSecondaryText"
+                            android:textSize="20sp"
+                            android:text="@string/location"/>
                     <TextView
                         android:id="@+id/details_location_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="21sp"
                         android:gravity="center"
@@ -223,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/delete"
-                android:background="@drawable/borderline_orange"
+                android:theme="@style/ThemeOverlay.MyDarkButton"
                 android:textSize="22sp" />
 
         </LinearLayout>
