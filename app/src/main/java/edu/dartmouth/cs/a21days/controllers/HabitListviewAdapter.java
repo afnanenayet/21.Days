@@ -2,11 +2,11 @@ package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-<<<<<<< HEAD
+
 import android.os.Bundle;
-=======
+
 import android.content.Context;
->>>>>>> aa6c5eb57535e1ff3e1d2a7aa443dda95f5c9405
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,7 +84,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                HabitDetailsFragment dialogFragment = new HabitDetailsFragment(habit);
+                HabitDetailsFragment dialogFragment = new HabitDetailsFragment();
                 FragmentManager manager = ((Activity)mContext).getFragmentManager();
                 Bundle bundle = new Bundle();
                 bundle.putInt("Position", position);

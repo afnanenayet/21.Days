@@ -70,12 +70,16 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
     private int position;
     private HabitDataSource dbHelper;
 
+    public HabitDetailsFragment(){
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         position = getArguments().getInt("Position");
         dbHelper = HabitDataSource.getInstance("example");
+        ArrayList<Habit> habits = dbHelper.getAll();
+        mHabit = habits.get(position);
     }
 
 
