@@ -32,8 +32,9 @@ public class AnalyticsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    // constructor
     public AnalyticsFragment() {
-        // Required empty public constructor
+        // empty, required
     }
 
     /**

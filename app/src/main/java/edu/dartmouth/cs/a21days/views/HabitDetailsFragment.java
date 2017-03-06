@@ -17,31 +17,29 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import android.widget.Button;
-
-import java.util.ArrayList;
-
-import edu.dartmouth.cs.a21days.R;
-import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
-import edu.dartmouth.cs.a21days.models.Habit;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 
+import java.util.ArrayList;
+
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.controllers.TrackingService;
 import edu.dartmouth.cs.a21days.models.Habit;
 
 import static com.facebook.GraphRequest.TAG;
 
 /**
+ * View the details of an individual habit.
+ * <p>
  * Created by Steven on 3/2/17.
  */
 
-public class HabitDetailsFragment extends DialogFragment implements IconRoundCornerProgressBar.OnIconClickListener {
+public class HabitDetailsFragment extends DialogFragment
+        implements IconRoundCornerProgressBar.OnIconClickListener {
 
     private static final int PERMISSION_REQUEST_CODE = 0;
     Habit mHabit;
@@ -62,15 +60,15 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
         @Override
         public void onReceive(Context context, Intent i) {
             Log.d("TTAG", "onReceive: ");
-            if (mHabit.getLocation()!=null)
-                CheckLocation((Location)i.getParcelableExtra(TrackingService.KEY_LOCATION));
+            if (mHabit.getLocation() != null)
+                CheckLocation((Location) i.getParcelableExtra(TrackingService.KEY_LOCATION));
         }
     };
 
     private int position;
     private HabitDataSource dbHelper;
 
-    public HabitDetailsFragment(){
+    public HabitDetailsFragment() {
     }
 
     @Override
@@ -99,23 +97,22 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
     @Override
     public void onPause() {
         super.onPause();
-        if (locationcheckin == true){
+        if (locationcheckin == true) {
             getActivity().stopService(mService);
             Log.d(TAG, "onPause: Stop Service");
             LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mReceiver);
-    }
+        }
     }
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
+        // build the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.fragment_habit_detail, null);
         builder.setView(view);
-
-
 
         // Set on click listener for delete button
         Button deleteHabit = (Button) view.findViewById(R.id.delete_habit);
@@ -131,17 +128,19 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
 
         checkPermission();
 
-        if (mHabit.getLocation()!=null)
+        if (mHabit.getLocation() != null)
             locationcheckin = true;
 
-        HabitName = (TextView)view.findViewById(R.id.details_habit_name);
-        Category = (TextView)view.findViewById(R.id.details_category_textview);
-        Completed = (TextView)view.findViewById(R.id.detail_days_completed);
-        Left = (TextView)view.findViewById(R.id.detail_days_left);
-        Priority = (TextView)view.findViewById(R.id.details_priority_textview);
-        Location = (TextView)view.findViewById(R.id.details_location_textview);
+        // get instances of the TextViews
+        HabitName = (TextView) view.findViewById(R.id.details_habit_name);
+        Category = (TextView) view.findViewById(R.id.details_category_textview);
+        Completed = (TextView) view.findViewById(R.id.detail_days_completed);
+        Left = (TextView) view.findViewById(R.id.detail_days_left);
+        Priority = (TextView) view.findViewById(R.id.details_priority_textview);
+        Location = (TextView) view.findViewById(R.id.details_location_textview);
         progress = (IconRoundCornerProgressBar) view.findViewById(R.id.detail_progress);
 
+        // set the progress bar
         progress.setProgressColor(Color.parseColor("#56d2c2"));
         progress.setProgressBackgroundColor(Color.parseColor("#757575"));
         progress.setIconBackgroundColor(Color.parseColor("#38c0ae"));
@@ -151,21 +150,19 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
 
         SetupFragment();
 
-
-
-
         return builder.create();
     }
 
     private void SetupFragment() {
+        // set the text for each TextView in the dialog
         HabitName.setText(mHabit.getName());
         Category.setText(mHabit.getCategory());
         Priority.setText(String.valueOf(mHabit.getPriority()));
-        if (mHabit.getStreak()<=21)
-            Left.setText(String.valueOf(21 - mHabit.getStreak())+" Days");
+        if (mHabit.getStreak() <= 21)
+            Left.setText(String.valueOf(21 - mHabit.getStreak()) + " Days");
         else
             Left.setText("0 Days");
-        Completed.setText(String.valueOf(mHabit.getStreak())+" Days");
+        Completed.setText(String.valueOf(mHabit.getStreak()) + " Days");
 
         progress.setMax(21);
         progress.setProgress(mHabit.getStreak());
@@ -192,17 +189,18 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
 
     //To check location permission
     private void checkPermission() {
-        if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || getActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
+        if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                || getActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), RequestString, PERMISSION_REQUEST_CODE);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode){
-            case PERMISSION_REQUEST_CODE:{
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE: {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
                         grantResults[1] != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(getActivity(), RequestString, PERMISSION_REQUEST_CODE);
@@ -217,7 +215,7 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
     //Check-in Button Click listener
     @Override
     public void onIconClick() {
-        mHabit.setStreak(mHabit.getStreak()+1);
+        mHabit.setStreak(mHabit.getStreak() + 1);
         SetupFragment();
         Toast.makeText(getActivity(), "Congratulations! Check-in successful!", Toast.LENGTH_SHORT).show();
     }

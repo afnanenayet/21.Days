@@ -36,29 +36,35 @@ import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 
 /**
+ * Dialog for creating a new habit from the habit list.
+ * <p>
  * Created by Steven on 3/1/17.
  */
 
 public class NewHabitDialogFragment extends DialogFragment {
-
-    private ArrayList<String> catagoryList = new ArrayList<String>();
+    // list of habit categories
+    private ArrayList<String> categoryList = new ArrayList<String>();
     private SimpleCursorAdapter mAdapter;
+    // tag for debugging
     private static final String TAG = "NewHabitDialogFragment";
+    // habit instance that is created
     private Habit mHabit;
+    // location of habit
     private Location mLocation;
+    // db helper to save habit with
     private HabitDataSource dbHelper;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Temporary code to add categories to categorylist
-        catagoryList.add("Life");
-        catagoryList.add("Fitness");
-        catagoryList.add("Productivity");
-        catagoryList.add("Academic");
-        catagoryList.add("Social");
-        catagoryList.add("Health");
+        categoryList.add("Life");
+        categoryList.add("Fitness");
+        categoryList.add("Productivity");
+        categoryList.add("Academic");
+        categoryList.add("Social");
+        categoryList.add("Health");
 
         mHabit = new Habit();
         dbHelper = HabitDataSource.getInstance("example");
@@ -68,6 +74,7 @@ public class NewHabitDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
+        // build the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
         builder.setTitle("Create a New Habit");
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -127,23 +134,33 @@ public class NewHabitDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    public void setHabitInfo(View view){
+    public void setHabitInfo(View view) {
+        // spinner to choose habit priority
         Spinner prioritySpinner = (Spinner) view.findViewById(R.id.priority_spinner);
+        // search for habit category
         SearchView categoryView = (SearchView) view.findViewById(R.id.category_search);
+        // pick habit time
         TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker_habit);
+        // enable location services
         Switch enableLocation = (Switch) view.findViewById(R.id.location_requirement);
+        // pick whether all day habit
         Switch enableAllDay = (Switch) view.findViewById(R.id.all_day_switch);
+        // give habit name
         EditText habitName = (EditText) view.findViewById(R.id.habit_name_input);
-        ToggleButtonGroup toggleButtons = (ToggleButtonGroup) view.findViewById(R.id.multi_selection_group);
+        ToggleButtonGroup toggleButtons = (ToggleButtonGroup)
+                view.findViewById(R.id.multi_selection_group);
         Log.i(TAG, "setHabitInfo: " + toggleButtons.getCheckedPositions());
+
+        // save inputted info
         mHabit.setPriority(prioritySpinner.getSelectedItemPosition());
         mHabit.setCategory(String.valueOf(categoryView.getQuery()));
         mHabit.setName(String.valueOf(habitName.getText()));
         ArrayList<Integer> frequency = new ArrayList<>();
         frequency.addAll(toggleButtons.getCheckedPositions());
         mHabit.setFrequency(frequency);
-        if (!enableAllDay.isChecked()){
-            String time = String.valueOf(timePicker.getHour()) + String.valueOf(timePicker.getMinute());
+        if (!enableAllDay.isChecked()) {
+            String time = String.valueOf(timePicker.getHour())
+                    + String.valueOf(timePicker.getMinute());
             Log.i(TAG, "setHabitInfo:  " + time);
             mHabit.setTime(Integer.parseInt(time));
         }
@@ -169,17 +186,17 @@ public class NewHabitDialogFragment extends DialogFragment {
 
     }
 
-    private void setUpSwitches(final View view){
+    // set up switch to show time picker as needed
+    private void setUpSwitches(final View view) {
         // Set up switch to show and hide time picker view
         Switch enableAllDay = (Switch) view.findViewById(R.id.all_day_switch);
         enableAllDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker_habit);
-                if (compoundButton.isChecked()){
+                if (compoundButton.isChecked()) {
                     timePicker.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     timePicker.setVisibility(View.VISIBLE);
                 }
             }
@@ -194,21 +211,21 @@ public class NewHabitDialogFragment extends DialogFragment {
         enableLocation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (!compoundButton.isChecked()){
+                if (!compoundButton.isChecked()) {
                     autocompleteView.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     autocompleteView.setVisibility(View.VISIBLE);
                 }
             }
         });
     }
 
-    private void setUpSearchView(View view){
+    // set up search for categories
+    private void setUpSearchView(View view) {
 
         // Initialize cursor adapter for categories search
-        final String[] from = new String[] {"habitCategories"};
-        final int[] to = new int[] {android.R.id.text1};
+        final String[] from = new String[]{"habitCategories"};
+        final int[] to = new int[]{android.R.id.text1};
         mAdapter = new SimpleCursorAdapter(getActivity(),
                 android.R.layout.simple_list_item_1,
                 null,
@@ -229,26 +246,28 @@ public class NewHabitDialogFragment extends DialogFragment {
                 String userInput = String.valueOf(searchView.getQuery());
 
                 // Get the text associated with the selection
-                try{
-                    displayInSearchBar = catagoryList.get(Integer.valueOf(mAdapter.getCursor().getString(position)));
-                }catch (Exception e){
+                try {
+                    displayInSearchBar = categoryList.get(Integer.
+                            valueOf(mAdapter.getCursor().getString(position)));
+                } catch (Exception e) {
                     displayInSearchBar = mAdapter.getCursor().getString(position);
                 }
 
                 // If it is already an option, populate the search bar
-                if (catagoryList.contains(displayInSearchBar)){
+                if (categoryList.contains(displayInSearchBar)) {
                     searchView.setQuery(displayInSearchBar, true);
                 }
                 // Otherwise, the user clicked "Create New Category"
                 else {
                     // Populate the search bar with their input and add it to the category list
                     searchView.setQuery(userInput, true);
-                    catagoryList.add(userInput);
+                    categoryList.add(userInput);
                 }
 
 
                 return true;
             }
+
             @Override
             public boolean onSuggestionSelect(int position) {
                 Log.i(TAG, "onSuggestionSelect: " + position);
@@ -274,12 +293,12 @@ public class NewHabitDialogFragment extends DialogFragment {
 
     // Helper function to populate the search suggestions
     private void populateAdapter(String query) {
-        final MatrixCursor c = new MatrixCursor(new String[]{ BaseColumns._ID, "habitCategories" });
-        for (int i = 0; i< catagoryList.size(); i++) {
-            if (catagoryList.get(i).toLowerCase().startsWith(query.toLowerCase()))
-                c.addRow(new Object[] {i, catagoryList.get(i)});
+        final MatrixCursor c = new MatrixCursor(new String[]{BaseColumns._ID, "habitCategories"});
+        for (int i = 0; i < categoryList.size(); i++) {
+            if (categoryList.get(i).toLowerCase().startsWith(query.toLowerCase()))
+                c.addRow(new Object[]{i, categoryList.get(i)});
         }
-        c.addRow(new Object[] {catagoryList.size()+1, "Create New Category"});
+        c.addRow(new Object[]{categoryList.size() + 1, "Create New Category"});
         mAdapter.changeCursor(c);
     }
 
