@@ -1,5 +1,7 @@
 package edu.dartmouth.cs.a21days.controllers;
 
+import java.util.ArrayList;
+
 import edu.dartmouth.cs.a21days.models.Habit;
 
 /**
@@ -18,6 +20,19 @@ public class AddToDBThread extends Thread {
 
     @Override
     public void run(){
-        habit.setId(dbHelper.put(habit));
+        ArrayList<Habit> habitList = dbHelper.getAll();
+        ArrayList<String> habitNames = new ArrayList<>();
+        for (Habit habit:habitList){
+            habitNames.add(habit.getName());
+        }
+        if (habitNames.contains(habit.getName())){
+            String id = habit.getId();
+            habit.setId(dbHelper.put(habit));
+            dbHelper.delete(id);
+        }
+        else {
+            habit.setId(dbHelper.put(habit));
+        }
+
     }
 }

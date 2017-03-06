@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.controllers.AddToDBThread;
 import edu.dartmouth.cs.a21days.controllers.DeleteFromDBThread;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.controllers.TrackingService;
@@ -252,7 +253,7 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
         SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
         int cdate = Integer.valueOf(df.format(c.getTime()));
 
-        if ( ( cdate!=mHabit.getTimeStamp() ) && enablecheckin) {
+        if ((cdate!=mHabit.getTimeStamp()) && enablecheckin) {
             mHabit.setStreak(mHabit.getStreak() + 1);
             mHabit.setTimeStamp(cdate);
             SetupFragment();
@@ -260,12 +261,14 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
         }
         else{
             if (!enablecheckin)
-                Toast.makeText(getActivity(), "Check-in falied, you falied location test!",
+                Toast.makeText(getActivity(), "Check-in failed: Location incorrect",
                         Toast.LENGTH_SHORT).show();
             else
-                Toast.makeText(getActivity(), "Check-in falied, you have checked in today!",
+                Toast.makeText(getActivity(), "Check-in failed: You have already checked in today",
                         Toast.LENGTH_SHORT).show();
 
         }
+        AddToDBThread add = new AddToDBThread(mHabit);
+        add.run();
     }
 }
