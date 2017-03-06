@@ -42,6 +42,7 @@ Below we present our MVC diagram, outlining the behind-the-scenes view for 21.Da
 ![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/MVC.jpg?token=ARpKavc22tgoQx1jVjW6MulirliHG6tSks5YvZgIwA%3D%3D)
 
 # Threaded Design Diagram
+Below we present our Threaded Design diagram, outlining the threads involved for 21.Days.
 ![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/Threaded%20Design%20Diagram.jpg?token=ARpKatSv5jIV2uj72_uUYUCM0YRruv9tks5Yxi5awA%3D%3D)
 
 
@@ -50,7 +51,7 @@ Below we present our MVC diagram, outlining the behind-the-scenes view for 21.Da
 |               | Complete      | Incomplete  |
 | ------------- |:-------------:| :------:|
 | Nan and Leo   | Analytics, Google Sign In, Habit Details, Database    |  Location Services |
-| Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment, Notification Service   |   Google Fit Integration, Machine Learning |
+| Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment, Notification Service, Facebook Sign In   |   Google Fit Integration, Machine Learning |
 
 # Build status
 [![Build Status](https://travis-ci.com/afnanenayet/21.Days.svg?token=QtxzrX3Qc2BDQfwx8D1K&branch=master)](https://travis-ci.com/afnanenayet/21.Days)
