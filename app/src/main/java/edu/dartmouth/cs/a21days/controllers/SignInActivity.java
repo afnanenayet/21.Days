@@ -40,13 +40,18 @@ public class SignInActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
-    private static final String DEBUG_TAG = "SignInActivity";
+    // sign in code
     private static final int RC_SIGN_IN = 9001;
+    // Firebase authentication
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
     private GoogleApiClient mGoogleApiClient;
 
     private CallbackManager callbackManager;
+
+    // tag for debugging
+    private static final String DEBUG_TAG = "SignInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,6 @@ public class SignInActivity extends AppCompatActivity implements
         findViewById(R.id.google_sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.disconnect_button).setOnClickListener(this);
-
 
         // configure Google sign in options
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -73,6 +77,7 @@ public class SignInActivity extends AppCompatActivity implements
         // get instance of Firebase
         mAuth = FirebaseAuth.getInstance();
 
+        // create Firebase listener
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -95,11 +100,11 @@ public class SignInActivity extends AppCompatActivity implements
         SignInButton signInButton = (SignInButton) findViewById(R.id.google_sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
-        // setting up facebook login button
+        // set up facebook login button
         LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.facebook_sign_in_button);
         facebookLoginButton.setReadPermissions("email");
 
-        // Setting up facebook callback
+        // set up facebook callback
         callbackManager = CallbackManager.Factory.create();
 
         // Handle facebook button results
@@ -154,7 +159,7 @@ public class SignInActivity extends AppCompatActivity implements
         }
     }
 
-    // what to do when get result from signing in
+    // what to do when get result from google sign in
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -228,7 +233,7 @@ public class SignInActivity extends AppCompatActivity implements
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-
+    // sign out user
     private void signOut() {
         // sign out of Firebase
         mAuth.signOut();
@@ -290,7 +295,7 @@ public class SignInActivity extends AppCompatActivity implements
     }
 
     // Called when skip button is clicked
-    public void onSkipClicked(View view){
+    public void onSkipClicked(View view) {
         // Starts main activity
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         startActivity(intent);

@@ -24,15 +24,19 @@ import edu.dartmouth.cs.a21days.views.HabitsListFragment;
 import edu.dartmouth.cs.a21days.views.SettingsFragment;
 
 /**
- * The Main controller for the application. Utilizes a bottom navigation bar
+ * The Main controller for the application. Utilizes a bottom navigation bar.
  */
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
+    // bottom navigation bar
     private BottomNavigationView mBottomNavigationView;
+    // list of fragments attached to main activity
     private ArrayList<Fragment> mFragments;
+    // ViewPager and adapter
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPageAdapter;
 
+    // tag for debugging use
     private static final String DEBUG_TAG = "MainActivity";
 
     @Override
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         mFragments.add(new AnalyticsFragment());
         mFragments.add(new SettingsFragment());
 
-        // Viewpage adapter so we can swipe through tabs with the bottom layout
+        // ViewPage adapter so we can swipe through tabs with the bottom layout
         mViewPageAdapter = new ViewPagerAdapter(getFragmentManager(), mFragments);
         mViewPager.setAdapter(mViewPageAdapter);
 
@@ -103,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         habits = dbHelper.getAll();
         // Get a list of habit names
         ArrayList<String> habitsNames = new ArrayList<>();
-        for (int i =0; i < habits.size(); i++){
+        for (int i = 0; i < habits.size(); i++) {
             habitsNames.add(habits.get(i).getName());
         }
 
@@ -113,10 +117,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 habit.setId(dbHelper.put(habit));
             }
         }
-
-
-
-
     }
 
 
@@ -145,19 +145,22 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         new AlertDialog.Builder(this).setTitle(R.string.permission_rationale_title)
                 .setMessage(R.string.permission_rationale_message)
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface dialog, int which) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         token.cancelPermissionRequest();
                     }
                 })
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface dialog, int which) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         token.continuePermissionRequest();
                     }
                 })
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override public void onDismiss(DialogInterface dialog) {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
                         token.cancelPermissionRequest();
                     }
                 })
