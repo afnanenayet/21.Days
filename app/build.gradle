@@ -4,19 +4,11 @@ def travisBuild = "true".equals(System.getenv("TRAVIS"))
 def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
 android {
-    signingConfigs {
-        config {
-            keyAlias '21_days_keystore'
-            keyPassword '21days'
-            storeFile file('/Users/Steven/AndroidStudioProjects/21.Days/21_days_keystore.jks')
-            storePassword 'android'
-        }
-    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "edu.dartmouth.cs.a21days"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 25
         versionCode 1
         versionName "0.1"
@@ -68,6 +60,7 @@ dependencies {
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services-places:10.2.0'
+    compile 'com.evernote:android-job:1.1.7'
     // Testing frameworks
     androidTestCompile 'com.android.support:support-annotations:25.2.0'
     androidTestCompile 'com.android.support.test:runner:0.5'

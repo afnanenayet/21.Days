@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.evernote.android.job.JobManager;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.Globals;
+import edu.dartmouth.cs.a21days.utilities.NotificationJobCreator;
 import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
 import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
 import edu.dartmouth.cs.a21days.views.HabitsListFragment;
@@ -99,8 +101,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Initialize Google Fit connection
         // connectToGoogleFit(); // todo get Fitness APIs
 
-        // TODO DEBUG REMOVE (example of how to add habit to db)
+        // TODO DEBUG (sample habits)
         HabitDataSource dbHelper = HabitDataSource.getInstance("example");
+
+        // Initializing bindings for evernote job creator library
+        JobManager.create(this).addJobCreator(new NotificationJobCreator());
     }
 
     @Override
