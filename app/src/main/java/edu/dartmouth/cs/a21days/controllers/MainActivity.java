@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Initialize Google Fit connection
         // connectToGoogleFit(); // todo get Fitness APIs
 
+        /*
         // TODO DEBUG REMOVE (example of how to add habit to db)
         HabitDataSource dbHelper = HabitDataSource.getInstance("example");
         ArrayList<Habit> habits = dbHelper.getAll();
@@ -117,6 +118,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 habit.setId(dbHelper.put(habit));
             }
         }
+        */
+
+        AddAllToDB add = new AddAllToDB();
+        add.run();
     }
 
 
