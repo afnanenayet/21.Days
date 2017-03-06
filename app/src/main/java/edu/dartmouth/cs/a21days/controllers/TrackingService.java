@@ -18,13 +18,16 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 /**
+ * Location tracking for accountablity in habits.
  * Created by lichenghui on 4/3/2017.
  */
 
 public class TrackingService extends Service implements LocationListener {
-
+    // location manager
     LocationManager mLocationManager;
+    // binder
     private final IBinder mBinder = new TrackingBinder();
+
     public static final String TRACKING_ACTION = "21days.TACKING_ACTION";
     public static final String KEY_LOCATION = "LOCATION";
 
@@ -64,7 +67,10 @@ public class TrackingService extends Service implements LocationListener {
         String provider = mLocationManager.getBestProvider(criteria, true);
 
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
             Log.d("TTAG", "StartLocationUpdate: Permission denied");
             return;
         }
@@ -82,23 +88,23 @@ public class TrackingService extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         Intent onLocationUpdated = new Intent(TRACKING_ACTION);
-        onLocationUpdated.putExtra(KEY_LOCATION,location);
+        onLocationUpdated.putExtra(KEY_LOCATION, location);
         Log.d("TTAG", "onLocationChanged: Location");
         LocalBroadcastManager.getInstance(this).sendBroadcast(onLocationUpdated);
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+        // empty, needed for location listener
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-
+        // empty, needed for location listener
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
+        // empty, needed for location listener
     }
 }

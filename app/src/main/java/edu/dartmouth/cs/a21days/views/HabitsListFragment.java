@@ -1,17 +1,13 @@
 package edu.dartmouth.cs.a21days.views;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,17 +23,17 @@ import edu.dartmouth.cs.a21days.models.Habit;
  * create an instance of this fragment.
  */
 public class HabitsListFragment extends Fragment {
-
+    // tag for debugging
     private static String TAG = "HabitsListFragment";
 
+    // constructor
     public HabitsListFragment() {
-        // Required empty public constructor
+        // empty, required
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
      */
     public static HabitsListFragment newInstance() {
         HabitsListFragment fragment = new HabitsListFragment();
@@ -64,10 +60,13 @@ public class HabitsListFragment extends Fragment {
 
         HabitListviewAdapter adapter = HabitListviewAdapter.getInstance(getContext(), dataList);
 
+        // set up RecyclerView
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(adapter);
 
-        FloatingActionButton createHabitButton = (FloatingActionButton) mView.findViewById(R.id.fab);
+        // set up button to create new habit
+        FloatingActionButton createHabitButton =
+                (FloatingActionButton) mView.findViewById(R.id.fab);
         createHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

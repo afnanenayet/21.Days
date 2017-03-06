@@ -70,7 +70,7 @@ public class HabitDataSource {
         @Override
         public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             Log.d(DEBUG_TAG, "Child was moved");
-            
+
             // Update UI to reflect this change
             updateAdapter();
         }

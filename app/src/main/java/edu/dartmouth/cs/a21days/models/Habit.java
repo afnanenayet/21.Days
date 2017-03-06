@@ -24,6 +24,9 @@ public class Habit {
     private int priority;
     // habit category
     private String category;
+    private boolean hasLocation;
+    private int timeStamp;
+
 
     // constructor
     public Habit() {
@@ -32,6 +35,22 @@ public class Habit {
 
 
     /************************************** Getters and setters *********************************/
+
+    public boolean isHasLocation() {
+        return hasLocation;
+    }
+
+    public void setHasLocation(boolean hasLocation) {
+        this.hasLocation = hasLocation;
+    }
+
+    public int getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(int timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
     // get habit time
     public int getTime() {

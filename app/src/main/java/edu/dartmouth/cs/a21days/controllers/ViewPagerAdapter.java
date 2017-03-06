@@ -23,12 +23,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         this.fragments = fragmentList;
     }
 
-    // Function for getting tab position
+    // get tab position
     public Fragment getItem(int pos){
         return fragments.get(pos);
     }
 
-    // Function for getting number of tabs
+    // get number of tabs
     public int getCount(){
         return fragments.size();
     }
