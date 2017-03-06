@@ -45,8 +45,8 @@ Below we preseng our MVC diagram, outlining the behind-the-scenes view for 21.Da
 
 |               | Complete      | Incomplete  |
 | ------------- |:-------------:| :------:|
-| Nan and Leo   | Analytics, Google Sign In, Habit Details     | Location Services, Database |
-| Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment, Google Fit Integration     |   Notification Service, Machine Learning |
+| Nan and Leo   | Analytics, Google Sign In, Habit Details, Database    |  Location Services |
+| Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment, Notification Service   |   Google Fit Integration, Machine Learning |
 
 # Build status
 [![Build Status](https://travis-ci.com/afnanenayet/21.Days.svg?token=QtxzrX3Qc2BDQfwx8D1K&branch=master)](https://travis-ci.com/afnanenayet/21.Days)
