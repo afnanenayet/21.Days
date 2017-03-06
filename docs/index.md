@@ -50,8 +50,8 @@ Below we present our Threaded Design diagram, outlining the threads involved for
 
 |               | Complete      | Incomplete  |
 | ------------- |:-------------:| :------:|
-| Nan and Leo   | Analytics, Google Sign In, Habit Details, Database    |  Location Services |
-| Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment, Notification Service, Facebook Sign In   |   Google Fit Integration, Machine Learning |
+| Nan and Leo   | Analytics, Google Sign In, Habit Details, Database, Location Services    | Notification Service  |
+| Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment, Facebook Sign In   |   Google Fit Integration, Machine Learning |
 
 # Build status
 [![Build Status](https://travis-ci.com/afnanenayet/21.Days.svg?token=QtxzrX3Qc2BDQfwx8D1K&branch=master)](https://travis-ci.com/afnanenayet/21.Days)
