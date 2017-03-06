@@ -1,7 +1,7 @@
 package edu.dartmouth.cs.a21days.models;
 
 import android.icu.util.Calendar;
-import android.location.Location;
+
 import java.util.ArrayList;
 
 /**
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Habit {
     private String id;
     private String name;
-    private Location location;
+    private SerialLatLng location;
     private ArrayList<Calendar> frequency;
     private int streak;
     private int priority;
@@ -56,12 +56,12 @@ public class Habit {
         this.frequency = frequency;
     }
 
-    public Location getLocation() {
+    public SerialLatLng getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocation(SerialLatLng serialLatLng) {
+        this.location = serialLatLng;
     }
 
     public String getName() {

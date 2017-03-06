@@ -30,8 +30,9 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
-import edu.dartmouth.cs.a21days.controllers.DatabaseHelper;
+import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.models.Habit;
+import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 
 /**
  * Created by Steven on 3/1/17.
@@ -44,7 +45,7 @@ public class NewHabitDialogFragment extends DialogFragment {
     private static final String TAG = "NewHabitDialogFragment";
     private Habit mHabit;
     private Location mLocation;
-    private DatabaseHelper dbHelper;
+    private HabitDataSource dbHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -59,7 +60,7 @@ public class NewHabitDialogFragment extends DialogFragment {
         catagoryList.add("Health");
 
         mHabit = new Habit();
-        dbHelper = DatabaseHelper.getInstance("example");
+        dbHelper = HabitDataSource.getInstance("example");
 
     }
 
@@ -136,9 +137,8 @@ public class NewHabitDialogFragment extends DialogFragment {
         mHabit.setCategory(String.valueOf(categoryView.getQuery()));
         mHabit.setName(String.valueOf(habitName.getText()));
         if (enableLocation.isEnabled()){
-            mHabit.setLocation(mLocation);
+            mHabit.setLocation(HabitUtility.locationToLatLng(mLocation));
         }
-
     }
 
     @Override

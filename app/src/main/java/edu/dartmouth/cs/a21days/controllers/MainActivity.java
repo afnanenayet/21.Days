@@ -13,11 +13,9 @@ import android.view.MenuItem;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.ArrayList;
 
-import edu.dartmouth.cs.a21days.Manifest;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
@@ -96,8 +94,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // connectToGoogleFit(); // todo get Fitness APIs
 
         // TODO DEBUG REMOVE (example of how to add habit to db)
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance("example");
-        ArrayList<Habit> habits = HabitDataSource.getAllHabits();
+        HabitDataSource dbHelper = HabitDataSource.getInstance("example");
+        ArrayList<Habit> habits = dbHelper.getAll();
 
         Log.d(DEBUG_TAG, "Adding habits to database");
         for (Habit habit : habits) {
