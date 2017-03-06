@@ -26,6 +26,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.nex3z.togglebuttongroup.ToggleButtonGroup;
 
 import java.util.ArrayList;
 
@@ -133,13 +134,23 @@ public class NewHabitDialogFragment extends DialogFragment {
         Switch enableLocation = (Switch) view.findViewById(R.id.location_requirement);
         Switch enableAllDay = (Switch) view.findViewById(R.id.all_day_switch);
         EditText habitName = (EditText) view.findViewById(R.id.habit_name_input);
+        ToggleButtonGroup toggleButtons = (ToggleButtonGroup) view.findViewById(R.id.multi_selection_group);
+        Log.i(TAG, "setHabitInfo: " + toggleButtons.getCheckedPositions());
         mHabit.setPriority(prioritySpinner.getSelectedItemPosition());
         mHabit.setCategory(String.valueOf(categoryView.getQuery()));
         mHabit.setName(String.valueOf(habitName.getText()));
-
-        if (enableLocation.isEnabled()) {
+        ArrayList<Integer> frequency = new ArrayList<>();
+        frequency.addAll(toggleButtons.getCheckedPositions());
+        mHabit.setFrequency(frequency);
+        if (!enableAllDay.isChecked()){
+            String time = String.valueOf(timePicker.getHour()) + String.valueOf(timePicker.getMinute());
+            Log.i(TAG, "setHabitInfo:  " + time);
+            mHabit.setTime(Integer.parseInt(time));
+        }
+        if (enableLocation.isChecked()) {
             mHabit.setLocation(HabitUtility.locationToLatLng(mLocation));
         }
+
     }
 
     @Override

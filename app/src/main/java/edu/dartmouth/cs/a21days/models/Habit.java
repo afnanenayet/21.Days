@@ -15,14 +15,24 @@ public class Habit {
     private String id;
     private String name;
     private SerialLatLng location;
-    private ArrayList<Calendar> frequency;
+    private int time;
+    private ArrayList<Integer> frequency;
     private int streak;
     private int priority;
     private String category;
 
     public Habit() {}
 
+
     /************************************** Getters and setters *********************************/
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 
     public String getCategory() {
         return category;
@@ -48,11 +58,11 @@ public class Habit {
         this.streak = streak;
     }
 
-    public ArrayList<Calendar> getFrequency() {
+    public ArrayList<Integer> getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(ArrayList<Calendar> frequency) {
+    public void setFrequency(ArrayList<Integer> frequency) {
         this.frequency = frequency;
     }
 

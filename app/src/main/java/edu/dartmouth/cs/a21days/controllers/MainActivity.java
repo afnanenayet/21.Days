@@ -98,12 +98,24 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         ArrayList<Habit> habits = dbHelper.getAll();
 
         Log.d(DEBUG_TAG, "Adding habits to database");
-        for (Habit habit : habits) {
-            habit.setId(dbHelper.put(habit));
-        }
 
         // retrieving all habits from dbHelper
         habits = dbHelper.getAll();
+        // Get a list of habit names
+        ArrayList<String> habitsNames = new ArrayList<>();
+        for (int i =0; i < habits.size(); i++){
+            habitsNames.add(habits.get(i).getName());
+        }
+
+        // Only add habit to db if it
+        for (Habit habit : habits) {
+            if (!habitsNames.contains(habit.getName())) {
+                habit.setId(dbHelper.put(habit));
+            }
+        }
+
+
+
 
     }
 
