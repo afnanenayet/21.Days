@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import edu.dartmouth.cs.a21days.models.Habit;
 
 /**
- * Created by Steven on 3/6/17.
+ * thread for adding habits to database
  */
-
-// Thread for adding habits to database
 public class AddToDBThread extends Thread {
-
+    // DB helper instance
     private HabitDataSource dbHelper;
+    // habit instance
     private Habit habit;
 
+    // constructor
     public AddToDBThread(Habit habit){
         this.habit = habit;
         dbHelper = HabitDataSource.getInstance("example");

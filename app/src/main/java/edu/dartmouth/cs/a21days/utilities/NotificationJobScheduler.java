@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.media.RingtoneManager;
 import android.support.annotation.NonNull;
 
@@ -13,20 +12,16 @@ import com.evernote.android.job.Job;
 import com.evernote.android.job.JobRequest;
 import com.evernote.android.job.util.support.PersistableBundleCompat;
 
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import edu.dartmouth.cs.a21days.controllers.MainActivity;
 
 /**
- * Created by aenayet on 3/6/17.
- */
-
-/**
- * The job to run when the timing has been scheduled
+ * The job to run when the timing has been scheduled.
  */
 public class NotificationJobScheduler extends Job {
-    public static final String TAG = "notif_job_sched";
+    // tag for debugging
+    private static final String TAG = "notif_job_sched";
 
     /**
      * Set up notification from available data
@@ -43,6 +38,7 @@ public class NotificationJobScheduler extends Job {
             NotificationManager notificationManager = (NotificationManager) context
                     .getSystemService(Context.NOTIFICATION_SERVICE);
 
+            // set up intent
             Intent intent = new Intent(context, MainActivity.class);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -51,6 +47,7 @@ public class NotificationJobScheduler extends Job {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
                     intent, 0);
 
+            // build notification
             Notification notification = new Notification.Builder(context)
                     .setContentTitle("Don't forget!")
                     .setContentText("You have a habit to maintain!")

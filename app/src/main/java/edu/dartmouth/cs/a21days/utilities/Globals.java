@@ -1,11 +1,7 @@
 package edu.dartmouth.cs.a21days.utilities;
 
 /**
- * Created by aenayet on 3/6/17.
- */
-
-/**
- * Stores various global variables and constants for project
+ * Stores various global variables and constants for this app.
  */
 public class Globals {
 

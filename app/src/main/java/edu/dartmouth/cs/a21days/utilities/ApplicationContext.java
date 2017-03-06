@@ -4,11 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 /**
- * Created by aenayet on 3/6/17.
- */
-
-/**
- * Provides method to access application context externally
+ * Provides method to access application context externally.
  */
 public class ApplicationContext extends Application {
     private static Context mContext;

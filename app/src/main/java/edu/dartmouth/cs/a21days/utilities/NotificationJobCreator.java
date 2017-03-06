@@ -4,14 +4,11 @@ import com.evernote.android.job.Job;
 import com.evernote.android.job.JobCreator;
 
 /**
- * Created by aenayet on 3/6/17.
- */
-
-/**
- * JobCreator singleton for Evernote job library
+ * JobCreator singleton for Evernote job library.
  */
 public class NotificationJobCreator implements JobCreator {
 
+    // create job notification
     @Override
     public Job create(String tag) {
         switch(tag) {
