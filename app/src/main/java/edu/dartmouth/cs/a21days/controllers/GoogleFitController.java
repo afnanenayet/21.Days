@@ -10,8 +10,6 @@ import com.google.android.gms.common.api.Scope;
 
 /**
  * Controller that allows access to Google fit.
- * <p>
- * Created by aenayet on 3/1/17.
  */
 public class GoogleFitController {
     // Lets us keep track of client connection status

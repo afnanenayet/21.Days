@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 /**
  * Data model for a habit + relevant properties.
- *
- * Created by aenayet on 2/24/17.
  */
 public class Habit {
     // habit id

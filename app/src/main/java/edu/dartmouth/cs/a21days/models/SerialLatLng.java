@@ -2,8 +2,6 @@ package edu.dartmouth.cs.a21days.models;
 
 /**
  * Serializable version of Location class for Firebase.
- *
- * Created by aenayet on 3/5/17.
  */
 public class SerialLatLng {
 
