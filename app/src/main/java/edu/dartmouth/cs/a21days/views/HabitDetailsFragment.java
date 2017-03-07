@@ -9,11 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
@@ -43,14 +38,17 @@ import ng.max.slideview.SlideView;
 import static com.facebook.GraphRequest.TAG;
 
 /**
- * Created by Steven on 3/2/17.
+ * View the details of an individual habit
  */
 
 public class HabitDetailsFragment extends DialogFragment {
-
+    // default request code
     private static final int PERMISSION_REQUEST_CODE = 0;
+    // habit to view
     Habit mHabit;
     Geocoder geocoder;
+
+    // TextViews to populate with habit information
     private TextView HabitName;
     private TextView Category;
     private TextView Priority;
@@ -58,9 +56,14 @@ public class HabitDetailsFragment extends DialogFragment {
     private TextView Left;
     private TextView Location;
     private Intent mService;
+
+    // permission request string
     private String[] RequestString = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION};
+
+    // whether location check in is enabled
     private boolean locationcheckin = false;
+    // whether can check in or not
     private boolean enablecheckin = true;
 
     //Get the current location and compare it with the setting location
@@ -72,7 +75,9 @@ public class HabitDetailsFragment extends DialogFragment {
         }
     };
 
+    // position of the habit
     private int position;
+    // instance of database helper
     private HabitDataSource dbHelper;
 
 
@@ -80,6 +85,7 @@ public class HabitDetailsFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // get positionof habit and habit instance
         position = getArguments().getInt("Position");
         mHabit = getHabitFromDB(position);
 
@@ -126,12 +132,11 @@ public class HabitDetailsFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
+        // build the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.fragment_habit_detail, null);
         builder.setView(view);
-
-
 
         // Set on click listener for delete button
         Button deleteHabit = (Button) view.findViewById(R.id.delete_habit);
@@ -145,13 +150,16 @@ public class HabitDetailsFragment extends DialogFragment {
             }
         });
 
+        // check for location permissions
         checkPermission();
 
+        // if habit has a location, update booleans as needed
         if (mHabit.isHasLocation()) {
             locationcheckin = true;
             enablecheckin = false;
         }
 
+        // get the TextViews
         HabitName = (TextView)view.findViewById(R.id.details_habit_name);
         Category = (TextView)view.findViewById(R.id.details_category_textview);
         Completed = (TextView)view.findViewById(R.id.detail_days_completed);
@@ -159,7 +167,7 @@ public class HabitDetailsFragment extends DialogFragment {
         Priority = (TextView)view.findViewById(R.id.details_priority_textview);
         Location = (TextView)view.findViewById(R.id.details_location_textview);
 
-
+        // slider used to check in with
         SlideView slide = (SlideView) view.findViewById(R.id.slideView);
         slide.setOnSlideCompleteListener(new SlideView.OnSlideCompleteListener() {
             @Override
@@ -169,6 +177,7 @@ public class HabitDetailsFragment extends DialogFragment {
                     SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
                     int cdate = Integer.valueOf(df.format(c.getTime()));
 
+                    // if allowed to check in for habit, check in
                     if ((cdate!=mHabit.getTimeStamp()) && enablecheckin) {
                         mHabit.setStreak(mHabit.getStreak() + 1);
                         mHabit.setTimeStamp(cdate);
@@ -176,6 +185,7 @@ public class HabitDetailsFragment extends DialogFragment {
                         Toast.makeText(getActivity(), "Congratulations! Check-in successful!", Toast.LENGTH_SHORT).show();
                     }
                     else{
+                        // if cannot check in, let user know
                         if (!enablecheckin)
                             Toast.makeText(getActivity(), "Check-in failed: Location incorrect",
                                     Toast.LENGTH_SHORT).show();
@@ -184,23 +194,21 @@ public class HabitDetailsFragment extends DialogFragment {
                                     Toast.LENGTH_SHORT).show();
 
                     }
+                    // add habit to db with newly updated info
                     AddToDBThread add = new AddToDBThread(mHabit);
                     add.run();
                 }
 
         });
 
-
-
+        // set up the fragment
         SetupFragment();
-
-
-
 
         return builder.create();
     }
 
     private void SetupFragment() {
+        // set text values for the TextViews
         HabitName.setText(mHabit.getName());
         Category.setText(mHabit.getCategory());
         Priority.setText(HabitUtility.getPriorityString(getContext(),mHabit.getPriority()));
@@ -209,6 +217,8 @@ public class HabitDetailsFragment extends DialogFragment {
         else
             Left.setText("0 Days");
         Completed.setText(String.valueOf(mHabit.getStreak())+" Days");
+
+        // if location check in is enabled, try to get the location
         if (locationcheckin){
             Location mlocation = HabitUtility.latLngToLocation(mHabit.getLocation());
             try {
@@ -229,7 +239,7 @@ public class HabitDetailsFragment extends DialogFragment {
 
     //To check whether it's at the right location to check-in
     private void CheckLocation(Location CurrentLocation) {
-
+        // get the location
         Location HabitLocation = HabitUtility.latLngToLocation(mHabit.getLocation());
         //If the current location is within 100 meters by the setting location,
         //Set the check-in ability as true
@@ -247,20 +257,24 @@ public class HabitDetailsFragment extends DialogFragment {
 
     //To check location permission
     private void checkPermission() {
-        if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || getActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                || getActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(getActivity(), RequestString, PERMISSION_REQUEST_CODE);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
         switch (requestCode){
             case PERMISSION_REQUEST_CODE:{
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
                         grantResults[1] != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), RequestString, PERMISSION_REQUEST_CODE);
+                    ActivityCompat.requestPermissions(getActivity(),
+                            RequestString, PERMISSION_REQUEST_CODE);
                 }
                 //All the request permissions must be granted or the app cannot work!
                 //Keep asking the user if any request is denied
@@ -268,7 +282,4 @@ public class HabitDetailsFragment extends DialogFragment {
         }
 
     }
-
-    //Check-in Button Click listener
-
 }

@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
-import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.controllers.HabitListviewAdapter;
-import edu.dartmouth.cs.a21days.controllers.MainActivity;
 import edu.dartmouth.cs.a21days.models.Habit;
 
 /**
@@ -32,6 +30,7 @@ public class HabitsListFragment extends Fragment {
 
     // constructor
     public HabitsListFragment() {
+        //empty, required
     }
 
     /**
@@ -63,7 +62,7 @@ public class HabitsListFragment extends Fragment {
         ArrayList<Habit> dataList = new ArrayList<>();
         adapter = HabitListviewAdapter.getInstance(getActivity(), dataList);
 
-        // Initializing recyclerview
+        // Initializing RecyclerView
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
 
         // set up RecyclerView
