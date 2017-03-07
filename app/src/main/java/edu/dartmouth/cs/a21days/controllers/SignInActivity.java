@@ -68,7 +68,8 @@ public class SignInActivity extends AppCompatActivity implements
         findViewById(R.id.disconnect_button).setOnClickListener(this);
 
         // configure Google sign in options
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
@@ -121,9 +122,6 @@ public class SignInActivity extends AppCompatActivity implements
             public void onSuccess(LoginResult loginResult) {
                 Log.d(DEBUG_TAG, "Facebook login successful");
                 handleFacebookAccessToken(loginResult.getAccessToken());
-
-                // Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                // startActivity(intent);
             }
 
             @Override
@@ -186,7 +184,7 @@ public class SignInActivity extends AppCompatActivity implements
                 updateUI(null);
             }
         } else {
-            // facebook callback, forward activity result
+            // Facebook callback, forward activity result
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -282,7 +280,6 @@ public class SignInActivity extends AppCompatActivity implements
     }
 
     /**
-     *
      * @param token
      */
     private void handleFacebookAccessToken(AccessToken token) {
@@ -303,8 +300,6 @@ public class SignInActivity extends AppCompatActivity implements
                             Toast.makeText(SignInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-
-                        // ...
                     }
                 });
     }

@@ -66,6 +66,9 @@ public class AnalyticsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_analytics, container, false);
 
+        // get all habits from database
+
+
         /*************** this section is hard coded stuff to test UI ******************************/
 
         // testing the bar graph

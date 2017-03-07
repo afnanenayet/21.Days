@@ -52,10 +52,11 @@ public class GoogleFitController {
                                 public void onConnectionSuspended(int i) {
                                     // If your connection to the sensor gets lost at some point,
                                     // you'll be able to determine the reason and react to it here.
-                                    if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST) {
+                                    if (i == GoogleApiClient.
+                                            ConnectionCallbacks.CAUSE_NETWORK_LOST) {
                                         Log.i(DEBUG_TAG, "Connection lost.  Cause: Network Lost.");
-                                    } else if (i
-                                            == GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
+                                    } else if (i == GoogleApiClient.
+                                            ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
                                         Log.i(DEBUG_TAG,
                                                 "Connection lost.  Reason: Service Disconnected");
                                     }
