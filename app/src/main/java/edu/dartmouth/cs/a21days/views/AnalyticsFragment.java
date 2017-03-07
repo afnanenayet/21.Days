@@ -15,8 +15,13 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.dartmouth.cs.a21days.R;
+import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
+import edu.dartmouth.cs.a21days.models.Habit;
+import edu.dartmouth.cs.a21days.utilities.Globals;
 
 /**
  * Use the {@link AnalyticsFragment#newInstance} factory method to
@@ -31,6 +36,24 @@ public class AnalyticsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    // database helper instance
+    private HabitDataSource dbHelper;
+
+    // map of length of streak to number of that streak
+    private HashMap<Integer, Integer> streakMap;
+    // number of habits completed
+    private int numHabitsCompleted = 0;
+    // number of habits ongoing
+    private int numHabitsOngoing = 0;
+    // name of longest ongoing habit
+    private String longestStreakHabitName;
+    // streak of longest ongoing habit
+    private int longestStreakHabitNum = 0;
+    // name of most neglected habit
+    private String mostNeglectedHabitName;
+    // days since most neglected habit checked off
+    private int mostNeglectedHabitNum = 0;
 
     // constructor
     public AnalyticsFragment() {
@@ -60,6 +83,7 @@ public class AnalyticsFragment extends Fragment {
 
     }
 
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,37 +91,85 @@ public class AnalyticsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_analytics, container, false);
 
         // get all habits from database
+        dbHelper = HabitDataSource.getInstance(Globals.userId);
+        ArrayList<Habit> habitList = dbHelper.getAll();
+
+        // create hashmap
+        streakMap = new HashMap<Integer, Integer>();
+
+        // go through each habit
+        for (Habit habit:habitList) {
+            // get the streak of the habit
+            int habitStreak = habit.getStreak();
+            // put this streak into the streak, frequency map as 0 frequency, for now
+            streakMap.put(habitStreak, 0);
+
+            // check if streak is longest
+            if (habitStreak >= longestStreakHabitNum) {
+                longestStreakHabitNum = habitStreak;
+                longestStreakHabitName = habit.getName();
+            }
+            // check if streak is over 21 days
+            if (habitStreak >= 21) {
+                numHabitsCompleted++;
+            }
+            else {
+                numHabitsOngoing++;
+            }
+            // TODO: get most neglected
+
+        }
+
+        // go through each habit again to construct the map
+        for (Habit habit:habitList) {
+            // get the streak
+            int habitStreak = habit.getStreak();
+            // get frequency of this streak from the map
+            int freq = streakMap.get(habitStreak);
+            streakMap.put(habitStreak, freq + 1);
+        }
 
 
-        /*************** this section is hard coded stuff to test UI ******************************/
-
-        // testing the bar graph
+        // add a bar graph
         BarChart barChart = (BarChart) view.findViewById(R.id.analytics_chart);
-        // add fake data to chart
+        // add data from map to entries list
         ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
-        entries.add(new BarEntry(21, 3)); // num days in streak, num of streaks of these days
-        entries.add(new BarEntry(25, 2));
-        entries.add(new BarEntry(5, 10));
-        entries.add(new BarEntry(10, 5));
+        // iterate through the map
+        for (Map.Entry<Integer, Integer> entry:streakMap.entrySet()) {
+            entries.add(new BarEntry(entry.getKey(), entry.getValue()));
+        }
+        // create dataset for bar graph
         BarDataSet dataSet = new BarDataSet(entries, "Streaks Summary");
         dataSet.setColor(Color.RED);
-        // dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
         dataSet.setBarBorderWidth(0.9f);
 
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        /*YAxis yAxis = barChart.getAxisLeft();
-        yAxis.setTextColor(Color.RED);
-        yAxis.setAxisMinimum(0f); // start at zero
-        yAxis.setAxisMaximum(12f); // the axis maximum is 12 */
-
-
-
         BarData barData = new BarData(dataSet);
         barChart.setData(barData);
         barChart.setFitBars(true);
         barChart.invalidate(); // refresh
+
+        // set text for num habits completed
+        TextView numHabitsCompletedView =
+                (TextView) view.findViewById(R.id.analytics_completed_habits_num_textview);
+        numHabitsCompletedView.setText(Integer.toString(numHabitsCompleted));
+
+        // set text for num habits ongoing
+        TextView numHabitsOngoingView =
+                (TextView) view.findViewById(R.id.analytics_ongoing_habits_num_textview);
+        numHabitsOngoingView.setText(Integer.toString(numHabitsOngoing));
+
+        // set text for longest streak habit
+        TextView longestStreakNameView =
+                (TextView) view.findViewById(R.id.analytics_longest_streak_habit_name_textview);
+        longestStreakNameView.setText(longestStreakHabitName);
+        TextView longestStreakNumView =
+                (TextView) view.findViewById(R.id.analytics_longest_streak_num_textview);
+        longestStreakNumView.setText(Integer.toString(longestStreakHabitNum));
+
+        // TODO: set text for most neglected
 
         // testing the comment
         TextView encourageComment = (TextView) view.findViewById(R.id.analytics_comment_textview);
