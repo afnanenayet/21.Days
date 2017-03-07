@@ -3,7 +3,6 @@ package edu.dartmouth.cs.a21days.controllers;
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.models.Habit;
-import edu.dartmouth.cs.a21days.utilities.Globals;
 
 /**
  * thread for adding habits to database
@@ -17,7 +16,7 @@ public class AddToDBThread extends Thread {
     // constructor
     public AddToDBThread(Habit habit){
         this.habit = habit;
-        dbHelper = HabitDataSource.getInstance(Globals.userId);
+        dbHelper = HabitDataSource.getInstance("example");
     }
 
     @Override

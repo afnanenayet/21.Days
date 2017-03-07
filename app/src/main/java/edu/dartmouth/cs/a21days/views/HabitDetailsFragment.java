@@ -182,15 +182,19 @@ public class HabitDetailsFragment extends DialogFragment {
                         mHabit.setStreak(mHabit.getStreak() + 1);
                         mHabit.setTimeStamp(cdate);
                         SetupFragment();
-                        Toast.makeText(getActivity(), "Congratulations! Check-in successful!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),
+                                "Congratulations! Check-in successful!",
+                                Toast.LENGTH_SHORT).show();
                     }
                     else{
                         // if cannot check in, let user know
                         if (!enablecheckin)
-                            Toast.makeText(getActivity(), "Check-in failed: Location incorrect",
+                            Toast.makeText(getActivity(),
+                                    "Check-in failed: Location incorrect",
                                     Toast.LENGTH_SHORT).show();
                         else
-                            Toast.makeText(getActivity(), "Check-in failed: You have already checked in today",
+                            Toast.makeText(getActivity(),
+                                    "Check-in failed: You have already checked in today",
                                     Toast.LENGTH_SHORT).show();
 
                     }
@@ -223,7 +227,8 @@ public class HabitDetailsFragment extends DialogFragment {
             Location mlocation = HabitUtility.latLngToLocation(mHabit.getLocation());
             try {
                 geocoder = new Geocoder(getContext());
-                String address = (geocoder.getFromLocation(mlocation.getLatitude(),mlocation.getLongitude(),1))
+                String address = (geocoder
+                        .getFromLocation(mlocation.getLatitude(),mlocation.getLongitude(),1))
                         .get(0).getAddressLine(0);
                 Location.setText(address);
             } catch (IOException e) {
