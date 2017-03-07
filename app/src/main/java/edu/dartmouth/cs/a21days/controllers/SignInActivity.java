@@ -361,6 +361,7 @@ public class SignInActivity extends AppCompatActivity implements
      */
     public void onSkipClicked(View view) {
         // Starts main activity
+        Globals.userId = "example";
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         startActivity(intent);
     }
