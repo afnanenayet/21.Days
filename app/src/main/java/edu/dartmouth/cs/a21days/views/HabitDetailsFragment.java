@@ -9,7 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
@@ -21,8 +25,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -36,6 +38,7 @@ import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.controllers.TrackingService;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
+import ng.max.slideview.SlideView;
 
 import static com.facebook.GraphRequest.TAG;
 
@@ -43,7 +46,7 @@ import static com.facebook.GraphRequest.TAG;
  * Created by Steven on 3/2/17.
  */
 
-public class HabitDetailsFragment extends DialogFragment implements IconRoundCornerProgressBar.OnIconClickListener {
+public class HabitDetailsFragment extends DialogFragment {
 
     private static final int PERMISSION_REQUEST_CODE = 0;
     Habit mHabit;
@@ -54,7 +57,6 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
     private TextView Completed;
     private TextView Left;
     private TextView Location;
-    private IconRoundCornerProgressBar progress;
     private Intent mService;
     private String[] RequestString = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -156,18 +158,39 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
         Left = (TextView)view.findViewById(R.id.detail_days_left);
         Priority = (TextView)view.findViewById(R.id.details_priority_textview);
         Location = (TextView)view.findViewById(R.id.details_location_textview);
-        progress = (IconRoundCornerProgressBar) view.findViewById(R.id.detail_progress);
 
-        /*
-        progress.setProgressColor(Color.parseColor("#56d2c2"));
-        progress.setProgressBackgroundColor(Color.parseColor("#757575"));
-        progress.setIconBackgroundColor(Color.parseColor("#38c0ae"));
-        */
 
-        progress.setMax(21);
-        progress.setIconImageResource(R.drawable.check_icon);
-        progress.setOnIconClickListener(this);
-        progress.setProgress(progress.getProgress());
+        SlideView slide = (SlideView) view.findViewById(R.id.slideView);
+        slide.setOnSlideCompleteListener(new SlideView.OnSlideCompleteListener() {
+            @Override
+            public void onSlideComplete(SlideView slideView) {
+                    //Get the current date and store it to habit
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
+                    int cdate = Integer.valueOf(df.format(c.getTime()));
+
+                    if ((cdate!=mHabit.getTimeStamp()) && enablecheckin) {
+                        mHabit.setStreak(mHabit.getStreak() + 1);
+                        mHabit.setTimeStamp(cdate);
+                        SetupFragment();
+                        Toast.makeText(getActivity(), "Congratulations! Check-in successful!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        if (!enablecheckin)
+                            Toast.makeText(getActivity(), "Check-in failed: Location incorrect",
+                                    Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(getActivity(), "Check-in failed: You have already checked in today",
+                                    Toast.LENGTH_SHORT).show();
+
+                    }
+                    AddToDBThread add = new AddToDBThread(mHabit);
+                    add.run();
+                }
+
+        });
+
+
 
         SetupFragment();
 
@@ -200,8 +223,6 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
         else {
             Location.setText("No location check-in is required");
         }
-        progress.setMax(21);
-        progress.setProgress(mHabit.getStreak());
 
     }
 
@@ -249,29 +270,5 @@ public class HabitDetailsFragment extends DialogFragment implements IconRoundCor
     }
 
     //Check-in Button Click listener
-    @Override
-    public void onIconClick() {
-        //Get the current date and store it to habit
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
-        int cdate = Integer.valueOf(df.format(c.getTime()));
 
-        if ((cdate!=mHabit.getTimeStamp()) && enablecheckin) {
-            mHabit.setStreak(mHabit.getStreak() + 1);
-            mHabit.setTimeStamp(cdate);
-            SetupFragment();
-            Toast.makeText(getActivity(), "Congratulations! Check-in successful!", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            if (!enablecheckin)
-                Toast.makeText(getActivity(), "Check-in failed: Location incorrect",
-                        Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(getActivity(), "Check-in failed: You have already checked in today",
-                        Toast.LENGTH_SHORT).show();
-
-        }
-        AddToDBThread add = new AddToDBThread(mHabit);
-        add.run();
-    }
 }
