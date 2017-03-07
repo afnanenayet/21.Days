@@ -228,7 +228,7 @@ public class HabitDetailsFragment extends DialogFragment {
         Location HabitLocation = HabitUtility.latLngToLocation(mHabit.getLocation());
         //If the current location is within 100 meters by the setting location,
         //Set the check-in ability as true
-        if (HabitLocation.distanceTo(CurrentLocation)<100){
+        if (HabitLocation.distanceTo(CurrentLocation)<400){
             EnableCheckin();
             Log.d(TAG, "CheckLocation: Allow Check-in");
         }
