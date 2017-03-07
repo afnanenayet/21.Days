@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.utilities.ApplicationContext;
 import edu.dartmouth.cs.a21days.utilities.Globals;
-import edu.dartmouth.cs.a21days.utilities.HabitUtility;
-import edu.dartmouth.cs.a21days.utilities.NotificationJob;
 import edu.dartmouth.cs.a21days.utilities.NotificationJobCreator;
 import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
 import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
