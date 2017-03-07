@@ -53,6 +53,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:10.2.0'
     compile 'com.google.firebase:firebase-core:9.6.1'
     compile 'com.google.firebase:firebase-database:10.2.0'
+    compile 'com.google.android.gms:play-services-gcm:10.2.0'
     compile 'com.snappydb:snappydb-lib:0.5.2'
     compile 'com.esotericsoftware.kryo:kryo:2.24.0'
     compile 'com.nex3z:toggle-button-group:0.2.2'
@@ -62,6 +63,8 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services-places:10.2.0'
     compile 'com.evernote:android-job:1.1.7'
+    // https://mvnrepository.com/artifact/joda-time/joda-time
+    compile group: 'joda-time', name: 'joda-time', version: '2.3'
     // Testing frameworks
     androidTestCompile 'com.android.support:support-annotations:25.2.0'
     androidTestCompile 'com.android.support.test:runner:0.5'

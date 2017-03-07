@@ -10,14 +10,9 @@ public class Globals {
      */
     private Globals() { }
 
-    // Static dynamic vars
-
-    // todo for the sake of demonstration, we are using the "example" user ID
-    public static String betaUserId;
+    public static String userId;
 
     // Global tags
-    public static final String NOTIFICATION = "notification";
-    public static final String NOTIFICATION_HABIT_ID = "notification_habit_id";
     public static final String POSITION_TAG = "Position";
     public static final String POPUP_DIALOG_TAG = "Habit details";
 
@@ -33,4 +28,8 @@ public class Globals {
     public static final String NOTIFICATION_TITLE_KEY = "notification_title_key";
     public static final String NOTIFICATION_MESSAGE_KEY = "notification_message_key";
     public static final long dayInMs = 86400000L;
+    public static final String NOTIFICATION_HOUR_KEY = "notification_hour_key";
+    public static final String NOTIFICATION_MINUTE_KEY = "notification_minute_key";
+    public static final String NOTIFICATION_DAY_ARRAY_KEY = "notification_day_array_key";
+    public static final String NOTIFICATION_HABIT_ID = "notification_habit_id";
 }

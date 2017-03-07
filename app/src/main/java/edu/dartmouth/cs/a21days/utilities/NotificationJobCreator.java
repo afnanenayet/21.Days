@@ -11,11 +11,10 @@ public class NotificationJobCreator implements JobCreator {
     // create job notification
     @Override
     public Job create(String tag) {
-        switch(tag) {
-            case NotificationJob.TAG:
-                return new NotificationJob();
-            default:
-                return null;
+        if (!tag.isEmpty()) {
+            return new NotificationJob();
+        } else {
+            return null;
         }
     }
 }

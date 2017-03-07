@@ -161,6 +161,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
      * Provides a reference to the view for each data item
      */
     static class HabitViewHolder extends RecyclerView.ViewHolder {
+        // Initializing/binding views
         @BindView(R.id.habit_name)
         TextView habitNameTv;
         @BindView(R.id.habit_current_streak)

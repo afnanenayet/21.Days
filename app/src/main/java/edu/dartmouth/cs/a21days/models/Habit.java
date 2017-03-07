@@ -6,30 +6,39 @@ import java.util.ArrayList;
  * Data model for a habit + relevant properties.
  */
 public class Habit {
-    // habit id
+
+    // Habit ID for database
     private String id;
-    // habit name
+
+    // User friendly habit name
     private String name;
-    // habit location
+
+    // Location where habit can be checked in
     private SerialLatLng location;
-    // time of day to do habit
+
+    // Time of day to do habit
     private int time;
-    // habit frequency
+
+    // Which days the habit is repeated
     private ArrayList<Integer> frequency;
-    // habit streak
+
+    // How many days in a row the habit has been checked in
     private int streak;
-    // habit priority
+
+    // Habit priority
     private int priority;
-    // habit category
+
+    // Habit category
     private String category;
+
+    // Whether the habit is using a geofence
     private boolean hasLocation;
+
+    // The last time the habit was checked in
     private int timeStamp;
 
-
-    // constructor
-    public Habit() {
-        // empty
-    }
+    // Need empty constructor for Firebase serialization
+    public Habit() { }
 
 
     /************************************** Getters and setters *********************************/

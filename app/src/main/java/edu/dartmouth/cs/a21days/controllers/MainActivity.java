@@ -2,13 +2,11 @@ package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -19,8 +17,10 @@ import com.karumi.dexter.PermissionToken;
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
-import edu.dartmouth.cs.a21days.models.Habit;
+import edu.dartmouth.cs.a21days.utilities.ApplicationContext;
 import edu.dartmouth.cs.a21days.utilities.Globals;
+import edu.dartmouth.cs.a21days.utilities.HabitUtility;
+import edu.dartmouth.cs.a21days.utilities.NotificationJob;
 import edu.dartmouth.cs.a21days.utilities.NotificationJobCreator;
 import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
 import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ApplicationContext.setContext(getApplicationContext());
 
         // Setting up bottom navigation view
         mBottomNavigationView = (BottomNavigationView)
@@ -103,10 +104,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // connectToGoogleFit(); // todo get Fitness APIs
 
         // Initializing database with user
-        HabitDataSource.getInstance(Globals.betaUserId);
+        HabitDataSource.getInstance(Globals.userId);
 
         // Initializing bindings for evernote job creator library
-        JobManager.create(this).addJobCreator(new NotificationJobCreator());
+        JobManager.create(getApplicationContext()).addJobCreator(new NotificationJobCreator());
 
         // Listview adapter needs new context on every orientation change because it outlives
         // MainActivity

@@ -84,29 +84,7 @@ public class HabitUtility {
         int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
 
         // convert calendar.day to Globals.day int
-        switch (currentDay) {
-            case Calendar.SUNDAY:
-                currentDay = Globals.SUNDAY;
-                break;
-            case Calendar.MONDAY:
-                currentDay = Globals.MONDAY;
-                break;
-            case Calendar.TUESDAY:
-                currentDay = Globals.TUESDAY;
-                break;
-            case Calendar.WEDNESDAY:
-                currentDay = Globals.WEDNESDAY;
-                break;
-            case Calendar.THURSDAY:
-                currentDay = Globals.THURSDAY;
-                break;
-            case Calendar.FRIDAY:
-                currentDay = Globals.FRIDAY;
-                break;
-            case Calendar.SATURDAY:
-                currentDay = Globals.SATURDAY;
-                break;
-        }
+        currentDay = calendarDayToGlobalDay(currentDay);
 
         int daysOffset;
 
@@ -118,8 +96,93 @@ public class HabitUtility {
         }
 
         // convert to ms
-
-
         return daysOffset * 86400000L;
+    }
+
+    /**
+     * Converts day enumerators to a boolean array
+     * @param days The day(s) to put into the array from enums in {@link Globals}
+     * @return an array of boolean values
+     */
+    public static boolean[] daysToBoolArray(Integer... days) {
+        boolean[] boolDays = new boolean[7];
+
+        // Bounds checking for array and setting bit flags to true in array
+        for (Integer day : days) {
+            if (day > 0 && day < 7) {
+                boolDays[day] = true;
+            }
+        }
+
+        return boolDays;
+    }
+
+    /**
+     * Converts a day enum from {@link Calendar} to an enum from {@link Globals}
+     * @param day The day from {@link Calendar}
+     * @return a day enumerator from {@link Globals}
+     */
+    public static int calendarDayToGlobalDay(int day) {
+        // convert calendar.day to Globals.day int
+        switch (day) {
+            case Calendar.SUNDAY:
+                day = Globals.SUNDAY;
+                break;
+            case Calendar.MONDAY:
+                day = Globals.MONDAY;
+                break;
+            case Calendar.TUESDAY:
+                day = Globals.TUESDAY;
+                break;
+            case Calendar.WEDNESDAY:
+                day = Globals.WEDNESDAY;
+                break;
+            case Calendar.THURSDAY:
+                day = Globals.THURSDAY;
+                break;
+            case Calendar.FRIDAY:
+                day = Globals.FRIDAY;
+                break;
+            case Calendar.SATURDAY:
+                day = Globals.SATURDAY;
+                break;
+        }
+
+        return day;
+    }
+
+    /**
+     * Converts a boolean array to an integer array
+     * @param booleanArray The boolean array to convert
+     * @return returns an integer array
+     */
+    public static int[] booleanToIntArray(boolean[] booleanArray) {
+        int[] array = new int[booleanArray.length];
+
+        for (int i = 0; i < booleanArray.length; i++) {
+            if (booleanArray[i]) {
+                array[i] = 1;
+            } else {
+                array[i] = 0;
+            }
+        }
+
+        return array;
+    }
+
+    /**
+     * Converts a integer array to a boolean array
+     * @param integerArray The integer array to convert
+     * @return returns a boolean array
+     */
+    public static boolean[] intToBooleanArray(int[] integerArray) {
+        boolean[] array = new boolean[integerArray.length];
+
+        // 1 corresponds to true
+        for (int i = 0; i < integerArray.length; i++) {
+            array[i] = integerArray[i] == 1;
+        }
+
+        return array;
     }
 }
