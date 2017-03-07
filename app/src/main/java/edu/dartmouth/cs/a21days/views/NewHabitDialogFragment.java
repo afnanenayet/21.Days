@@ -167,7 +167,7 @@ public class NewHabitDialogFragment extends DialogFragment {
             mHabit.setTime(Integer.parseInt(time));
         }
 
-        if (enableLocation.isChecked()) {
+        if (enableLocation.isChecked() && mLocation != null) {
             mHabit.setHasLocation(true);
             mHabit.setLocation(HabitUtility.locationToLatLng(mLocation));
         }
