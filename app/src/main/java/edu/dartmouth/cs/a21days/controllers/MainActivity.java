@@ -117,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         // Empty function required to implement OnPageChangedListener
+        if (position == 1){
+            ((AnalyticsFragment)mFragments.get(position)).UpdateAnalyticView();
+        }
     }
 
     // Set bottom bar nav item to be selected when viewpager is swiped/selected

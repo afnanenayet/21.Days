@@ -16,7 +16,7 @@ public class AddToDBThread extends Thread {
     // constructor
     public AddToDBThread(Habit habit){
         this.habit = habit;
-        dbHelper = HabitDataSource.getInstance("example");
+        dbHelper = HabitDataSource.getInstance();
     }
 
     @Override
