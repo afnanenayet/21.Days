@@ -58,6 +58,7 @@ dependencies {
     compile 'com.nex3z:toggle-button-group:0.2.2'
     compile 'com.karumi:dexter:3.0.2'
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
+    compile 'com.github.MAXDeliveryNG:slideview:1.0.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services-places:10.2.0'
     compile 'com.evernote:android-job:1.1.7'
