@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class NotificationJob extends Job {
     // tag for debugging
-    private static final String TAG = "notif_job_sched";
+    protected static final String TAG = "notif_job_sched";
 
     /**
      * Sends a notification when job is scheduled
