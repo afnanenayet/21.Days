@@ -5,6 +5,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.annotation.Nullable;
 
+import java.util.Calendar;
+
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.models.SerialLatLng;
@@ -65,10 +67,61 @@ public class HabitUtility {
 
     /**
      * get the hash of a user's ID
-     * @param userId
-     * @return
+     * @param userId The user's UID
+     * @return A hash of the user's UID that will contain no special characters
      */
     public static String hashId(String userId) {
         return ((Integer) userId.hashCode()).toString();
+    }
+
+    /**
+     * Retrieves offset from current day for a specific day in the future
+     * ex: if today is monday, then wednesday is 2 days converted to ms
+     * @param targetDay The target day
+     * @return The offset in milliseconds
+     */
+    public static long daysOffset(int targetDay) {
+        // Getting current day
+        Calendar calendar = Calendar.getInstance();
+        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+
+        // convert calendar.day to Globals.day int
+        switch (currentDay) {
+            case Calendar.SUNDAY:
+                currentDay = Globals.SUNDAY;
+                break;
+            case Calendar.MONDAY:
+                currentDay = Globals.MONDAY;
+                break;
+            case Calendar.TUESDAY:
+                currentDay = Globals.TUESDAY;
+                break;
+            case Calendar.WEDNESDAY:
+                currentDay = Globals.WEDNESDAY;
+                break;
+            case Calendar.THURSDAY:
+                currentDay = Globals.THURSDAY;
+                break;
+            case Calendar.FRIDAY:
+                currentDay = Globals.FRIDAY;
+                break;
+            case Calendar.SATURDAY:
+                currentDay = Globals.SATURDAY;
+                break;
+        }
+
+        int daysOffset;
+
+        // Retrieving the difference in days
+        if (currentDay > targetDay) {
+            daysOffset = (7 - currentDay) + targetDay;
+        } else {
+            daysOffset = targetDay - currentDay;
+        }
+
+        // convert to ms
+
+
+        return daysOffset * 86400000L;
     }
 }

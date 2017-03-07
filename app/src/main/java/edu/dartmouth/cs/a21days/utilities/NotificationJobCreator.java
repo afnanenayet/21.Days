@@ -12,8 +12,8 @@ public class NotificationJobCreator implements JobCreator {
     @Override
     public Job create(String tag) {
         switch(tag) {
-            case NotificationJobScheduler.TAG:
-                return new NotificationJobScheduler();
+            case NotificationJob.TAG:
+                return new NotificationJob();
             default:
                 return null;
         }

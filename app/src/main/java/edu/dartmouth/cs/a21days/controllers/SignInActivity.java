@@ -46,6 +46,7 @@ public class SignInActivity extends AppCompatActivity implements
 
     // sign in code
     private static final int RC_SIGN_IN = 9001;
+
     // Firebase authentication
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -62,27 +63,28 @@ public class SignInActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        // set listeners for buttons
+        // Set listeners for buttons
         findViewById(R.id.google_sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.disconnect_button).setOnClickListener(this);
 
-        // configure Google sign in options
+        // Configure Google sign in options
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
+        // Set up Google auth client using Google API
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        // get instance of Firebase
+        // Get instance of Firebase
         mAuth = FirebaseAuth.getInstance();
 
-        // create Firebase listener
+        // Create Firebase listener
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -105,15 +107,15 @@ public class SignInActivity extends AppCompatActivity implements
             }
         };
 
-        // set size of sign in button
+        // Set size of sign in button
         SignInButton signInButton = (SignInButton) findViewById(R.id.google_sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
-        // set up facebook login button
+        // Set up facebook login button
         LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.facebook_sign_in_button);
         facebookLoginButton.setReadPermissions("email");
 
-        // set up facebook callback
+        // Set up facebook callback
         callbackManager = CallbackManager.Factory.create();
 
         // Handle facebook button results
@@ -136,7 +138,10 @@ public class SignInActivity extends AppCompatActivity implements
         });
     }
 
-    // what to do when a button is clicked
+    /**
+     * Callback handler for button clicks
+     * @param v The button view
+     */
     @Override
     public void onClick(View v) {
         int i = v.getId();
@@ -166,7 +171,9 @@ public class SignInActivity extends AppCompatActivity implements
         }
     }
 
-    // what to do when get result from google sign in
+    /**
+     * Handle result from Google sign in (callback)
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -189,7 +196,10 @@ public class SignInActivity extends AppCompatActivity implements
         }
     }
 
-    // authenticate into Firebase with Google
+    /**
+     * Authenticate into Firebase with a Google account
+     * @param acct The google account
+     */
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(DEBUG_TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
@@ -216,6 +226,11 @@ public class SignInActivity extends AppCompatActivity implements
                 });
     }
 
+    /**
+     * Account creation mechanism with email and password
+     * @param email The user's registration email
+     * @param password The password the user wishes to use
+     */
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -234,13 +249,17 @@ public class SignInActivity extends AppCompatActivity implements
                 });
     }
 
-    // sign in user
+    /**
+     * Sign in user
+     */
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    // sign out user
+    /**
+     * Sign out user
+     */
     private void signOut() {
         // sign out of Firebase
         mAuth.signOut();
@@ -260,7 +279,9 @@ public class SignInActivity extends AppCompatActivity implements
     }
 
 
-    // revoke access
+    /**
+     * Revoke access/sign out of Firebase
+     */
     private void revokeAccess() {
         // sign out of Firebase
         mAuth.signOut();
@@ -280,11 +301,13 @@ public class SignInActivity extends AppCompatActivity implements
     }
 
     /**
-     * @param token
+     * Exchange token from facebook to authorize with Firebase
+     * @param token The Facebook access token
      */
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(DEBUG_TAG, "handleFacebookAccessToken:" + token);
 
+        // Use facebook token to try to authorize with firebase
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -304,7 +327,10 @@ public class SignInActivity extends AppCompatActivity implements
                 });
     }
 
-    // update the buttons that are shown depending on whether a user is signed in or not
+    /**
+     * update the buttons that are shown depending on whether a user is signed in or not
+     * @param user The firebase user object
+     */
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             findViewById(R.id.google_sign_in_button).setVisibility(View.GONE);
@@ -317,7 +343,10 @@ public class SignInActivity extends AppCompatActivity implements
         }
     }
 
-    // what to do when connection fails
+    /**
+     * Handle connection failure
+     * @param connectionResult An object that contains the connection result and error
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
@@ -326,7 +355,10 @@ public class SignInActivity extends AppCompatActivity implements
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 
-    // Called when skip button is clicked
+    /**
+     * Button callback to skip signing in
+     * @param view The button view
+     */
     public void onSkipClicked(View view) {
         // Starts main activity
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
