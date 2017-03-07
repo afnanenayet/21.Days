@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // connectToGoogleFit(); // todo get Fitness APIs
 
         // Initializing database with user
-        HabitDataSource.getInstance(Globals.userId);
+        HabitDataSource.getInstance(Globals.betaUserId);
 
         // Initializing bindings for evernote job creator library
         JobManager.create(this).addJobCreator(new NotificationJobCreator());
