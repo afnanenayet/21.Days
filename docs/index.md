@@ -39,7 +39,7 @@ Some individuals who want to delve into the history of this venture have request
 
 # MVC Diagram
 Below we present our MVC diagram, outlining the behind-the-scenes view for 21.Days.
-![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/MVC.jpg?token=ARpKavc22tgoQx1jVjW6MulirliHG6tSks5YvZgIwA%3D%3D)
+![alt text](https://github.com/afnanenayet/21.Days/blob/master/docs/images/MVC.jpg?raw=true)
 
 # Threaded Design Diagram
 Below we present our Threaded Design diagram, outlining the threads involved for 21.Days.
