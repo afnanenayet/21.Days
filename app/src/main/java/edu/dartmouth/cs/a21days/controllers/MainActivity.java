@@ -2,13 +2,11 @@ package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -19,7 +17,6 @@ import com.karumi.dexter.PermissionToken;
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
-import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.NotificationJobCreator;
 import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
@@ -116,6 +113,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         // Empty function required to implement OnPageChangedListener
+        if (position == 1){
+            ((AnalyticsFragment)mFragments.get(position)).UpdateAnalyticView();
+        }
     }
 
     // Set bottom bar nav item to be selected when viewpager is swiped/selected
