@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.Globals;
+import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
 
 /**
  * Helper class for Firebase realtime database.
@@ -197,5 +198,9 @@ public class HabitDataSource {
         if (adapter != null) {
             adapter.updateData(this.getAll());
         }
+
+        //Update the analytic page data
+        AnalyticsFragment.habitList.clear();
+        AnalyticsFragment.habitList = this.getAll();
     }
 }
