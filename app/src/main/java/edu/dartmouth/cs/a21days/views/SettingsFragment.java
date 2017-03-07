@@ -10,10 +10,11 @@ import android.preference.PreferenceScreen;
 import edu.dartmouth.cs.a21days.R;
 
 /**
- * The fragment in which users can change their preferences
+ * The fragment in which users can change their preferences.
  */
 public class SettingsFragment extends PreferenceFragment {
 
+    // tag for debugging
     private final String TAG = "SettingsFragment";
 
     @Override
@@ -33,7 +34,7 @@ public class SettingsFragment extends PreferenceFragment {
             screen.removePreference(quiethours);
         }
 
-        // Set a listener
+        // Set a listener for preferences being changed
         enableQuietHours.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newVal) {

@@ -19,7 +19,6 @@ import android.util.Log;
 
 /**
  * Location tracking for accountablity in habits.
- * Created by lichenghui on 4/3/2017.
  */
 
 public class TrackingService extends Service implements LocationListener {

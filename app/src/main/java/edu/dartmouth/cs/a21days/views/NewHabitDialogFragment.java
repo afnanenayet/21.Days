@@ -37,17 +37,14 @@ import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 
 /**
- * Dialog for creating a new habit from the habit list.
- * <p>
- * Created by Steven on 3/1/17.
+ * Dialog for creating a new habit. Is called from the habit list.
  */
 
 public class NewHabitDialogFragment extends DialogFragment {
     // list of habit categories
     private ArrayList<String> categoryList = new ArrayList<String>();
+    // adapter from cursor to xml
     private SimpleCursorAdapter mAdapter;
-    // tag for debugging
-    private static final String TAG = "NewHabitDialogFragment";
     // habit instance that is created
     private Habit mHabit;
     // location of habit
@@ -55,11 +52,14 @@ public class NewHabitDialogFragment extends DialogFragment {
     // db helper to save habit with
     private HabitDataSource dbHelper;
 
+    // tag for debugging
+    private static final String TAG = "NewHabitDialogFragment";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Temporary code to add categories to categorylist
+        // add default categories to category list
         categoryList.add("Life");
         categoryList.add("Fitness");
         categoryList.add("Productivity");
@@ -67,6 +67,7 @@ public class NewHabitDialogFragment extends DialogFragment {
         categoryList.add("Social");
         categoryList.add("Health");
 
+        // create new habit and get instance of database helper
         mHabit = new Habit();
         dbHelper = HabitDataSource.getInstance("example");
 
@@ -79,6 +80,8 @@ public class NewHabitDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
         builder.setTitle("Create a New Habit");
         LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        // inflate the view and link the dialog and the view
         final View view = inflater.inflate(R.layout.fragment_new_habit, null);
         builder.setView(view);
 
@@ -167,6 +170,7 @@ public class NewHabitDialogFragment extends DialogFragment {
             mHabit.setTime(Integer.parseInt(time));
         }
 
+        // set location if option is enabled
         if (enableLocation.isChecked() && mLocation != null) {
             mHabit.setHasLocation(true);
             mHabit.setLocation(HabitUtility.locationToLatLng(mLocation));

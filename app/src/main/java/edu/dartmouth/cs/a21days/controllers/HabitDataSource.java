@@ -17,18 +17,19 @@ import edu.dartmouth.cs.a21days.utilities.Globals;
 
 /**
  * Helper class for Firebase realtime database.
- *
- * Created by aenayet on 3/5/17.
  */
 public class HabitDataSource {
     // database instance
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+
     // instance of this class
     private static HabitDataSource instance = null;
     private HashMap<String, Habit> habitMap;
 
     public static final String INVALID_USER = "INVALID";
+
+    // tag for debugging
     private static final String DEBUG_TAG = "HabitDataSource";
 
     // Read and update list of habits

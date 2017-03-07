@@ -21,22 +21,12 @@ import java.util.Map;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.models.Habit;
-import edu.dartmouth.cs.a21days.utilities.Globals;
 
 /**
  * Use the {@link AnalyticsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class AnalyticsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     // database helper instance
     private HabitDataSource dbHelper;
 
@@ -65,7 +55,6 @@ public class AnalyticsFragment extends Fragment {
      * this fragment using the provided parameters.
      * @return A new instance of fragment AnalyticsFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static AnalyticsFragment newInstance() {
         AnalyticsFragment fragment = new AnalyticsFragment();
         Bundle args = new Bundle();
@@ -76,11 +65,6 @@ public class AnalyticsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
     }
 
     
@@ -91,7 +75,7 @@ public class AnalyticsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_analytics, container, false);
 
         // get all habits from database
-        dbHelper = HabitDataSource.getInstance(Globals.userId);
+        dbHelper = HabitDataSource.getInstance("example");
         ArrayList<Habit> habitList = dbHelper.getAll();
 
         // create hashmap

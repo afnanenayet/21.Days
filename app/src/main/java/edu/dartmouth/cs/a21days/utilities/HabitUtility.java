@@ -13,8 +13,6 @@ import edu.dartmouth.cs.a21days.models.SerialLatLng;
 
 /**
  * Helper class to translate or discern data for a {@link Habit} object
- *
- * Created by aenayet on 2/26/17.
  */
 public class HabitUtility {
     /**

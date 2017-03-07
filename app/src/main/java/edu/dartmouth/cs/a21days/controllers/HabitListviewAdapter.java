@@ -2,13 +2,9 @@ package edu.dartmouth.cs.a21days.controllers;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-
 import android.app.FragmentTransaction;
-import android.os.AsyncTask;
-import android.os.Bundle;
-
 import android.content.Context;
-
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,8 +26,6 @@ import edu.dartmouth.cs.a21days.views.HabitDetailsFragment;
 
 /**
  * ListView Adapter for recycler view that displays habit information.
- * <p>
- * Created by aenayet on 2/26/17.
  */
 public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdapter
         .HabitViewHolder> {

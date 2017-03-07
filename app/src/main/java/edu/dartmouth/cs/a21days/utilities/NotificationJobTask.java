@@ -1,9 +1,5 @@
 package edu.dartmouth.cs.a21days.utilities;
 
-/**
- * Created by aenayet on 3/6/17.
- */
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,7 +11,7 @@ import android.support.annotation.WorkerThread;
 import edu.dartmouth.cs.a21days.controllers.MainActivity;
 
 /**
- * Class to handle logic for notification job
+ * Class to handle logic for notification job.
  */
 public class NotificationJobTask {
 

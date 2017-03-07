@@ -22,24 +22,12 @@ public class TimePreference extends DialogPreference {
     private int mHour = 0;
     private int mMinute = 0;
     private final String DEFAULT_VALUE = "00:00";
-
+    // using a TimePicker to set the time
     private TimePicker picker = null;
 
     // constructor
     public TimePreference(Context context) {
         this(context, null);
-    }
-
-    // get hour of day
-    public static int getHour(String time) {
-        String[] pieces = time.split(":");
-        return Integer.parseInt(pieces[0]);
-    }
-
-    // get minute of day
-    public static int getMinute(String time) {
-        String[] pieces = time.split(":");
-        return Integer.parseInt(pieces[1]);
     }
 
     // overrided constructor
@@ -54,17 +42,32 @@ public class TimePreference extends DialogPreference {
         setNegativeButtonText("Cancel");
     }
 
+    // get hour from a time string
+    public static int getHour(String time) {
+        String[] pieces = time.split(":");
+        return Integer.parseInt(pieces[0]);
+    }
+
+    // get minute from a time string
+    public static int getMinute(String time) {
+        String[] pieces = time.split(":");
+        return Integer.parseInt(pieces[1]);
+    }
+
     // set time of day
     public void setTime(int hour, int minute) {
         mHour = hour;
         mMinute = minute;
+
+        // create a string in the hh:mm format
         String time = toTime(mHour, mMinute);
+
         persistString(time);
         notifyDependencyChange(shouldDisableDependents());
         notifyChanged();
     }
 
-    // convert hour and minute int values to Time object
+    // convert hour and minute int values to a string
     public String toTime(int hour, int minute) {
         return String.valueOf(hour) + ":" + String.valueOf(minute);
     }
@@ -94,8 +97,9 @@ public class TimePreference extends DialogPreference {
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
-
+        // if ok button is pressed
         if (positiveResult) {
+            // get current time
             int currHour = picker.getCurrentHour();
             int currMinute = picker.getCurrentMinute();
 

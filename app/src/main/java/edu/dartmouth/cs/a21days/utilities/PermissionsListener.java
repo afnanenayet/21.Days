@@ -11,8 +11,6 @@ import edu.dartmouth.cs.a21days.controllers.MainActivity;
 
 /**
  * A class that implements listeners for {@link PermissionRequestUtility} and posts feedback.
- *
- * Created by aenayet on 3/1/17.
  */
 public class PermissionsListener implements MultiplePermissionsListener {
     private MainActivity mActivity;
