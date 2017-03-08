@@ -368,15 +368,15 @@ public class SignInActivity extends AppCompatActivity implements
         // Starts main activity
         Random ran = new Random();
         SharedPreferences mPref = getSharedPreferences(PREFS,MODE_PRIVATE);
-        Globals.localuserId = mPref.getString(KEY_LOCAL_USER_ID," ");
+        Globals.localuserId = mPref.getString(KEY_LOCAL_USER_ID, "");
 
         //Get the local user id, if null, generate a random one
-        if (Globals.localuserId == " ") {
+        if (Globals.localuserId.isEmpty()) {
             Globals.localuserId = String.valueOf(ran.nextInt(10000000));
             SharedPreferences.Editor mEditor  = mPref.edit();
             mEditor.clear();
             mEditor.putString(KEY_LOCAL_USER_ID,Globals.localuserId);
-            mEditor.commit();
+            mEditor.apply();
         }
         Log.d("TTAG", "onSkipClicked: " + Globals.localuserId);
 
