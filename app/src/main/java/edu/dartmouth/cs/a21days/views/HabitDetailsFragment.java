@@ -29,6 +29,7 @@ import edu.dartmouth.cs.a21days.controllers.DeleteFromDBThread;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.controllers.TrackingService;
 import edu.dartmouth.cs.a21days.models.Habit;
+import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 import ng.max.slideview.SlideView;
 
@@ -91,7 +92,7 @@ public class HabitDetailsFragment extends DialogFragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                dbHelper = HabitDataSource.getInstance("example");
+                dbHelper = HabitDataSource.getInstance(Globals.userId);
                 ArrayList<Habit> habits = dbHelper.getAll();
                 mHabit = habits.get(position);
             }

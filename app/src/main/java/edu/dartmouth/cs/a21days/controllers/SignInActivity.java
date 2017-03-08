@@ -100,6 +100,7 @@ public class SignInActivity extends AppCompatActivity implements
 
                     // Set user ID
                     Globals.userId = HabitUtility.hashId(user.getUid());
+                    Log.d(DEBUG_TAG, "user ID: " + Globals.userId);
 
                     // Launch main activity
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
@@ -370,7 +371,7 @@ public class SignInActivity extends AppCompatActivity implements
         SharedPreferences mPref = getSharedPreferences(PREFS,MODE_PRIVATE);
         Globals.localuserId = mPref.getString(KEY_LOCAL_USER_ID, "");
 
-        //Get the local user id, if null, generate a random one
+        // Get the local user id, if null, generate a random one
         if (Globals.localuserId.isEmpty()) {
             Globals.localuserId = String.valueOf(ran.nextInt(10000000));
             SharedPreferences.Editor mEditor  = mPref.edit();

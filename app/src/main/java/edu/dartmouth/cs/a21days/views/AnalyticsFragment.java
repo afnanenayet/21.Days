@@ -26,6 +26,7 @@ import java.util.Map;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.models.Habit;
+import edu.dartmouth.cs.a21days.utilities.Globals;
 
 /**
  * Use the {@link AnalyticsFragment#newInstance} factory method to
@@ -94,7 +95,7 @@ public class AnalyticsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         // get instance of database helper
-        dbHelper = HabitDataSource.getInstance("example");
+        dbHelper = HabitDataSource.getInstance(Globals.userId);
         // get all habits
         habitList = dbHelper.getAll();
     }
