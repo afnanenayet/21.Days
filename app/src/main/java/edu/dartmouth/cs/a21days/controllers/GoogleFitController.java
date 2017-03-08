@@ -122,8 +122,6 @@ public class GoogleFitController {
                         distance = totalDistanceSet.isEmpty() ? -1 : totalDistanceSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE).asFloat();
                     }
 
-
-
                     Log.i(TAG, "buildFitnessClient: " + steps + "  " + distance);
                 }
             }).start();

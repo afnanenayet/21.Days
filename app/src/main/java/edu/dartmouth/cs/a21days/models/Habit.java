@@ -47,7 +47,7 @@ public class Habit {
 
     /************************************** Getters and setters *********************************/
 
-    public boolean isHasGoogleFit() {
+    public boolean hasGoogleFit() {
         return hasGoogleFit;
     }
 
