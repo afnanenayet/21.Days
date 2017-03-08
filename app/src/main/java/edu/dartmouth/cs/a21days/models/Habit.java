@@ -48,7 +48,6 @@ public class Habit {
     /************************************** Getters and setters *********************************/
 
 
-
     public int getGoogleFitValue() {
         return googleFitValue;
     }
