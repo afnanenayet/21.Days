@@ -7,22 +7,42 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.fitness.Fitness;
+import com.google.android.gms.fitness.data.DataSet;
+import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.fitness.data.Field;
+import com.google.android.gms.fitness.request.DataReadRequest;
+import com.google.android.gms.fitness.result.DailyTotalResult;
+import com.google.android.gms.fitness.result.DataReadResult;
+
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
+
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller that allows access to Google fit.
  */
 public class GoogleFitController {
+
+    private String TAG = "GoogleFitController";
     // Lets us keep track of client connection status
     private GoogleApiClient mClient = null;
     private MainActivity mActivity;
     private static final String DEBUG_TAG = "GoogleFitController";
+    private Calendar calendar = Calendar.getInstance();
 
     // constructor
     public GoogleFitController(MainActivity mainActivity) {
         mActivity = mainActivity;
     }
+
+
 
 
     /**
@@ -39,7 +59,7 @@ public class GoogleFitController {
             // build new client
             mClient = new GoogleApiClient.Builder(mActivity.getApplicationContext())
                     // add API
-                    .addApi(Fitness.GOALS_API)
+                    .addApi(Fitness.HISTORY_API)
                     .addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
                     .addConnectionCallbacks(
                             new GoogleApiClient.ConnectionCallbacks() {
@@ -73,6 +93,41 @@ public class GoogleFitController {
                         }
                     })
                     .build();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    int steps = 0;
+                    int calories = 0;
+
+                    /*
+                    PendingResult<DailyTotalResult> result = Fitness.HistoryApi.readDailyTotal(mClient, DataType.AGGREGATE_STEP_COUNT_DELTA);
+                    DailyTotalResult totalResult = result.await(60, TimeUnit.SECONDS);
+                    if (totalResult.getStatus().isSuccess()) {
+
+                        DataSet totalSet = totalResult.getTotal();
+                        Log.i(TAG, "run: " + totalSet.getDataPoints().get(0).getDataType().getName());
+                        steps = totalSet.isEmpty() ? -1 : totalSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
+                    }
+                    */
+
+
+                    PendingResult<DailyTotalResult> result = Fitness.HistoryApi.readDailyTotal(mClient, DataType.AGGREGATE_CALORIES_EXPENDED);
+                    DailyTotalResult totalResult = result.await(60, TimeUnit.SECONDS);
+                    if (totalResult.getStatus().isSuccess()) {
+
+                        DataSet totalSet = totalResult.getTotal();
+                        Log.i(TAG, "run: " + totalSet.getDataPoints().get(0).getDataType().getName());
+                        steps = totalSet.isEmpty() ? -1 : totalSet.getDataPoints().get(0).getValue(Field.FIELD_CALORIES).asInt();
+                    }
+
+
+
+                    Log.i(TAG, "buildFitnessClient: " + steps + "  " + calories);
+                }
+            }).start();
+
         }
     }
 }

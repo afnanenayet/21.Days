@@ -32,11 +32,12 @@ import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.controllers.AddToDBThread;
+import edu.dartmouth.cs.a21days.controllers.GoogleFitController;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
+import edu.dartmouth.cs.a21days.controllers.MainActivity;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
-import edu.dartmouth.cs.a21days.utilities.NotificationJob;
 
 /**
  * Dialog for creating a new habit. Is called from the habit list.
@@ -51,8 +52,6 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
     private Habit mHabit;
     // location of habit
     private Location mLocation;
-    // db helper to save habit with
-    private HabitDataSource dbHelper;
 
     private int habitHour;
     private int habitMinute;
@@ -74,7 +73,6 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
 
         // create new habit and get instance of database helper
         mHabit = new Habit();
-        dbHelper = HabitDataSource.getInstance("example");
 
     }
 
@@ -105,6 +103,12 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
 
         TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker_habit);
         timePicker.setOnTimeChangedListener(this);
+
+
+        GoogleFitController googleFit = new GoogleFitController((MainActivity)getActivity());
+        googleFit.buildFitnessClient();
+
+
 
         // Set up autocomplete fragment
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
@@ -205,6 +209,8 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
                     .remove(autocompleteFragment)
                     .commit();
         }
+
+
 
     }
 
@@ -325,7 +331,7 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         mAdapter.changeCursor(c);
     }
 
-
+    // Get the time from user input
     @Override
     public void onTimeChanged(TimePicker timePicker, int i, int i1) {
         habitHour = i;
