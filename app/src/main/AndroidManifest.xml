@@ -18,8 +18,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBQh-dElmVXw0ff6kwlhTRsGAHayEuL8y8" />
 
-        <activity android:name=".controllers.MainActivity" />
-        <activity android:name=".controllers.SignInActivity">
+        <activity android:name=".controllers.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".controllers.SignInActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
