@@ -23,6 +23,7 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -30,22 +31,20 @@ import java.util.concurrent.TimeUnit;
  */
 public class GoogleFitController {
 
-    private String TAG = "GoogleFitController";
+    private final static String TAG = "GoogleFitController";
     // Lets us keep track of client connection status
-    private GoogleApiClient mClient = null;
+    private static GoogleApiClient mClient = null;
     private MainActivity mActivity;
     private static final String DEBUG_TAG = "GoogleFitController";
     private Calendar calendar = Calendar.getInstance();
+
+    public static final String STEPS = "steps_key";
+    public static final String DISTANCE = "distance_key";
 
     // constructor
     public GoogleFitController(MainActivity mainActivity) {
         mActivity = mainActivity;
     }
-
-
-
-
-
 
     /**
      * Build a {@link GoogleApiClient} that will authenticate the user and allow the application
@@ -96,38 +95,55 @@ public class GoogleFitController {
                     })
                     .build();
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-
-                    int steps = 0;
-                    float distance = 0;
-
-
-                    PendingResult<DailyTotalResult> result = Fitness.HistoryApi.readDailyTotal(mClient, DataType.AGGREGATE_STEP_COUNT_DELTA);
-                    DailyTotalResult totalResult = result.await(60, TimeUnit.SECONDS);
-                    if (totalResult.getStatus().isSuccess()) {
-
-                        DataSet totalSet = totalResult.getTotal();
-                        Log.i(TAG, "run: " + totalSet.getDataPoints().get(0).getDataType().getName());
-                        steps = totalSet.isEmpty() ? -1 : totalSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
-                    }
-
-                    PendingResult<DailyTotalResult> distanceResult = Fitness.HistoryApi.readDailyTotal(mClient, DataType.AGGREGATE_DISTANCE_DELTA);
-                    DailyTotalResult totalDistanceResult = distanceResult.await(60, TimeUnit.SECONDS);
-                    if (totalDistanceResult.getStatus().isSuccess()) {
-
-                        DataSet totalDistanceSet = totalDistanceResult.getTotal();
-                        Log.i(TAG, "run: " + totalDistanceSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE));
-                        distance = totalDistanceSet.isEmpty() ? -1 : totalDistanceSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE).asFloat();
-                    }
-
-
-
-                    Log.i(TAG, "buildFitnessClient: " + steps + "  " + distance);
-                }
-            }).start();
+            getData();
 
         }
+    }
+
+    /**
+     * Retrieves distance and steps for user
+     * @return A hashmap where steps are an {@link Integer} and distance is a {@link Float}
+     */
+    public static HashMap<String, Object> getData() {
+        final HashMap<String, Object> resultMap = new HashMap<>();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Integer steps;
+                Float distance;
+
+
+                PendingResult<DailyTotalResult> result = Fitness.HistoryApi.readDailyTotal(mClient,
+                        DataType.AGGREGATE_STEP_COUNT_DELTA);
+                DailyTotalResult totalResult = result.await(60, TimeUnit.SECONDS);
+                if (totalResult.getStatus().isSuccess()) {
+
+                    DataSet totalSet = totalResult.getTotal();
+                    Log.i(TAG, "run: " + totalSet.getDataPoints().get(0).getDataType().getName());
+                    steps = totalSet.isEmpty() ? -1 : totalSet.getDataPoints().get(0)
+                            .getValue(Field.FIELD_STEPS).asInt();
+                    resultMap.put(GoogleFitController.STEPS, steps);
+                }
+
+                PendingResult<DailyTotalResult> distanceResult = Fitness.HistoryApi.readDailyTotal
+                        (mClient, DataType.AGGREGATE_DISTANCE_DELTA);
+                DailyTotalResult totalDistanceResult = distanceResult.await(60, TimeUnit.SECONDS);
+                if (totalDistanceResult.getStatus().isSuccess()) {
+
+                    DataSet totalDistanceSet = totalDistanceResult.getTotal();
+                    Log.i(TAG, "run: " + totalDistanceSet.getDataPoints().get(0)
+                            .getValue(Field.FIELD_DISTANCE));
+                    distance = totalDistanceSet.isEmpty() ? -1 :
+                            totalDistanceSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE)
+                                    .asFloat();
+                    resultMap.put(GoogleFitController.DISTANCE, distance);
+                }
+
+                Log.i(TAG, "buildFitnessClient: " + resultMap.get(STEPS) + "  " +
+                        resultMap.get(DISTANCE));
+            }
+            
+        }).start();
+        return resultMap;
     }
 }

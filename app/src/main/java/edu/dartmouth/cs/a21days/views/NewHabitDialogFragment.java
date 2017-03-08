@@ -255,8 +255,7 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
                 TableRow googleFitOptions = (TableRow) view.findViewById(R.id.table_row_google_fit);
                 if (compoundButton.isChecked()) {
                     googleFitOptions.setVisibility(View.VISIBLE);
-                    GoogleFitController googleFit = new GoogleFitController((MainActivity)getActivity());
-                    googleFit.buildFitnessClient();
+
                     Spinner googleFitSpinner = (Spinner) view.findViewById(R.id.google_fit_spinner);
                     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                             R.array.google_fit_array, android.R.layout.simple_spinner_item);

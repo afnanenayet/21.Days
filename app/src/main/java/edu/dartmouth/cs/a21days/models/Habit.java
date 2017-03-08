@@ -47,13 +47,7 @@ public class Habit {
 
     /************************************** Getters and setters *********************************/
 
-    public boolean isHasGoogleFit() {
-        return hasGoogleFit;
-    }
 
-    public void setHasGoogleFit(boolean hasGoogleFit) {
-        this.hasGoogleFit = hasGoogleFit;
-    }
 
     public int getGoogleFitValue() {
         return googleFitValue;
@@ -165,5 +159,13 @@ public class Habit {
     // set habit id
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isHasGoogleFit() {
+        return hasGoogleFit;
+    }
+
+    public void setHasGoogleFit(boolean hasGoogleFit) {
+        this.hasGoogleFit = hasGoogleFit;
     }
 }

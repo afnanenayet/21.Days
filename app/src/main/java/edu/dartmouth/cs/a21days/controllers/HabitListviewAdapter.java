@@ -144,6 +144,11 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
                 return false;
             }
         });
+
+        // Checking to see if habit has Google Fit integration
+        if (habit.isHasGoogleFit()) {
+            // call task to check
+        }
     }
 
     /**

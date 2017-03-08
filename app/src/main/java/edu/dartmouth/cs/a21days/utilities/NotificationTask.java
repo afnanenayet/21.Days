@@ -14,7 +14,7 @@ import edu.dartmouth.cs.a21days.controllers.MainActivity;
 /**
  * Class to handle logic for notification job.
  */
-public class NotificationJobTask {
+public class NotificationTask {
 
     /**
      * Sends notification with intent in a worker thread

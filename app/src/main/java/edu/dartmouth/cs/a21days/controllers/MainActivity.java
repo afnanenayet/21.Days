@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Setting up binding for Dexter to request permissions
         Dexter.withActivity(this).continueRequestingPendingPermissions(permissionsListener);
         // Initialize Google Fit connection
-        // connectToGoogleFit(); // todo get Fitness APIs
+        connectToGoogleFit();
 
         // Initializing database with user
         HabitDataSource.getInstance(Globals.userId);

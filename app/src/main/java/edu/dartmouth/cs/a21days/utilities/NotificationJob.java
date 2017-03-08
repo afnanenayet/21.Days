@@ -12,14 +12,9 @@ import com.evernote.android.job.JobRequest;
 import com.evernote.android.job.util.support.PersistableBundleCompat;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalTime;
-import org.joda.time.field.MillisDurationField;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The job to run when the timing has been scheduled.
@@ -79,7 +74,7 @@ public class NotificationJob extends Job {
         // Because we are breaking the static context rule, this may be null
         if (context != null && !withinQuietHours) {
 
-            new NotificationJobTask().sendNotification(context, title, message);
+            new NotificationTask().sendNotification(context, title, message);
             return Result.SUCCESS;
         } else {
             return Result.FAILURE;

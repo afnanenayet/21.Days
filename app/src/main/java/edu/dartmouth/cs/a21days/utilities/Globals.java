@@ -32,4 +32,6 @@ public class Globals {
     public static final String NOTIFICATION_MINUTE_KEY = "notification_minute_key";
     public static final String NOTIFICATION_DAY_ARRAY_KEY = "notification_day_array_key";
     public static final String NOTIFICATION_HABIT_ID = "notification_habit_id";
+    public static final String DISTANCE_STRING = "Distance Travelled Daily (Meters)";
+    public static final String STEPS_STRING = "Steps Taken Daily";
 }
