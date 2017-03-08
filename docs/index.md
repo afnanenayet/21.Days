@@ -1,19 +1,20 @@
 # What is 21.Days?
-21.Days is, at its core, a habit-building application. 21.Days uses encourages user accountability and responsibility through its notification and location-checking system and ensures that users follow through with their habits. Building a habit is just that simple!
+21.Days is, at its core, a habit-building application. 21.Days encourages user accountability and responsibility through its notification and location-checking system to ensure that users follow through with their habits. Building a habit is just that simple!
 
 # Features
 ## Easy sign in
-21.Days is dedicated to making your habit-building process fun and simple. That's why we don't need you to create another account just for us. 
+21.Days is dedicated to making your habit-building process fun and simple. That's why you don't need to create another account just for us. 
 - Sign in with Google or Facebook
-- Use 21.Days withouth creating an account
+- Use 21.Days without creating an account
 
 ## Create habits
 Setting up a new habit in 21.Days is easy! With our clutter-free interface, beginning a new habit is just a few taps and clicks away.
-- Choose from all-day habits or specify a time you wish to check-in
+- Choose from all-day habits or specify a time you wish to be notified
+- Integrate with Google Fit to create step count and distance based habits
 - Track how well you've been completing your habits with our streaks system
 
 ## Make yourself accountable
-21.Days doesn't just let you check your habits off. You have to show 21.Days that you've done what you needed.
+21.Days doesn't just let you check your habits off. You have to prove to 21.Days and, more importantly, yourself that you've completed your habit.
 - Check in requirements:
     - Set a location-based geofence so 21.Days knows whether you're at the right place to complete your habit
 - Be notified to complete your habits at the time you have specified
@@ -50,7 +51,7 @@ Below we present our Threaded Design diagram, outlining the threads involved for
 |               | Complete      | Incomplete  |
 | ------------- |:-------------:| :------:|
 | Nan and Leo   | Analytics Fragment, Individual Analytics, Google Sign In, Habit Details, Database, Location Services |   |
-| Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment, Facebook Sign In, Notification Service   |   Google Fit Integration |
+| Afnan and Steven | Main Activity, Habits List Fragment, Settings Fragment, Facebook Sign In, Notification Service, Google Fit Integration   |    |
 
 # Build status
 [![Build Status](https://travis-ci.com/afnanenayet/21.Days.svg?token=QtxzrX3Qc2BDQfwx8D1K&branch=master)](https://travis-ci.com/afnanenayet/21.Days)
