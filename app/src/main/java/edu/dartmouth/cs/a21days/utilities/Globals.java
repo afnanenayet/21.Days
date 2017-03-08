@@ -34,4 +34,5 @@ public class Globals {
     public static final String NOTIFICATION_HABIT_ID = "notification_habit_id";
     public static final String DISTANCE_STRING = "Distance Travelled Daily (Meters)";
     public static final String STEPS_STRING = "Steps Taken Daily";
+    public static final String USER_ID_KEY = "user_id_key";
 }

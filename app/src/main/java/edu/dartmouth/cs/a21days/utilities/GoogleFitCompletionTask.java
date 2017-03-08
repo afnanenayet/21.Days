@@ -26,9 +26,15 @@ import edu.dartmouth.cs.a21days.models.Habit;
 public class GoogleFitCompletionTask extends AsyncTask<Void, Void, Integer> {
     private static final String DEBUG_TAG = "GoogleFitCompletionTask";
     private ArrayList<Habit> habitArrayList;
+    private String mUserId;
 
-    public GoogleFitCompletionTask() {
+    /**
+     * Class constructor
+     * @param userId the ID string for the user
+     */
+    public GoogleFitCompletionTask(String userId) {
         Log.d(DEBUG_TAG, "Class init");
+        mUserId = userId;
     }
 
     /**
@@ -65,40 +71,45 @@ public class GoogleFitCompletionTask extends AsyncTask<Void, Void, Integer> {
 
         Map map = GoogleFitController.resultMap;
 
-        HabitDataSource dbHelper = HabitDataSource.getInstance();
+        HabitDataSource dbHelper = HabitDataSource.getInstance(mUserId);
         ArrayList<Habit> habits = dbHelper.getAll();
+
+        // If habits are empty then the data is inaccessible. Terminate.
+        if (habits.isEmpty()) return;
 
         // Cycling through each habit and checking to see if they have been completed
         for (Habit habit : habits) {
-            // Getting current time
-            Calendar c = Calendar.getInstance();
-            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-            int cdate = Integer.valueOf(df.format(c.getTime()));
+            if (habit.isHasGoogleFit()) {
+                // Getting current time
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+                int cdate = Integer.valueOf(df.format(c.getTime()));
 
-            // Checking to see if habit is eligible for check in
-            if (map.size() != 0 && cdate != habit.getTimeStamp()) {
-                boolean checkin = false;
+                // Checking to see if habit is eligible for check in
+                if (map.size() != 0 && cdate != habit.getTimeStamp()) {
+                    boolean checkin = false;
+                    Log.d(DEBUG_TAG, "Habit: " + habit.toString());
+                    Log.d(DEBUG_TAG, "Google fit type: " + habit.getGoogleFitType());
 
-                switch (habit.getGoogleFitType()) {
-                    case Globals.DISTANCE_STRING:
+                    if (habit.getGoogleFitType().equals(Globals.DISTANCE_STRING)) {
                         Float distance = (Float) map.get(GoogleFitController.DISTANCE);
                         checkin = (distance >= habit.getGoogleFitValue());
-                        break;
-                    case Globals.STEPS_STRING:
+
+                    } else if (habit.getGoogleFitType().equals(Globals.STEPS_STRING)) {
                         Integer steps = (Integer) map.get(GoogleFitController.STEPS);
                         checkin = (steps >= habit.getGoogleFitValue());
-                        break;
-                }
+                    }
 
-                // If Google Fit data indicates that habit has been completed
-                if (checkin) {
-                    Log.d(DEBUG_TAG, "Habit is complete");
+                    // If Google Fit data indicates that habit has been completed
+                    if (checkin) {
+                        Log.d(DEBUG_TAG, "Habit is complete");
 
-                    habit.setStreak(habit.getStreak() + 1);
-                    habit.setTimeStamp(cdate);
+                        habit.setStreak(habit.getStreak() + 1);
+                        habit.setTimeStamp(cdate);
 
-                    // Updating in database
-                    new AddToDBThread(habit).run();
+                        // Updating in database
+                        new AddToDBThread(habit).run();
+                    }
                 }
             }
         }
@@ -110,6 +121,9 @@ public class GoogleFitCompletionTask extends AsyncTask<Void, Void, Integer> {
      * Updates UI for data
      */
     public void updateUiData() {
-        HabitListviewAdapter.getInstance().updateData(habitArrayList);
+        HabitListviewAdapter adapter = HabitListviewAdapter.getInstance();
+
+        if (adapter != null && habitArrayList != null)
+            adapter.updateData(habitArrayList);
     }
 }

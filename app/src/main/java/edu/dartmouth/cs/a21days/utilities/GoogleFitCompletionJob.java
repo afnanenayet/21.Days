@@ -6,6 +6,7 @@ import android.util.Log;
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobRequest;
+import com.evernote.android.job.util.support.PersistableBundleCompat;
 
 /**
  * Created by aenayet on 3/8/17.
@@ -23,21 +24,39 @@ public class GoogleFitCompletionJob extends Job {
     @NonNull
     @Override
     protected Result onRunJob(Params params) {
-        Log.d(TAG, "Running job");
-        GoogleFitCompletionTask task = new GoogleFitCompletionTask();
-        task.setHabitCompleted();
-        task.updateUiData();
-        return null;
+        PersistableBundleCompat extras = params.getExtras();
+        String userId = extras.getString(Globals.USER_ID_KEY, "");
+
+        if (!userId.isEmpty()) {
+            Log.d(TAG, "Running job");
+            GoogleFitCompletionTask task = new GoogleFitCompletionTask(Globals.userId);
+
+            try {
+                task.setHabitCompleted();
+            } catch (Exception e) {
+                Log.e(TAG, "Task failed");
+                e.printStackTrace();
+            }
+
+            return Result.SUCCESS;
+        } else
+            return Result.FAILURE;
     }
 
     /**
      * Starts a periodic job to check Google fit completion
+     * @param userId The ID string for the user
      * @param intervalLength The length of the interval between checks in milliseconds
      * @return The ID of the job
      */
-    public static int startJob(long intervalLength) {
+    public static int startJob(String userId, long intervalLength) {
+        PersistableBundleCompat params = new PersistableBundleCompat();
+
+        params.putString(Globals.USER_ID_KEY, userId);
+
         return new JobRequest.Builder(TAG)
                 .setPeriodic(intervalLength)
+                .setExtras(params)
                 .build()
                 .schedule();
     }

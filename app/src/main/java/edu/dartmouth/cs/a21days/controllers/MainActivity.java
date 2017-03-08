@@ -24,7 +24,7 @@ import edu.dartmouth.cs.a21days.utilities.ApplicationContext;
 import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.GoogleFitCompletionJob;
 import edu.dartmouth.cs.a21days.utilities.GoogleFitCompletionTask;
-import edu.dartmouth.cs.a21days.utilities.NotificationJobCreator;
+import edu.dartmouth.cs.a21days.utilities.JobCreatorSingleton;
 import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
 import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
 import edu.dartmouth.cs.a21days.views.HabitsListFragment;
@@ -110,12 +110,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         HabitDataSource.getInstance(Globals.userId);
 
         // Initializing bindings for evernote job creator library
-        JobManager.create(getApplicationContext()).addJobCreator(new NotificationJobCreator());
+        JobManager.create(getApplicationContext()).addJobCreator(new JobCreatorSingleton());
 
         // Listview adapter needs new context on every orientation change because it outlives
         // MainActivity
         HabitsListFragment.getInstance().refreshAdapter(this);
-        GoogleFitCompletionJob.startJob(900_000);
+        GoogleFitCompletionJob.startJob(Globals.userId, 900000);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         GoogleFitController fitController = new GoogleFitController(this);
         fitController.buildFitnessClient();
         GoogleFitController.getData();
-        new GoogleFitCompletionTask().execute();
+        new GoogleFitCompletionTask(Globals.userId).execute();
     }
 
 
