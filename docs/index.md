@@ -34,8 +34,8 @@ We believe in letting you see what you've accomplished. See how you're doing and
 - Chenghui Li
 
 # Our demo slides
-Some individuals who want to delve into the history of this venture have requested that we share a little of our archives. Our demo slides, including our original pitch, can be found here:
-[Pitch slides](https://docs.google.com/presentation/d/1jZVyAWzXpNxvboM9mWs4kSQBQadF9-X9Kso-EU4HQVo/edit?usp=sharing)
+Some individuals who want to delve into the history of this venture have requested that we share a little of our archives. Our demo slides can be found here:
+[Demo slides](https://docs.google.com/presentation/d/1jZVyAWzXpNxvboM9mWs4kSQBQadF9-X9Kso-EU4HQVo/edit?usp=sharing)
 
 # MVC Diagram
 Below we present our MVC diagram, outlining the behind-the-scenes view for 21.Days.
