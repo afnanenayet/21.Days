@@ -202,5 +202,7 @@ public class HabitDataSource {
         //Update the analytic page data
         AnalyticsFragment.habitList.clear();
         AnalyticsFragment.habitList = this.getAll();
+        AnalyticsFragment analyticsFragment = (AnalyticsFragment)MainActivity.mFragments.get(1);
+        analyticsFragment.UpdateAnalyticView();
     }
 }
