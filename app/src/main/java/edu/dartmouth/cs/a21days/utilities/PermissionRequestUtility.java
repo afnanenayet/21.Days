@@ -9,11 +9,9 @@ public class PermissionRequestUtility {
      * Fire permissions request
      */
     public void requestPermissions() {
-        //TODO
     }
 
     public boolean checkPermissions() {
-        //TODO
         return false;
     }
 }

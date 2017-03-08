@@ -35,7 +35,7 @@ We believe in letting you see what you've accomplished. See how you're doing and
 
 # Our demo slides
 Some individuals who want to delve into the history of this venture have requested that we share a little of our archives. Our demo slides, including our original pitch, can be found here:
-[Pitch slides](https://docs.google.com/presentation/d/1LqYHAFYNit3Wd_bE9uATRXGYYwExH9Xo0qOO0rtN3oY/edit#slide=id.p)
+[Pitch slides](https://docs.google.com/presentation/d/1jZVyAWzXpNxvboM9mWs4kSQBQadF9-X9Kso-EU4HQVo/edit?usp=sharing)
 
 # MVC Diagram
 Below we present our MVC diagram, outlining the behind-the-scenes view for 21.Days.
@@ -43,7 +43,7 @@ Below we present our MVC diagram, outlining the behind-the-scenes view for 21.Da
 
 # Threaded Design Diagram
 Below we present our Threaded Design diagram, outlining the threads involved for 21.Days.
-![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/Threaded%20Design%20Diagram.jpg?token=ARpKatSv5jIV2uj72_uUYUCM0YRruv9tks5Yxi5awA%3D%3D)
+![alt text](https://github.com/afnanenayet/21.Days/blob/master/docs/images/Threaded%20Design%20Diagram.jpg?raw=true)
 
 
 # Work Distribution

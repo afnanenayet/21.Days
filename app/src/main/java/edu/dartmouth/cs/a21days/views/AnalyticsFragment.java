@@ -32,15 +32,13 @@ import edu.dartmouth.cs.a21days.models.Habit;
  * create an instance of this fragment.
  */
 public class AnalyticsFragment extends Fragment {
-
+    // instance of this fragment
     private static AnalyticsFragment instance;
 
     // database helper instance
     private HabitDataSource dbHelper;
     public static ArrayList<Habit> habitList;
 
-    // map of length of streak to number of that streak
-    private HashMap<Integer, Integer> streakMap;
     // number of habits completed
     private int numHabitsCompleted = 0;
     // number of habits ongoing
@@ -54,8 +52,7 @@ public class AnalyticsFragment extends Fragment {
     // days since most neglected habit checked off
     private int mostNeglectedHabitNum = 0;
 
-
-
+    // UI elements
     private BarChart barChart;
     private TextView numHabitsCompletedView;
     private TextView numHabitsOngoingView;
@@ -67,24 +64,24 @@ public class AnalyticsFragment extends Fragment {
 
     // constructor
     public AnalyticsFragment() {
-       // empty, required
+        // empty, required
     }
 
-    public static AnalyticsFragment getInstance(){
-        if (instance == null){
+    // return instance of this fragment
+    public static AnalyticsFragment getInstance() {
+        if (instance == null) {
             instance = new AnalyticsFragment();
         }
 
         return instance;
     }
 
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
      * @return A new instance of fragment AnalyticsFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static AnalyticsFragment newInstance() {
         AnalyticsFragment fragment = new AnalyticsFragment();
         Bundle args = new Bundle();
@@ -96,17 +93,20 @@ public class AnalyticsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // get instance of database helper
         dbHelper = HabitDataSource.getInstance("example");
+        // get all habits
         habitList = dbHelper.getAll();
     }
 
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_analytics, container, false);
 
+        // get the Bar Chart
         barChart = (BarChart) view.findViewById(R.id.analytics_chart);
 
         // get the TextViews
@@ -128,7 +128,6 @@ public class AnalyticsFragment extends Fragment {
         //Setup the fragment view with data
         UpdateAnalyticView();
 
-
         return view;
     }
 
@@ -139,13 +138,14 @@ public class AnalyticsFragment extends Fragment {
         longestStreakHabitNum = 0;
         mostNeglectedHabitNum = 0;
         numHabitsCompleted = 0;
+
         Log.d("TAG", "UpdateAnalyticView: ");
 
         // create hashmap
         HashMap<Integer, Integer> streakMap = new HashMap<Integer, Integer>();
 
         // go through each habit
-        for (int i = 0; i<habitList.size();i++) {
+        for (int i = 0; i < habitList.size(); i++) {
             Habit habit = habitList.get(i);
             // get the streak of the habit
             int habitStreak = habit.getStreak();
@@ -160,15 +160,13 @@ public class AnalyticsFragment extends Fragment {
             // check if streak is over 21 days
             if (habitStreak >= 21) {
                 numHabitsCompleted++;
-            }
-            else {
+            } else {
                 numHabitsOngoing++;
             }
 
             //Calculate the days interval between last day and today
-            if (habit.getStreak()!=0) {
+            if (habit.getStreak() != 0) {
                 //Make sure that timestamp exists
-
                 String timestamp = String.valueOf(habit.getTimeStamp());
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
                 Date d = null;
@@ -194,7 +192,7 @@ public class AnalyticsFragment extends Fragment {
         }
 
         // go through each habit again to construct the map
-        for (Habit habit:habitList) {
+        for (Habit habit : habitList) {
             // get the streak
             int habitStreak = habit.getStreak();
             // get frequency of this streak from the map
@@ -206,7 +204,7 @@ public class AnalyticsFragment extends Fragment {
         // add data from map to entries list
         ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
         // iterate through the map
-        for (Map.Entry<Integer, Integer> entry:streakMap.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : streakMap.entrySet()) {
             entries.add(new BarEntry(entry.getKey(), entry.getValue()));
         }
         // create dataset for bar graph
@@ -237,7 +235,7 @@ public class AnalyticsFragment extends Fragment {
         mostNeglectedDaysView.setText(Integer.toString(mostNeglectedHabitNum));
         mostNeglectedNameView.setText(mostNeglectedHabitName);
 
-        // testing the comment
+        // set text for comment
         encourageComment.setText(R.string.analytics_default_comment);
 
     }

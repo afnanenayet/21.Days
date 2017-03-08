@@ -1,19 +1,16 @@
 package edu.dartmouth.cs.a21days.views;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.database.MatrixCursor;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,18 +35,14 @@ import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.controllers.AddToDBThread;
-import edu.dartmouth.cs.a21days.controllers.GoogleFitController;
-import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
-import edu.dartmouth.cs.a21days.controllers.MainActivity;
 import edu.dartmouth.cs.a21days.models.Habit;
-import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 
 /**
- * Dialog for creating a new habit. Is called from the habit list.
+ * Dialog for creating a new habit. It is called from the habit list.
  */
 
-public class NewHabitDialogFragment extends DialogFragment implements TimePicker.OnTimeChangedListener{
+public class NewHabitDialogFragment extends DialogFragment implements TimePicker.OnTimeChangedListener {
     // list of habit categories
     private ArrayList<String> categoryList = new ArrayList<String>();
     // adapter from cursor to xml
@@ -59,6 +52,7 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
     // location of habit
     private Location mLocation;
 
+    // time when habit should be completed
     private int habitHour;
     private int habitMinute;
 
@@ -120,7 +114,7 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
+                // set location of the place
                 Log.i(TAG, "Place: " + place.getName());
                 mLocation = new Location(LocationManager.GPS_PROVIDER);
                 mLocation.setLatitude(place.getLatLng().latitude);
@@ -130,7 +124,6 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
 
             @Override
             public void onError(Status status) {
-                // TODO: Handle the error.
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
@@ -197,12 +190,12 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         if (enableLocation.isChecked() && mLocation != null) {
             mHabit.setHasLocation(true);
             mHabit.setLocation(HabitUtility.locationToLatLng(mLocation));
-        }
-        else {
+        } else {
             mHabit.setHasLocation(false);
         }
 
-        if (googleFitEnabled.isChecked() && !googleFitValue.getText().toString().isEmpty()){
+        // set Google Fi info if option is enabled
+        if (googleFitEnabled.isChecked() && !googleFitValue.getText().toString().isEmpty()) {
             mHabit.setHasGoogleFit(true);
             mHabit.setGoogleFitType(googleFitSpinner.getSelectedItem().toString());
             mHabit.setGoogleFitValue(Integer.parseInt(googleFitValue.getText().toString()));
@@ -227,7 +220,6 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         }
 
 
-
     }
 
     // set up switch to show time picker as needed
@@ -248,6 +240,7 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
             }
         });
 
+        // Set up switch to show and hide Google Fit options
         Switch enableGoogleFit = (Switch) view.findViewById(R.id.google_fit);
         enableGoogleFit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -257,8 +250,9 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
                     googleFitOptions.setVisibility(View.VISIBLE);
 
                     Spinner googleFitSpinner = (Spinner) view.findViewById(R.id.google_fit_spinner);
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                            R.array.google_fit_array, android.R.layout.simple_spinner_item);
+                    ArrayAdapter<CharSequence> adapter =
+                            ArrayAdapter.createFromResource(getActivity(),
+                                    R.array.google_fit_array, android.R.layout.simple_spinner_item);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     googleFitSpinner.setAdapter(adapter);
                 } else {
@@ -274,6 +268,7 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         final View autocompleteView = view.findViewById(R.id.place_autocomplete_fragment);
         autocompleteView.setVisibility(View.GONE);
 
+        // Set up switch to show and hide location options
         Switch enableLocation = (Switch) view.findViewById(R.id.location_requirement);
         enableLocation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -330,7 +325,6 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
                     searchView.setQuery(userInput, true);
                     categoryList.add(userInput);
                 }
-
 
                 return true;
             }

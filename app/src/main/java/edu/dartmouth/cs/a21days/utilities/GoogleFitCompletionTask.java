@@ -1,17 +1,11 @@
 package edu.dartmouth.cs.a21days.utilities;
 
-/**
- * Created by aenayet on 3/8/17.
- */
-
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Map;
 
 import edu.dartmouth.cs.a21days.controllers.AddToDBThread;
@@ -21,11 +15,14 @@ import edu.dartmouth.cs.a21days.controllers.HabitListviewAdapter;
 import edu.dartmouth.cs.a21days.models.Habit;
 
 /**
- * Task to check if habit has been completed with completion criteria via Google Fit
+ * Task to check if habit has been completed with completion criteria via Google Fit.
  */
 public class GoogleFitCompletionTask extends AsyncTask<Void, Void, Integer> {
+    // tag for debugging
     private static final String DEBUG_TAG = "GoogleFitCompletionTask";
+    // list of all habits
     private ArrayList<Habit> habitArrayList;
+    // user ID
     private String mUserId;
 
     /**
@@ -69,8 +66,10 @@ public class GoogleFitCompletionTask extends AsyncTask<Void, Void, Integer> {
             Log.e(DEBUG_TAG, "Failed to join thread");
         }
 
+        // get results from controller
         Map map = GoogleFitController.resultMap;
 
+        // get habits
         HabitDataSource dbHelper = HabitDataSource.getInstance(mUserId);
         ArrayList<Habit> habits = dbHelper.getAll();
 
@@ -79,6 +78,7 @@ public class GoogleFitCompletionTask extends AsyncTask<Void, Void, Integer> {
 
         // Cycling through each habit and checking to see if they have been completed
         for (Habit habit : habits) {
+            // make sure habit is linked to Google Fit
             if (habit.isHasGoogleFit()) {
                 // Getting current time
                 Calendar c = Calendar.getInstance();
@@ -90,17 +90,19 @@ public class GoogleFitCompletionTask extends AsyncTask<Void, Void, Integer> {
                     boolean checkin = false;
                     Log.d(DEBUG_TAG, "Habit: " + habit.toString());
                     Log.d(DEBUG_TAG, "Google fit type: " + habit.getGoogleFitType());
-
+                    // if looking at distance, get distance from the results map
                     if (habit.getGoogleFitType().equals(Globals.DISTANCE_STRING)) {
                         Float distance = (Float) map.get(GoogleFitController.DISTANCE);
                         checkin = (distance >= habit.getGoogleFitValue());
 
-                    } else if (habit.getGoogleFitType().equals(Globals.STEPS_STRING)) {
+                    }
+                    // if looking at steps, get steps from the result map
+                    else if (habit.getGoogleFitType().equals(Globals.STEPS_STRING)) {
                         Integer steps = (Integer) map.get(GoogleFitController.STEPS);
                         checkin = (steps >= habit.getGoogleFitValue());
                     }
 
-                    // If Google Fit data indicates that habit has been completed
+                    // If Google Fit data indicates that habit has been completed, check in
                     if (checkin) {
                         Log.d(DEBUG_TAG, "Habit is complete");
 

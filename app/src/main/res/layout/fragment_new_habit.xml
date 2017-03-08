@@ -116,21 +116,19 @@
 
             <Spinner
                 android:id="@+id/google_fit_spinner"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"></Spinner>
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"></Spinner>
 
             <EditText
                 android:id="@+id/google_fit_value"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:layout_weight="1"
                 android:iconifiedByDefault="false"
+                android:inputType="number"
                 android:queryHint="Category" />
         </TableRow>
-
-
 
 
     </LinearLayout>

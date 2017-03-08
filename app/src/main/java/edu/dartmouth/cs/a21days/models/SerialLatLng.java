@@ -6,11 +6,9 @@ package edu.dartmouth.cs.a21days.models;
  *     - only getters and setters
  *     - empty constructor
  *
- * All hail Google
- *
  */
 public class SerialLatLng {
-
+    // latitude and longitude values
     private Double latitude;
     private Double longitude;
 

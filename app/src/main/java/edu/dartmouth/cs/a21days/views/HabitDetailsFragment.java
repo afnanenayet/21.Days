@@ -1,6 +1,5 @@
 package edu.dartmouth.cs.a21days.views;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -36,13 +35,10 @@ import ng.max.slideview.SlideView;
 import static com.facebook.GraphRequest.TAG;
 
 /**
- * Created by Steven on 3/2/17.
+ * Show details of an individual habit
  */
 
 public class HabitDetailsFragment extends DialogFragment {
-
-    private static final int PERMISSION_REQUEST_CODE = 0;
-
     // database helper instance
     private HabitDataSource dbHelper;
     // the habit to display
@@ -64,37 +60,34 @@ public class HabitDetailsFragment extends DialogFragment {
     // Intent to start the tracking service
     private Intent mService;
 
-    private String[] RequestString = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION};
     //Indicator of whether the location check in is required
     private boolean locationcheckin = false;
     //Indicator of whether check in is allowed, set to true by default
     private boolean enablecheckin = true;
 
+    //Positon of the habit in the habit list
+    private int position;
+
     //Get the current location and compare it with the setting location
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent i) {
-            if (mHabit.getLocation()!=null)
-                CheckLocation((Location)i.getParcelableExtra(TrackingService.KEY_LOCATION));
+            if (mHabit.getLocation() != null)
+                CheckLocation((Location) i.getParcelableExtra(TrackingService.KEY_LOCATION));
         }
     };
-
-    //Positon of the habit in the habit list
-    private int position;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // get habit
         position = getArguments().getInt("Position");
         mHabit = getHabitFromDB(position);
-
     }
 
     // Retrieve habit from database using thread
-    private Habit getHabitFromDB(final int position){
+    private Habit getHabitFromDB(final int position) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -123,11 +116,11 @@ public class HabitDetailsFragment extends DialogFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (locationcheckin){
+        if (locationcheckin) {
             getActivity().stopService(mService);
             Log.d(TAG, "onPause: Stop Service");
             LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mReceiver);
-    }
+        }
     }
 
 
@@ -138,8 +131,6 @@ public class HabitDetailsFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.fragment_habit_detail, null);
         builder.setView(view);
-
-
 
         // Set on click listener for delete button
         Button deleteHabit = (Button) view.findViewById(R.id.delete_habit);
@@ -158,81 +149,79 @@ public class HabitDetailsFragment extends DialogFragment {
             enablecheckin = false;
         }
 
-        HabitName = (TextView)view.findViewById(R.id.details_habit_name);
-        Category = (TextView)view.findViewById(R.id.details_category_textview);
-        Completed = (TextView)view.findViewById(R.id.detail_days_completed);
-        Left = (TextView)view.findViewById(R.id.detail_days_left);
-        Priority = (TextView)view.findViewById(R.id.details_priority_textview);
-        Location = (TextView)view.findViewById(R.id.details_location_textview);
+        // get the TextViews
+        HabitName = (TextView) view.findViewById(R.id.details_habit_name);
+        Category = (TextView) view.findViewById(R.id.details_category_textview);
+        Completed = (TextView) view.findViewById(R.id.detail_days_completed);
+        Left = (TextView) view.findViewById(R.id.detail_days_left);
+        Priority = (TextView) view.findViewById(R.id.details_priority_textview);
+        Location = (TextView) view.findViewById(R.id.details_location_textview);
 
-
+        // set up slider for checking in to habit
         SlideView slide = (SlideView) view.findViewById(R.id.slideView);
         slide.setOnSlideCompleteListener(new SlideView.OnSlideCompleteListener() {
             @Override
             public void onSlideComplete(SlideView slideView) {
-                    //Get the current date and store it to habit
-                    Calendar c = Calendar.getInstance();
-                    SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-                    int cdate = Integer.valueOf(df.format(c.getTime()));
+                //Get the current date and store it to habit
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+                int cdate = Integer.valueOf(df.format(c.getTime()));
 
-                    if ((cdate!=mHabit.getTimeStamp()) && enablecheckin) {
-                        mHabit.setStreak(mHabit.getStreak() + 1);
-                        mHabit.setTimeStamp(cdate);
-                        SetupFragment();
-                        Toast.makeText(getActivity(), "Congratulations! Check-in successful!", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        if (!enablecheckin)
-                            Toast.makeText(getActivity(), "Check-in failed: Location incorrect",
-                                    Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(getActivity(), "Check-in failed: You have already checked in today",
-                                    Toast.LENGTH_SHORT).show();
-
-                    }
-                    AddToDBThread add = new AddToDBThread(mHabit);
-                    add.run();
+                // if can check in
+                if ((cdate != mHabit.getTimeStamp()) && enablecheckin) {
+                    mHabit.setStreak(mHabit.getStreak() + 1);
+                    mHabit.setTimeStamp(cdate);
+                    SetupFragment();
+                    Toast.makeText(getActivity(), "Congratulations! Check-in successful!", Toast.LENGTH_SHORT).show();
                 }
+                // otherwise can't check in
+                else {
+                    if (!enablecheckin)
+                        Toast.makeText(getActivity(), "Check-in failed: Location incorrect",
+                                Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getActivity(), "Check-in failed: You have already checked in today",
+                                Toast.LENGTH_SHORT).show();
+
+                }
+                // add updated habit to database
+                AddToDBThread add = new AddToDBThread(mHabit);
+                add.run();
+            }
 
         });
 
-
-
+        // set up UI elements of the fragment
         SetupFragment();
-
-
-
 
         return builder.create();
     }
 
     // Update the fragment view with data
     private void SetupFragment() {
-
         //Update habit info
         HabitName.setText(mHabit.getName());
         Category.setText(mHabit.getCategory());
-        Priority.setText(HabitUtility.getPriorityString(getContext(),mHabit.getPriority()));
+        Priority.setText(HabitUtility.getPriorityString(getContext(), mHabit.getPriority()));
 
-        if (mHabit.getStreak()<=21)
-            Left.setText(String.valueOf(21 - mHabit.getStreak())+" Days");
+        if (mHabit.getStreak() <= 21)
+            Left.setText(String.valueOf(21 - mHabit.getStreak()) + " Days");
         else
             Left.setText("0 Days");
-        Completed.setText(String.valueOf(mHabit.getStreak())+" Days");
+        Completed.setText(String.valueOf(mHabit.getStreak()) + " Days");
 
         //If the location is right, decode the address
-        if (locationcheckin){
+        if (locationcheckin) {
             Location mlocation = HabitUtility.latLngToLocation(mHabit.getLocation());
             try {
                 geocoder = new Geocoder(getContext());
-                String address = (geocoder.getFromLocation(mlocation.getLatitude(),mlocation.getLongitude(),1))
+                String address = (geocoder.getFromLocation(mlocation.getLatitude(), mlocation.getLongitude(), 1))
                         .get(0).getAddressLine(0);
                 Location.setText(address);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             Location.setText("No location check-in is required");
         }
 
@@ -241,11 +230,11 @@ public class HabitDetailsFragment extends DialogFragment {
 
     //To check whether it's at the right location to check-in
     private void CheckLocation(Location CurrentLocation) {
-
+        // get location
         Location HabitLocation = HabitUtility.latLngToLocation(mHabit.getLocation());
         //If the current location is within 400 meters by the setting location,
         //Set the check-in ability as true
-        if (HabitLocation.distanceTo(CurrentLocation)<400){
+        if (HabitLocation.distanceTo(CurrentLocation) < 400) {
             EnableCheckin();
             Log.d(TAG, "CheckLocation: Allow Check-in");
         }
