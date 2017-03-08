@@ -3,11 +3,10 @@ package edu.dartmouth.cs.a21days.models;
 import java.util.ArrayList;
 
 /**
- * Data model for a habit + relevant properties.
+ * Data model for a habit and its relevant properties.
  */
 public class Habit {
-
-    // Habit ID for database
+    // Habit id for database
     private String id;
 
     // User friendly habit name
@@ -37,8 +36,13 @@ public class Habit {
     // The last time the habit was checked in
     private int timeStamp;
 
+    // Whether the habit is using Google Fit
     private boolean hasGoogleFit;
+
+    // The goal for Google Fit
     private int googleFitValue;
+
+    // What type of Google Fit data is used; distance of steps
     private String googleFitType;
 
     // Need empty constructor for Firebase serialization
@@ -47,35 +51,42 @@ public class Habit {
 
     /************************************** Getters and setters *********************************/
 
-
+    // get Google Fit value
     public int getGoogleFitValue() {
         return googleFitValue;
     }
 
+    // set Google Fit value
     public void setGoogleFitValue(int googleFitValue) {
         this.googleFitValue = googleFitValue;
     }
 
+    // get Google Fit type
     public String getGoogleFitType() {
         return googleFitType;
     }
 
+    // set Google Fit type
     public void setGoogleFitType(String googleFitType) {
         this.googleFitType = googleFitType;
     }
 
+    // return whether using location
     public boolean isHasLocation() {
         return hasLocation;
     }
 
+    // set whether using location
     public void setHasLocation(boolean hasLocation) {
         this.hasLocation = hasLocation;
     }
 
+    // get timestamp
     public int getTimeStamp() {
         return timeStamp;
     }
 
+    // set timestamp
     public void setTimeStamp(int timeStamp) {
         this.timeStamp = timeStamp;
     }
@@ -160,10 +171,12 @@ public class Habit {
         this.id = id;
     }
 
+    // return whether using Google Fit
     public boolean isHasGoogleFit() {
         return hasGoogleFit;
     }
 
+    // set whether using Google Fit
     public void setHasGoogleFit(boolean hasGoogleFit) {
         this.hasGoogleFit = hasGoogleFit;
     }
