@@ -43,7 +43,7 @@ Below we present our MVC diagram, outlining the behind-the-scenes view for 21.Da
 
 # Threaded Design Diagram
 Below we present our Threaded Design diagram, outlining the threads involved for 21.Days.
-![alt text](https://raw.githubusercontent.com/afnanenayet/21.Days/master/docs/images/Threaded%20Design%20Diagram.jpg?token=ARpKatSv5jIV2uj72_uUYUCM0YRruv9tks5Yxi5awA%3D%3D)
+![alt text](https://github.com/afnanenayet/21.Days/blob/master/docs/images/Threaded%20Design%20Diagram.jpg?raw=true)
 
 
 # Work Distribution
