@@ -43,6 +43,8 @@ import edu.dartmouth.cs.a21days.utilities.HabitUtility;
  */
 
 public class NewHabitDialogFragment extends DialogFragment implements TimePicker.OnTimeChangedListener {
+    // tag for debugging
+    private static final String TAG = "NewHabitDialogFragment";
     // list of habit categories
     private ArrayList<String> categoryList = new ArrayList<String>();
     // adapter from cursor to xml
@@ -51,13 +53,9 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
     private Habit mHabit;
     // location of habit
     private Location mLocation;
-
     // time when habit should be completed
     private int habitHour;
     private int habitMinute;
-
-    // tag for debugging
-    private static final String TAG = "NewHabitDialogFragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -22,13 +22,12 @@ import android.util.Log;
  */
 
 public class TrackingService extends Service implements LocationListener {
-    // location manager
-    LocationManager mLocationManager;
-    // binder
-    private final IBinder mBinder = new TrackingBinder();
-
     public static final String TRACKING_ACTION = "21days.TACKING_ACTION";
     public static final String KEY_LOCATION = "LOCATION";
+    // binder
+    private final IBinder mBinder = new TrackingBinder();
+    // location manager
+    LocationManager mLocationManager;
 
     @Nullable
     @Override
@@ -49,13 +48,6 @@ public class TrackingService extends Service implements LocationListener {
     public void onDestroy() {
         super.onDestroy();
         stopSelf();
-    }
-
-    public class TrackingBinder extends Binder {
-        TrackingService getService() {
-            // Return instance so clients can call public methods
-            return TrackingService.this;
-        }
     }
 
     // start location updates
@@ -102,5 +94,12 @@ public class TrackingService extends Service implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         // empty, needed for location listener
+    }
+
+    public class TrackingBinder extends Binder {
+        TrackingService getService() {
+            // Return instance so clients can call public methods
+            return TrackingService.this;
+        }
     }
 }

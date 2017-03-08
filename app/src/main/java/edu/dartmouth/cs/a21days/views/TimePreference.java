@@ -18,10 +18,10 @@ import java.util.Date;
 import java.util.Locale;
 
 public class TimePreference extends DialogPreference {
+    private final String DEFAULT_VALUE = "00:00";
     // default hour, minute, and time value
     private int mHour = 0;
     private int mMinute = 0;
-    private final String DEFAULT_VALUE = "00:00";
     // using a TimePicker to set the time
     private TimePicker picker = null;
 
@@ -52,6 +52,27 @@ public class TimePreference extends DialogPreference {
     public static int getMinute(String time) {
         String[] pieces = time.split(":");
         return Integer.parseInt(pieces[1]);
+    }
+
+    // convert a string time to Date object
+    public static Date toDate(String inTime) {
+        try {
+            DateFormat inTimeFormat = new SimpleDateFormat("HH:mm", Locale.US);
+            return inTimeFormat.parse(inTime);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    // convert 24 hour clock to 12 hour
+    public static String time24to12(String inTime) {
+        Date inDate = toDate(inTime);
+        if (inDate != null) {
+            DateFormat outTimeFormat = new SimpleDateFormat("hh:mm a", Locale.US);
+            return outTimeFormat.format(inDate);
+        } else {
+            return inTime;
+        }
     }
 
     // set time of day
@@ -139,26 +160,5 @@ public class TimePreference extends DialogPreference {
         // need to persist here for default value to work
         setTime(currHour, currMinute);
         updateSummary();
-    }
-
-    // convert a string time to Date object
-    public static Date toDate(String inTime) {
-        try {
-            DateFormat inTimeFormat = new SimpleDateFormat("HH:mm", Locale.US);
-            return inTimeFormat.parse(inTime);
-        } catch (ParseException e) {
-            return null;
-        }
-    }
-
-    // convert 24 hour clock to 12 hour
-    public static String time24to12(String inTime) {
-        Date inDate = toDate(inTime);
-        if (inDate != null) {
-            DateFormat outTimeFormat = new SimpleDateFormat("hh:mm a", Locale.US);
-            return outTimeFormat.format(inDate);
-        } else {
-            return inTime;
-        }
     }
 }

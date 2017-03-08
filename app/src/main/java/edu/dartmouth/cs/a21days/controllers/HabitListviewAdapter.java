@@ -29,10 +29,10 @@ import edu.dartmouth.cs.a21days.views.HabitDetailsFragment;
  */
 public class HabitListviewAdapter
         extends RecyclerView.Adapter<HabitListviewAdapter.HabitViewHolder> {
+    private static HabitListviewAdapter instance = null;
     // Holds all the habit data for view
     private ArrayList<Habit> mHabitList;
     private Context mContext;
-    private static HabitListviewAdapter instance = null;
 
     /**
      * Constructor
@@ -43,6 +43,42 @@ public class HabitListviewAdapter
     public HabitListviewAdapter(Context context, ArrayList<Habit> habitArrayList) {
         this.mContext = context;
         this.mHabitList = habitArrayList;
+    }
+
+    /**
+     * Turn the {@link HabitListviewAdapter} into a singleton
+     *
+     * @return an instance of the recycler view adapter
+     */
+    public static HabitListviewAdapter getInstance(Context context, ArrayList<Habit> list) {
+        if (instance == null) {
+            instance = new HabitListviewAdapter(context, list);
+        }
+
+        return instance;
+    }
+
+    /**
+     * get the instance of {@link HabitListviewAdapter}
+     *
+     * @return an instance of the recycler view adapter
+     */
+    public static HabitListviewAdapter setContext(Context context) {
+        if (instance != null) {
+            instance.mContext = context;
+        }
+
+        return instance;
+    }
+
+    /**
+     * Get instance of recycler view adapter
+     *
+     * @return a possibly null instance
+     */
+    @Nullable
+    public static HabitListviewAdapter getInstance() {
+        return instance;
     }
 
     /**
@@ -62,46 +98,13 @@ public class HabitListviewAdapter
 
     /**
      * Updates the list and refreshes the ListView
+     *
      * @param list The new list of data
      */
     public void updateData(ArrayList<Habit> list) {
         mHabitList.clear();
         mHabitList = list;
         notifyDataSetChanged();
-    }
-
-    /**
-     * Turn the {@link HabitListviewAdapter} into a singleton
-     * @return an instance of the recycler view adapter
-     */
-    public static HabitListviewAdapter getInstance(Context context, ArrayList<Habit> list) {
-        if (instance == null) {
-            instance = new HabitListviewAdapter(context, list);
-        }
-
-        return instance;
-    }
-
-    /**
-     * get the instance of {@link HabitListviewAdapter}
-     * @return an instance of the recycler view adapter
-     */
-    public static HabitListviewAdapter setContext(Context context) {
-        if (instance != null) {
-            instance.mContext = context;
-        }
-
-        return instance;
-    }
-
-    /**
-     * Get instance of recycler view adapter
-     *
-     * @return a possibly null instance
-     */
-    @Nullable
-    public static HabitListviewAdapter getInstance() {
-        return instance;
     }
 
     /**

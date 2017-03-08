@@ -19,23 +19,23 @@ public class AddToDBThread extends Thread {
     private Habit habit;
 
     // constructor
-    public AddToDBThread(Habit habit){
+    public AddToDBThread(Habit habit) {
         this.habit = habit;
         dbHelper = HabitDataSource.getInstance();
     }
 
     @Override
-    public void run(){
+    public void run() {
         // Get all habits
         ArrayList<Habit> habitList = dbHelper.getAll();
         ArrayList<String> habitNames = new ArrayList<>();
 
         // Make sure that habit isn't already in database
-        for (Habit habit:habitList){
+        for (Habit habit : habitList) {
             habitNames.add(habit.getId());
         }
         // If habit does exist, add the updated version and remove the old version
-        if (habitNames.contains(habit.getId())){
+        if (habitNames.contains(habit.getId())) {
             String id = habit.getId();
             habit.setId(dbHelper.put(habit));
             dbHelper.delete(id);
@@ -48,8 +48,8 @@ public class AddToDBThread extends Thread {
                 boolean[] days;
 
                 // If no days are selected, assume habit should be done every day
-                if (habit.getFrequency().size() == 0){
-                    days = new boolean[] {true, true, true, true, true, true, true};
+                if (habit.getFrequency().size() == 0) {
+                    days = new boolean[]{true, true, true, true, true, true, true};
                 }
                 // Otherwise get the specified days
                 else {
@@ -61,7 +61,7 @@ public class AddToDBThread extends Thread {
                 int habitHour = habit.getTime() / 100;
 
                 Log.i(TAG, "run: " + habit.getTime());
-                Log.i(TAG, "run: " + habitMin +  ", " + habitHour);
+                Log.i(TAG, "run: " + habitMin + ", " + habitHour);
 
                 // Schedule notification
                 NotificationJob.scheduleJob(

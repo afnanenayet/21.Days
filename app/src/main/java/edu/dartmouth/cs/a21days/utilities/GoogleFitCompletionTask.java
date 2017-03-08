@@ -27,6 +27,7 @@ public class GoogleFitCompletionTask extends AsyncTask<Void, Void, Integer> {
 
     /**
      * Class constructor
+     *
      * @param userId the ID string for the user
      */
     public GoogleFitCompletionTask(String userId) {

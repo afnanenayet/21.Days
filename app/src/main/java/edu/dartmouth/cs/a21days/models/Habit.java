@@ -46,7 +46,8 @@ public class Habit {
     private String googleFitType;
 
     // Need empty constructor for Firebase serialization
-    public Habit() { }
+    public Habit() {
+    }
 
 
     /************************************** Getters and setters *********************************/

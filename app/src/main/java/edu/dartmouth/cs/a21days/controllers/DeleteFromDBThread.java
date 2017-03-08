@@ -20,14 +20,14 @@ public class DeleteFromDBThread extends Thread {
     private int position;
 
     // constructor
-    public DeleteFromDBThread(int position){
+    public DeleteFromDBThread(int position) {
         dbHelper = HabitDataSource.getInstance("example");
         this.position = position;
     }
 
 
     @Override
-    public void run(){
+    public void run() {
         // get all habits from database
         ArrayList<Habit> habits = dbHelper.getAll();
         // Cancel notification

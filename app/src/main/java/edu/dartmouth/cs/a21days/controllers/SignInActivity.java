@@ -51,17 +51,13 @@ public class SignInActivity extends AppCompatActivity implements
     private static final int RC_SIGN_IN = 9001;
     private static final String PREFS = "Local_UserId_prefs";
     private static final String KEY_LOCAL_USER_ID = "Local_user_id";
-
+    // tag for debugging
+    private static final String DEBUG_TAG = "SignInActivity";
     // Firebase authentication
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
     private GoogleApiClient mGoogleApiClient;
-
     private CallbackManager callbackManager;
-
-    // tag for debugging
-    private static final String DEBUG_TAG = "SignInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +142,7 @@ public class SignInActivity extends AppCompatActivity implements
 
     /**
      * Callback handler for button clicks
+     *
      * @param v The button view
      */
     @Override
@@ -204,6 +201,7 @@ public class SignInActivity extends AppCompatActivity implements
 
     /**
      * Authenticate into Firebase with a Google account
+     *
      * @param acct The google account
      */
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -234,7 +232,8 @@ public class SignInActivity extends AppCompatActivity implements
 
     /**
      * Account creation mechanism with email and password
-     * @param email The user's registration email
+     *
+     * @param email    The user's registration email
      * @param password The password the user wishes to use
      */
     private void createAccount(String email, String password) {
@@ -308,6 +307,7 @@ public class SignInActivity extends AppCompatActivity implements
 
     /**
      * Exchange token from facebook to authorize with Firebase
+     *
      * @param token The Facebook access token
      */
     private void handleFacebookAccessToken(AccessToken token) {
@@ -335,6 +335,7 @@ public class SignInActivity extends AppCompatActivity implements
 
     /**
      * update the buttons that are shown depending on whether a user is signed in or not
+     *
      * @param user The firebase user object
      */
     private void updateUI(FirebaseUser user) {
@@ -351,6 +352,7 @@ public class SignInActivity extends AppCompatActivity implements
 
     /**
      * Handle connection failure
+     *
      * @param connectionResult An object that contains the connection result and error
      */
     @Override
@@ -363,20 +365,21 @@ public class SignInActivity extends AppCompatActivity implements
 
     /**
      * Button callback to skip signing in
+     *
      * @param view The button view
      */
     public void onSkipClicked(View view) {
         // Starts main activity
         Random ran = new Random();
-        SharedPreferences mPref = getSharedPreferences(PREFS,MODE_PRIVATE);
+        SharedPreferences mPref = getSharedPreferences(PREFS, MODE_PRIVATE);
         Globals.localuserId = mPref.getString(KEY_LOCAL_USER_ID, "");
 
         // Get the local user id, if null, generate a random one
         if (Globals.localuserId.isEmpty()) {
             Globals.localuserId = String.valueOf(ran.nextInt(10000000));
-            SharedPreferences.Editor mEditor  = mPref.edit();
+            SharedPreferences.Editor mEditor = mPref.edit();
             mEditor.clear();
-            mEditor.putString(KEY_LOCAL_USER_ID,Globals.localuserId);
+            mEditor.putString(KEY_LOCAL_USER_ID, Globals.localuserId);
             mEditor.apply();
         }
         Log.d("TTAG", "onSkipClicked: " + Globals.localuserId);
