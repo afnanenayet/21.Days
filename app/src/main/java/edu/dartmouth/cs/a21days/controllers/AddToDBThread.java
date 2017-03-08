@@ -3,6 +3,9 @@ package edu.dartmouth.cs.a21days.controllers;
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.models.Habit;
+import edu.dartmouth.cs.a21days.utilities.Globals;
+import edu.dartmouth.cs.a21days.utilities.HabitUtility;
+import edu.dartmouth.cs.a21days.utilities.NotificationJob;
 
 /**
  * thread for adding habits to database
@@ -39,6 +42,29 @@ public class AddToDBThread extends Thread {
         // Otherwise, just add it
         else {
             habit.setId(dbHelper.put(habit));
+            if (habit.getTime() != -1) {
+                boolean[] days;
+
+                // If no days are selected, assume every day)
+                if (habit.getFrequency().size() == 0){
+                    days = new boolean[] {true, true, true, true, true, true, true};
+                } else {
+                    ArrayList<Integer> daysArrayList = habit.getFrequency();
+                    days = HabitUtility.daysToBoolArray(daysArrayList);
+                }
+                int habitMin = habit.getTime() % 100;
+                int habitHour = habit.getTime() / 100;
+
+                // Schedule notification
+                NotificationJob.scheduleJob(
+                        habit.getId(),
+                        "21.Days",
+                        habit.getName(),
+                        habitHour,
+                        habitMin,
+                        days
+                );
+            }
         }
 
     }

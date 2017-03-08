@@ -158,7 +158,7 @@ public class NotificationJob extends Job {
      * Batch cancel a set of jobs pertaining to a particular habit
      * @param habitId The ID of the habit
      */
-    private static void cancelJob(String habitId) {
+    public static void cancelJob(String habitId) {
         JobManager.instance().cancelAllForTag(habitId);
     }
 }
