@@ -11,6 +11,7 @@ public class Globals {
     private Globals() { }
 
     public static String userId;
+    public static String localuserId;
 
     // Global tags
     public static final String POSITION_TAG = "Position";

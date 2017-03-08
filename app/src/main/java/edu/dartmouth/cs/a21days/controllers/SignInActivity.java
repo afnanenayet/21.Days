@@ -1,6 +1,7 @@
 package edu.dartmouth.cs.a21days.controllers;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.Random;
+
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
@@ -46,6 +49,8 @@ public class SignInActivity extends AppCompatActivity implements
 
     // sign in code
     private static final int RC_SIGN_IN = 9001;
+    private static final String PREFS = "Local_UserId_prefs";
+    private static final String KEY_LOCAL_USER_ID = "Local_user_id";
 
     // Firebase authentication
     private FirebaseAuth mAuth;
@@ -361,7 +366,21 @@ public class SignInActivity extends AppCompatActivity implements
      */
     public void onSkipClicked(View view) {
         // Starts main activity
-        Globals.userId = "example";
+        Random ran = new Random();
+        SharedPreferences mPref = getSharedPreferences(PREFS,MODE_PRIVATE);
+        Globals.localuserId = mPref.getString(KEY_LOCAL_USER_ID," ");
+
+        //Get the local user id, if null, generate a random one
+        if (Globals.localuserId == " ") {
+            Globals.localuserId = String.valueOf(ran.nextInt(10000000));
+            SharedPreferences.Editor mEditor  = mPref.edit();
+            mEditor.clear();
+            mEditor.putString(KEY_LOCAL_USER_ID,Globals.localuserId);
+            mEditor.commit();
+        }
+        Log.d("TTAG", "onSkipClicked: " + Globals.localuserId);
+
+        Globals.userId = Globals.localuserId;
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         startActivity(intent);
     }
