@@ -178,11 +178,7 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         mHabit.setFrequency(frequency);
         mHabit.setTime(-1);
         if (!enableAllDay.isChecked()) {
-            String time = Integer.toString(habitHour)
-                    + Integer.toString(habitMinute);
-
-            Log.i(TAG, "setHabitInfo:  " + time);
-            mHabit.setTime(Integer.parseInt(time));
+            mHabit.setTime(habitHour * 100 + habitMinute);
             Log.i(TAG, "setHabitInfo: habitTime is " + mHabit.getTime());
         }
 

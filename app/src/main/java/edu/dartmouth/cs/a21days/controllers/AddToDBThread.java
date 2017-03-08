@@ -1,5 +1,7 @@
 package edu.dartmouth.cs.a21days.controllers;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import edu.dartmouth.cs.a21days.models.Habit;
@@ -10,6 +12,7 @@ import edu.dartmouth.cs.a21days.utilities.NotificationJob;
  * Thread for adding habits to the database.
  */
 public class AddToDBThread extends Thread {
+    private String TAG = "AddToDBThread";
     // DB helper instance
     private HabitDataSource dbHelper;
     // habit instance
@@ -56,6 +59,9 @@ public class AddToDBThread extends Thread {
                 // get hour and min of when habit should be completed
                 int habitMin = habit.getTime() % 100;
                 int habitHour = habit.getTime() / 100;
+
+                Log.i(TAG, "run: " + habit.getTime());
+                Log.i(TAG, "run: " + habitMin +  ", " + habitHour);
 
                 // Schedule notification
                 NotificationJob.scheduleJob(
