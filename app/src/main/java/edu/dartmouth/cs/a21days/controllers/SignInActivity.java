@@ -37,8 +37,8 @@ import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 
 /**
- * activity for users to sign in to the app
- * based off of example code from Firebase
+ * Activity for users to sign in to the app with Google or Facebook.
+ * Based off of example code from Firebase
  */
 public class SignInActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -93,10 +93,10 @@ public class SignInActivity extends AppCompatActivity implements
                     // User is signed in
                     Log.d(DEBUG_TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
-                    // setting user ID
+                    // Set user ID
                     Globals.userId = HabitUtility.hashId(user.getUid());
 
-                    // launch main activity
+                    // Launch main activity
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {

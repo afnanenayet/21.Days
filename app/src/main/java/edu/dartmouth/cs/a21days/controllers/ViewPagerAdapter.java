@@ -7,8 +7,11 @@ import android.support.v13.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-
+/**
+ * Adapter for fragments in the Main Activity.
+ */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
+    // list of fragments
     private ArrayList<Fragment> fragments;
 
     // Tab enumerations
@@ -17,7 +20,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public static final int SETTINGS = 2;
 
 
-    // View Pager Adapter constructor
+    // constructor
     public ViewPagerAdapter(FragmentManager fragmentManager, ArrayList<Fragment> fragmentList){
         super(fragmentManager);
         this.fragments = fragmentList;

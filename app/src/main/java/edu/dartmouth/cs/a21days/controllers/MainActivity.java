@@ -34,8 +34,7 @@ import edu.dartmouth.cs.a21days.views.SettingsFragment;
  * The Main controller for the application. Utilizes a bottom navigation bar.
  */
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
-
-
+    // permission request
     private String[] RequestString = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION};
     private static final int PERMISSION_REQUEST_CODE = 0;
@@ -44,10 +43,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private BottomNavigationView mBottomNavigationView;
     // list of fragments attached to main activity
     private ArrayList<Fragment> mFragments;
+
     // ViewPager and adapter
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPageAdapter;
-    public HabitListviewAdapter adapter;
 
     // tag for debugging use
     private static final String DEBUG_TAG = "MainActivity";
@@ -58,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setContentView(R.layout.activity_main);
         ApplicationContext.setContext(getApplicationContext());
 
+        // check for permissions
         checkPermission();
 
         // Setting up bottom navigation view
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Allows us to set the selected item in bottompagelistener
         mViewPager.addOnPageChangeListener(this);
 
+        // listen for which fragment is being selected
         mBottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                     }
                 });
 
+        // create permissions listener
         PermissionsListener permissionsListener = new PermissionsListener(this);
 
         // Setting up binding for Dexter to request permissions
@@ -115,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Listview adapter needs new context on every orientation change because it outlives
         // MainActivity
         HabitsListFragment.getInstance().refreshAdapter(this);
+
+        // start Google Fit job
         GoogleFitCompletionJob.startJob(Globals.userId, 900000);
     }
 
@@ -178,23 +182,24 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     //To check location permission
     private void checkPermission() {
-        if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                || this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(this, RequestString, PERMISSION_REQUEST_CODE);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
         switch (requestCode){
             case PERMISSION_REQUEST_CODE:{
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
                         grantResults[1] != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, RequestString, PERMISSION_REQUEST_CODE);
                 }
-                //All the request permissions must be granted or the app cannot work!
-                //Keep asking the user if any request is denied
             }
         }
 

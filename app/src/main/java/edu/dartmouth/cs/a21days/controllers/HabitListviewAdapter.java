@@ -21,19 +21,17 @@ import cn.fanrunqi.waveprogress.WaveProgressView;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.Globals;
-import edu.dartmouth.cs.a21days.utilities.GoogleFitCompletionTask;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 import edu.dartmouth.cs.a21days.views.HabitDetailsFragment;
 
 /**
  * ListView Adapter for recycler view that displays habit information.
  */
-public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdapter
-        .HabitViewHolder> {
+public class HabitListviewAdapter
+        extends RecyclerView.Adapter<HabitListviewAdapter.HabitViewHolder> {
     // Holds all the habit data for view
     private ArrayList<Habit> mHabitList;
     private Context mContext;
-    private static final String TAG = "HabitListviewAdapter";
     private static HabitListviewAdapter instance = null;
 
     /**
@@ -63,7 +61,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     }
 
     /**
-     * Updates the list and refreshes the listview
+     * Updates the list and refreshes the ListView
      * @param list The new list of data
      */
     public void updateData(ArrayList<Habit> list) {
@@ -85,7 +83,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     }
 
     /**
-     * Turn the {@link HabitListviewAdapter} into a singleton
+     * get the instance of {@link HabitListviewAdapter}
      * @return an instance of the recycler view adapter
      */
     public static HabitListviewAdapter setContext(Context context) {
@@ -98,6 +96,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
 
     /**
      * Get instance of recycler view adapter
+     *
      * @return a possibly null instance
      */
     @Nullable
@@ -116,6 +115,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
         // Load contents for that position
         Habit habit = mHabitList.get(holder.getAdapterPosition());
 
+        // set values for TextViews and progress bar
         holder.habitNameTv.setText(habit.getName());
         holder.habitPriorityTv.setText(HabitUtility
                 .getPriorityString(mContext, habit.getPriority()));
@@ -124,13 +124,16 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
         holder.progressView.setMaxProgress(21);
         holder.progressView.setCurrent(habit.getStreak(), Integer.toString(habit.getStreak()));
 
+        // when item is long pressed, show the habit details fragment
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                // create new habit details fragment
                 HabitDetailsFragment dialogFragment = new HabitDetailsFragment();
                 FragmentManager manager = ((Activity) mContext)
                         .getFragmentManager();
                 Bundle bundle = new Bundle();
+                // pass information into the details fragment
                 bundle.putInt(Globals.POSITION_TAG, position);
                 dialogFragment.setArguments(bundle);
 

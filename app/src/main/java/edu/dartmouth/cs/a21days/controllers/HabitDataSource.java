@@ -26,6 +26,8 @@ public class HabitDataSource {
 
     // instance of this class
     private static HabitDataSource instance = null;
+
+    // map of habit id to habit
     private HashMap<String, Habit> habitMap;
 
     public static final String INVALID_USER = "INVALID";
@@ -40,6 +42,7 @@ public class HabitDataSource {
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             Log.d(DEBUG_TAG, "Habit added for user");
 
+            // put habit into map
             Habit newHabit = dataSnapshot.getValue(Habit.class);
             habitMap.put(newHabit.getId(), newHabit);
 
@@ -51,6 +54,7 @@ public class HabitDataSource {
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             Log.d(DEBUG_TAG, "Habit modified for user");
 
+            // put habit into map
             Habit habit = dataSnapshot.getValue(Habit.class);
             habitMap.put(habit.getId(), habit);
 
@@ -62,6 +66,7 @@ public class HabitDataSource {
         public void onChildRemoved(DataSnapshot dataSnapshot) {
             Log.d(DEBUG_TAG, "Habit removed for user");
 
+            // put habit into map
             Habit habit = dataSnapshot.getValue(Habit.class);
             habitMap.remove(habit.getId());
 
@@ -93,7 +98,7 @@ public class HabitDataSource {
     }
 
     /**
-     * Sets the database to reflect the
+     * Sets the database to reflect the current user
      * @param userId the ID string for the user currently using the app. If the user is offline,
      *               use the string "INVALID"
      */
@@ -124,7 +129,6 @@ public class HabitDataSource {
      * @return An instance of the HabitDataSource
      */
     public static HabitDataSource getInstance(String userId) {
-
         // If class hasn't been initialized, then initialize class
         if (instance == null) {
             instance = new HabitDataSource(userId);
@@ -189,9 +193,10 @@ public class HabitDataSource {
     }
 
     /**
-     * Updates listviewadapter with current data
+     * Updates ListViewAdapter with current data
      */
     private void updateAdapter() {
+        // get instance of adapter
         HabitListviewAdapter adapter = HabitListviewAdapter.getInstance();
 
         // If the adapter has been initialized, update visible data
@@ -202,7 +207,6 @@ public class HabitDataSource {
         //Update the analytic page data
         AnalyticsFragment.habitList.clear();
         AnalyticsFragment.habitList = this.getAll();
-
         AnalyticsFragment.getInstance().UpdateAnalyticView();
 
     }
