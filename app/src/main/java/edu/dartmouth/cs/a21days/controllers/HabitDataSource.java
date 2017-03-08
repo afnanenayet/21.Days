@@ -20,21 +20,16 @@ import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
  * Helper class for Firebase realtime database.
  */
 public class HabitDataSource {
+    public static final String INVALID_USER = "INVALID";
+    // tag for debugging
+    private static final String DEBUG_TAG = "HabitDataSource";
+    // instance of this class
+    private static HabitDataSource instance = null;
     // database instance
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
-
-    // instance of this class
-    private static HabitDataSource instance = null;
-
     // map of habit id to habit
     private HashMap<String, Habit> habitMap;
-
-    public static final String INVALID_USER = "INVALID";
-
-    // tag for debugging
-    private static final String DEBUG_TAG = "HabitDataSource";
-
     // Read and update list of habits
     private ChildEventListener childListener = new ChildEventListener() {
 
@@ -90,6 +85,7 @@ public class HabitDataSource {
 
     /**
      * Public constructor for database
+     *
      * @param userId the ID of the user
      */
     private HabitDataSource(String userId) {
@@ -98,7 +94,17 @@ public class HabitDataSource {
     }
 
     /**
+     * Get instance of {@link HabitDataSource}
+     *
+     * @return instance of HabitDataSource
+     */
+    public static HabitDataSource getInstance() {
+        return instance;
+    }
+
+    /**
      * Sets the database to reflect the current user
+     *
      * @param userId the ID string for the user currently using the app. If the user is offline,
      *               use the string "INVALID"
      */
@@ -138,13 +144,6 @@ public class HabitDataSource {
         return instance;
     }
 
-    /**
-     * Get instance of {@link HabitDataSource}
-     * @return instance of HabitDataSource
-     */
-    public static HabitDataSource getInstance() {
-        return instance;
-    }
 
     public static void setInstance(){
         HabitDataSource.instance = null;
@@ -152,6 +151,7 @@ public class HabitDataSource {
 
     /**
      * Puts an object into the database
+     *
      * @param value the value to put into the database
      * @return a string corresponding to the ID of the entry
      */
@@ -167,6 +167,7 @@ public class HabitDataSource {
 
     /**
      * Deletes an entry
+     *
      * @param id the ID of the habit to delete
      */
     public void delete(String id) {
@@ -178,6 +179,7 @@ public class HabitDataSource {
 
     /**
      * Gets a particular object specified by id
+     *
      * @param id the ID of the object
      * @return an object that corresponds to the query results
      */
@@ -188,6 +190,7 @@ public class HabitDataSource {
 
     /**
      * Gets all objects for a reference location in the database
+     *
      * @return a list of objects
      */
     public ArrayList<Habit> getAll() {

@@ -18,8 +18,9 @@ public class NotificationTask {
 
     /**
      * Sends notification with intent in a worker thread
+     *
      * @param context System context to get notification manager
-     * @param title The title text of the notification
+     * @param title   The title text of the notification
      * @param message The message text of the notification
      */
     @WorkerThread
@@ -43,7 +44,7 @@ public class NotificationTask {
                 .setContentText(message)
                 .setContentIntent(pendingIntent)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                .setVibrate(new long[] {500, 500, 500, 500})
+                .setVibrate(new long[]{500, 500, 500, 500})
                 .setSmallIcon(R.drawable.ic_offline_pin_black_24dp)
                 .build();
 

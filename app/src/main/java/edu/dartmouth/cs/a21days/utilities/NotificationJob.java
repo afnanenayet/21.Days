@@ -25,75 +25,16 @@ public class NotificationJob extends Job {
     private String TAG = "NotificationJob";
 
     /**
-     * Sends a notification when scheduled
-     */
-    @NonNull
-    @Override
-    protected Result onRunJob(Params params) {
-        Log.d(DEBUG_TAG, "Running job");
-        // boolean to see if it's quiet hours right now
-        boolean withinQuietHours = false;
-
-        // get the quiet hours
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        boolean checked = prefs.getBoolean("quiet_hours_preference", false);
-        String startTime = prefs.getString("start_time", "0");
-        String endTime = prefs.getString("end_time", "0");
-        Calendar calendar = Calendar.getInstance();
-        if (checked) {
-            // get quiet hours start and end times
-            int startHour = Integer.parseInt(startTime.split(":")[0]);
-            int startMin = Integer.parseInt(startTime.split(":")[1]);
-            int endHour = Integer.parseInt(endTime.split(":")[0]);
-            int endMin = Integer.parseInt(endTime.split(":")[1]);
-
-            // Check if within quiet hours
-            withinQuietHours = (calendar.get(Calendar.HOUR_OF_DAY)) > startHour &&
-                    (calendar.get(Calendar.HOUR_OF_DAY)) < endHour ||
-                    (calendar.get(Calendar.HOUR_OF_DAY)) == startHour
-                            && (calendar.get(Calendar.MINUTE)) > startMin ||
-                    (calendar.get(Calendar.HOUR_OF_DAY)) == endHour &&
-                            (calendar.get(Calendar.MINUTE)) < endMin;
-        }
-
-        Log.i(TAG, "onRunJob: " + checked);
-        Log.i(TAG, "onRunJob: " + calendar.get(Calendar.HOUR_OF_DAY) );
-        Log.i(TAG, "onRunJob: " + calendar.get(Calendar.MINUTE));
-        Log.i(TAG, "onRunJob: " + withinQuietHours);
-
-
-
-
-        PersistableBundleCompat bundle = params.getExtras();
-        Context context = ApplicationContext.getContext();
-        String title = bundle.getString(Globals.NOTIFICATION_TITLE_KEY, "");
-        String message = bundle.getString(Globals.NOTIFICATION_MESSAGE_KEY, "");
-        String id = bundle.getString(Globals.NOTIFICATION_HABIT_ID, "");
-
-        // Scheduling next job for following week
-        NotificationJob.scheduleJob(id, title, message, Globals.dayInMs * 7);
-
-        // Because we are breaking the static context rule, this may be null
-        if (context != null && !withinQuietHours) {
-
-            new NotificationTask().sendNotification(context, title, message);
-            return Result.SUCCESS;
-        } else {
-            return Result.FAILURE;
-        }
-    }
-
-    /**
      * Schedules when a notification will go off and the contents of the notification
+     *
      * @param habitId The ID for the habit
-     * @param title The title text for the notification
+     * @param title   The title text for the notification
      * @param message The message text for the notification
-     * @param hour The hour at which the notification should go off in 24 hour format
-     *             (ex: if 1:30 PM, then the hour is 13)
+     * @param hour    The hour at which the notification should go off in 24 hour format
+     *                (ex: if 1:30 PM, then the hour is 13)
      * @param minutes The minute at which the notification should go off (ex: if 1:30 PM, then the
      *                minute is 30)
-     * @param days A boolean array of which days this notification will repeat
-     *
+     * @param days    A boolean array of which days this notification will repeat
      * @return A list of Job ID(s) for the jobs that have been scheduled
      */
     public static ArrayList<Integer> scheduleJob(String habitId, String title, String message,
@@ -164,10 +105,11 @@ public class NotificationJob extends Job {
 
     /**
      * Schedule a notification with only an offset
+     *
      * @param habitId The ID string for the habit as it is in firebase
-     * @param title The title text for the notification
+     * @param title   The title text for the notification
      * @param message The message text for the notification
-     * @param offset the offset of the job, in milliseconds
+     * @param offset  the offset of the job, in milliseconds
      * @return The ID of the job
      */
     public static int scheduleJob(String habitId, String title, String message, long offset) {
@@ -186,11 +128,70 @@ public class NotificationJob extends Job {
                 .build()
                 .schedule();
     }
+
     /**
      * Batch cancel a set of jobs pertaining to a particular habit
+     *
      * @param habitId The ID of the habit
      */
     public static void cancelJob(String habitId) {
         JobManager.instance().cancelAllForTag(habitId);
+    }
+
+    /**
+     * Sends a notification when scheduled
+     */
+    @NonNull
+    @Override
+    protected Result onRunJob(Params params) {
+        Log.d(DEBUG_TAG, "Running job");
+        // boolean to see if it's quiet hours right now
+        boolean withinQuietHours = false;
+
+        // get the quiet hours
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        boolean checked = prefs.getBoolean("quiet_hours_preference", false);
+        String startTime = prefs.getString("start_time", "0");
+        String endTime = prefs.getString("end_time", "0");
+        Calendar calendar = Calendar.getInstance();
+        if (checked) {
+            // get quiet hours start and end times
+            int startHour = Integer.parseInt(startTime.split(":")[0]);
+            int startMin = Integer.parseInt(startTime.split(":")[1]);
+            int endHour = Integer.parseInt(endTime.split(":")[0]);
+            int endMin = Integer.parseInt(endTime.split(":")[1]);
+
+            // Check if within quiet hours
+            withinQuietHours = (calendar.get(Calendar.HOUR_OF_DAY)) > startHour &&
+                    (calendar.get(Calendar.HOUR_OF_DAY)) < endHour ||
+                    (calendar.get(Calendar.HOUR_OF_DAY)) == startHour
+                            && (calendar.get(Calendar.MINUTE)) > startMin ||
+                    (calendar.get(Calendar.HOUR_OF_DAY)) == endHour &&
+                            (calendar.get(Calendar.MINUTE)) < endMin;
+        }
+
+        Log.i(TAG, "onRunJob: " + checked);
+        Log.i(TAG, "onRunJob: " + calendar.get(Calendar.HOUR_OF_DAY));
+        Log.i(TAG, "onRunJob: " + calendar.get(Calendar.MINUTE));
+        Log.i(TAG, "onRunJob: " + withinQuietHours);
+
+
+        PersistableBundleCompat bundle = params.getExtras();
+        Context context = ApplicationContext.getContext();
+        String title = bundle.getString(Globals.NOTIFICATION_TITLE_KEY, "");
+        String message = bundle.getString(Globals.NOTIFICATION_MESSAGE_KEY, "");
+        String id = bundle.getString(Globals.NOTIFICATION_HABIT_ID, "");
+
+        // Scheduling next job for following week
+        NotificationJob.scheduleJob(id, title, message, Globals.dayInMs * 7);
+
+        // Because we are breaking the static context rule, this may be null
+        if (context != null && !withinQuietHours) {
+
+            new NotificationTask().sendNotification(context, title, message);
+            return Result.SUCCESS;
+        } else {
+            return Result.FAILURE;
+        }
     }
 }

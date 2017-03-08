@@ -33,13 +33,11 @@ import edu.dartmouth.cs.a21days.utilities.Globals;
  * create an instance of this fragment.
  */
 public class AnalyticsFragment extends Fragment {
+    public static ArrayList<Habit> habitList;
     // instance of this fragment
     private static AnalyticsFragment instance;
-
     // database helper instance
     private HabitDataSource dbHelper;
-    public static ArrayList<Habit> habitList;
-
     // number of habits completed
     private int numHabitsCompleted = 0;
     // number of habits ongoing

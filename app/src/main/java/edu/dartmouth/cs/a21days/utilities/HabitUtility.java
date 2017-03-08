@@ -18,6 +18,7 @@ import edu.dartmouth.cs.a21days.models.SerialLatLng;
 public class HabitUtility {
     /**
      * Get String representation of priority index
+     *
      * @param i the priority index
      * @return a human readable string that the priority index represents
      */
@@ -35,6 +36,7 @@ public class HabitUtility {
 
     /**
      * Converts {@link SerialLatLng} to a {@link Location} object
+     *
      * @param serialLatLng SerialLatLng object to convert
      * @return returns a location object
      */
@@ -51,6 +53,7 @@ public class HabitUtility {
 
     /**
      * Converts {@link Location} object to {@link SerialLatLng} object
+     *
      * @param location the {@link Location} object to convert
      * @return the {@link SerialLatLng} converted from Location
      */
@@ -66,6 +69,7 @@ public class HabitUtility {
 
     /**
      * get the hash of a user's ID
+     *
      * @param userId The user's UID
      * @return A hash of the user's UID that will contain no special characters
      */
@@ -76,6 +80,7 @@ public class HabitUtility {
     /**
      * Retrieves offset from current day for a specific day in the future
      * ex: if today is monday, then wednesday is 2 days converted to ms
+     *
      * @param targetDay The target day
      * @return The offset in milliseconds
      */
@@ -102,6 +107,7 @@ public class HabitUtility {
 
     /**
      * Converts day enumerators to a boolean array
+     *
      * @param days The day(s) to put into the array from enums in {@link Globals}
      * @return an array of boolean values
      */
@@ -120,6 +126,7 @@ public class HabitUtility {
 
     /**
      * Converts day enumerators to a boolean array
+     *
      * @param days The day(s) to put into the array from enums in {@link Globals}
      * @return an array of boolean values
      */
@@ -138,6 +145,7 @@ public class HabitUtility {
 
     /**
      * Converts a day enum from {@link Calendar} to an enum from {@link Globals}
+     *
      * @param day The day from {@link Calendar}
      * @return a day enumerator from {@link Globals}
      */
@@ -172,6 +180,7 @@ public class HabitUtility {
 
     /**
      * Converts a boolean array to an integer array
+     *
      * @param booleanArray The boolean array to convert
      * @return returns an integer array
      */
@@ -191,6 +200,7 @@ public class HabitUtility {
 
     /**
      * Converts a integer array to a boolean array
+     *
      * @param integerArray The integer array to convert
      * @return returns a boolean array
      */

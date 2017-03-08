@@ -3,9 +3,8 @@ package edu.dartmouth.cs.a21days.models;
 /**
  * Serializable version of Location class for Firebase
  * Need:
- *     - only getters and setters
- *     - empty constructor
- *
+ * - only getters and setters
+ * - empty constructor
  */
 public class SerialLatLng {
     // latitude and longitude values
@@ -13,7 +12,8 @@ public class SerialLatLng {
     private Double longitude;
 
     // Requisite empty constructor
-    public SerialLatLng() { }
+    public SerialLatLng() {
+    }
 
     // get latitude
     public Double getLatitude() {

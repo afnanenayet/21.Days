@@ -22,21 +22,28 @@ import java.util.concurrent.TimeUnit;
  * Controller that allows access to Google fit.
  */
 public class GoogleFitController {
-    // keep track of client connection status
-    private static GoogleApiClient mClient = null;
-    private MainActivity mActivity;
-
-    // debugging tag
-    private static final String DEBUG_TAG = "GoogleFitController";
-
     public static final String STEPS = "steps_key";
     public static final String DISTANCE = "distance_key";
     // map for results from Google Fit
     public final static ConcurrentHashMap<String, Object> resultMap = new ConcurrentHashMap<>();
+    // debugging tag
+    private static final String DEBUG_TAG = "GoogleFitController";
+    // keep track of client connection status
+    private static GoogleApiClient mClient = null;
+    private MainActivity mActivity;
 
     // constructor
     public GoogleFitController(MainActivity mainActivity) {
         mActivity = mainActivity;
+    }
+
+    /**
+     * Retrieves distance and steps for user
+     *
+     * @return A hashmap where steps are an {@link Integer} and distance is a {@link Float}
+     */
+    public static Map<String, Object> getData() {
+        return resultMap;
     }
 
     /**
@@ -95,15 +102,6 @@ public class GoogleFitController {
     }
 
     /**
-     * Retrieves distance and steps for user
-     *
-     * @return A hashmap where steps are an {@link Integer} and distance is a {@link Float}
-     */
-    public static Map<String, Object> getData() {
-        return resultMap;
-    }
-
-    /**
      * Thread that populates resultMap;
      */
     public static class UpdateData extends Thread {
@@ -116,6 +114,7 @@ public class GoogleFitController {
             PendingResult<DailyTotalResult> result = Fitness.HistoryApi.readDailyTotal(mClient,
                     DataType.AGGREGATE_STEP_COUNT_DELTA);
             DailyTotalResult totalResult = result.await(60, TimeUnit.SECONDS);
+
             if (totalResult.getStatus().isSuccess()) {
                 // get number of steps
                 DataSet totalSet = totalResult.getTotal();
@@ -127,6 +126,7 @@ public class GoogleFitController {
             // get result for distance from Google Fit
             PendingResult<DailyTotalResult> distanceResult = Fitness.HistoryApi.readDailyTotal
                     (mClient, DataType.AGGREGATE_DISTANCE_DELTA);
+
             DailyTotalResult totalDistanceResult = distanceResult.await(60, TimeUnit.SECONDS);
             if (totalDistanceResult.getStatus().isSuccess()) {
                 // get distance, in meters

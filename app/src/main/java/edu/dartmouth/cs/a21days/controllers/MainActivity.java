@@ -34,22 +34,19 @@ import edu.dartmouth.cs.a21days.views.SettingsFragment;
  * The Main controller for the application. Utilizes a bottom navigation bar.
  */
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+    private static final int PERMISSION_REQUEST_CODE = 0;
+    // tag for debugging use
+    private static final String DEBUG_TAG = "MainActivity";
     // permission request
     private String[] RequestString = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION};
-    private static final int PERMISSION_REQUEST_CODE = 0;
-
     // bottom navigation bar
     private BottomNavigationView mBottomNavigationView;
     // list of fragments attached to main activity
     private ArrayList<Fragment> mFragments;
-
     // ViewPager and adapter
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPageAdapter;
-
-    // tag for debugging use
-    private static final String DEBUG_TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,8 +182,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
                 || this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED)
-        {
+                != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, RequestString, PERMISSION_REQUEST_CODE);
         }
     }
@@ -194,8 +190,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
-        switch (requestCode){
-            case PERMISSION_REQUEST_CODE:{
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE: {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
                         grantResults[1] != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, RequestString, PERMISSION_REQUEST_CODE);

@@ -17,6 +17,7 @@ public class PermissionsListener implements MultiplePermissionsListener {
 
     /**
      * Constructor
+     *
      * @param activity The activity that responses will be displayed to
      */
     public PermissionsListener(MainActivity activity) {
