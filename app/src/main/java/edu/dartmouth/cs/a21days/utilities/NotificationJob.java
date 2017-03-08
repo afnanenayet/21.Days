@@ -1,6 +1,8 @@
 package edu.dartmouth.cs.a21days.utilities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -25,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class NotificationJob extends Job {
     // tag for debugging
     static final String DEBUG_TAG = "NotificationJob";
+    private String TAG = "NotificationJob";
 
     /**
      * Sends a notification when scheduled
@@ -33,6 +36,41 @@ public class NotificationJob extends Job {
     @Override
     protected Result onRunJob(Params params) {
         Log.d(DEBUG_TAG, "Running job");
+
+        boolean withinQuietHours = false;
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        boolean checked = prefs.getBoolean("quiet_hours_preference", false);
+        String startTime = prefs.getString("start_time", "0");
+        String endTime = prefs.getString("end_time", "0");
+        Calendar calendar = Calendar.getInstance();
+        if (checked){
+            int startHour = Integer.parseInt(startTime.split(":")[0]);
+            int startMin = Integer.parseInt(startTime.split(":")[1]);
+            int endHour = Integer.parseInt(endTime.split(":")[0]);
+            int endMin = Integer.parseInt(endTime.split(":")[1]);
+            if ((calendar.get(Calendar.HOUR_OF_DAY)) > startHour && (calendar.get(Calendar.HOUR_OF_DAY)) < endHour){
+                withinQuietHours = true;
+            }
+            else if((calendar.get(Calendar.HOUR_OF_DAY)) == startHour && (calendar.get(Calendar.MINUTE)) > startMin){
+                withinQuietHours = true;
+            }
+            else if ((calendar.get(Calendar.HOUR_OF_DAY)) == endHour && (calendar.get(Calendar.MINUTE)) < endMin){
+                withinQuietHours = true;
+            }
+            else {
+                withinQuietHours = false;
+            }
+
+        }
+
+        Log.i(TAG, "onRunJob: " + checked);
+        Log.i(TAG, "onRunJob: " + calendar.get(Calendar.HOUR_OF_DAY) );
+        Log.i(TAG, "onRunJob: " + calendar.get(Calendar.MINUTE));
+        Log.i(TAG, "onRunJob: " + withinQuietHours);
+
+
+
 
         PersistableBundleCompat bundle = params.getExtras();
         Context context = ApplicationContext.getContext();
@@ -44,7 +82,8 @@ public class NotificationJob extends Job {
         NotificationJob.scheduleJob(id, title, message, Globals.dayInMs * 7);
 
         // Because we are breaking the static context rule, this may be null
-        if (context != null) {
+        if (context != null && !withinQuietHours) {
+
             new NotificationJobTask().sendNotification(context, title, message);
             return Result.SUCCESS;
         } else {

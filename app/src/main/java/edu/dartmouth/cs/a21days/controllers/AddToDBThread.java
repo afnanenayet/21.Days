@@ -59,7 +59,7 @@ public class AddToDBThread extends Thread {
                 NotificationJob.scheduleJob(
                         habit.getId(),
                         habit.getName(),
-                        "This reminder is brought to you by 21.Days, making you a better person three weeks at a time.",
+                        "This reminder is brought to you by 21.Days",
                         habitHour,
                         habitMin,
                         days
