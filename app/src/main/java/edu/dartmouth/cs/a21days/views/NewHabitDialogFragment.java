@@ -227,7 +227,7 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
 
 
         // Hid autocompleteView and set up switch to show and hide it
-        final View autocompleteView = (View) view.findViewById(R.id.place_autocomplete_fragment);
+        final View autocompleteView = view.findViewById(R.id.place_autocomplete_fragment);
         autocompleteView.setVisibility(View.GONE);
 
         Switch enableLocation = (Switch) view.findViewById(R.id.location_requirement);
