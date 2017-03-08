@@ -4,8 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.evernote.android.job.JobManager;
-
 /**
  * Provides method to access application context from utility classes
  */

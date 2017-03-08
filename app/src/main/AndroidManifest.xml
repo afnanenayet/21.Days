@@ -3,6 +3,7 @@
     package="edu.dartmouth.cs.a21days">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -18,8 +19,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBQh-dElmVXw0ff6kwlhTRsGAHayEuL8y8" />
 
-        <activity android:name=".controllers.MainActivity" />
-        <activity android:name=".controllers.SignInActivity">
+        <activity android:name=".controllers.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".controllers.SignInActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -3,6 +3,8 @@ package edu.dartmouth.cs.a21days.views;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.database.MatrixCursor;
 import android.location.Location;
@@ -73,7 +75,6 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
 
         // create new habit and get instance of database helper
         mHabit = new Habit();
-
     }
 
     @Override
@@ -205,9 +206,11 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
         if (autocompleteFragment != null) {
-            getFragmentManager().beginTransaction()
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(autocompleteFragment)
                     .remove(autocompleteFragment)
-                    .commit();
+                    .commitAllowingStateLoss();
         }
 
 

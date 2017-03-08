@@ -33,14 +33,7 @@ import edu.dartmouth.cs.a21days.models.Habit;
  */
 public class AnalyticsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static AnalyticsFragment instance;
 
     // database helper instance
     private HabitDataSource dbHelper;
@@ -77,6 +70,15 @@ public class AnalyticsFragment extends Fragment {
        // empty, required
     }
 
+    public static AnalyticsFragment getInstance(){
+        if (instance == null){
+            instance = new AnalyticsFragment();
+        }
+
+        return instance;
+    }
+
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -93,10 +95,6 @@ public class AnalyticsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
         dbHelper = HabitDataSource.getInstance("example");
         habitList = dbHelper.getAll();
@@ -141,6 +139,7 @@ public class AnalyticsFragment extends Fragment {
         longestStreakHabitNum = 0;
         mostNeglectedHabitNum = 0;
         numHabitsCompleted = 0;
+
 
         // create hashmap
         HashMap<Integer, Integer> streakMap = new HashMap<Integer, Integer>();

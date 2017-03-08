@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     // bottom navigation bar
     private BottomNavigationView mBottomNavigationView;
     // list of fragments attached to main activity
-    public static ArrayList<Fragment> mFragments;
+    private ArrayList<Fragment> mFragments;
     // ViewPager and adapter
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPageAdapter;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Making list of fragments to swipe through
         mFragments = new ArrayList<>();
         mFragments.add(new HabitsListFragment());
-        mFragments.add(new AnalyticsFragment());
+        mFragments.add(AnalyticsFragment.getInstance());
         mFragments.add(new SettingsFragment());
 
         // ViewPage adapter so we can swipe through tabs with the bottom layout
@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         // Setting up binding for Dexter to request permissions
         Dexter.withActivity(this).continueRequestingPendingPermissions(permissionsListener);
-
         // Initialize Google Fit connection
         // connectToGoogleFit(); // todo get Fitness APIs
 
