@@ -202,7 +202,7 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
             mHabit.setHasLocation(false);
         }
 
-        if (googleFitEnabled.isChecked() && googleFitValue.getText() != null){
+        if (googleFitEnabled.isChecked() && !googleFitValue.getText().toString().isEmpty()){
             mHabit.setHasGoogleFit(true);
             mHabit.setGoogleFitType(googleFitSpinner.getSelectedItem().toString());
             mHabit.setGoogleFitValue(Integer.parseInt(googleFitValue.getText().toString()));

@@ -65,9 +65,7 @@ public class AddToDBThread extends Thread {
                         days
 
                 );
-
             }
         }
-
     }
 }

@@ -21,6 +21,7 @@ import cn.fanrunqi.waveprogress.WaveProgressView;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.models.Habit;
 import edu.dartmouth.cs.a21days.utilities.Globals;
+import edu.dartmouth.cs.a21days.utilities.GoogleFitCompletionTask;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
 import edu.dartmouth.cs.a21days.views.HabitDetailsFragment;
 
@@ -113,8 +114,7 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
     @Override
     public void onBindViewHolder(HabitViewHolder holder, final int position) {
         // Load contents for that position
-        // TODO put in all data when applicable
-        final Habit habit = mHabitList.get(holder.getAdapterPosition());
+        Habit habit = mHabitList.get(holder.getAdapterPosition());
 
         holder.habitNameTv.setText(habit.getName());
         holder.habitPriorityTv.setText(HabitUtility
@@ -140,15 +140,9 @@ public class HabitListviewAdapter extends RecyclerView.Adapter<HabitListviewAdap
                     transaction.add(dialogFragment, Globals.POPUP_DIALOG_TAG);
                     transaction.commitAllowingStateLoss();
                 }
-
                 return false;
             }
         });
-
-        // Checking to see if habit has Google Fit integration
-        if (habit.isHasGoogleFit()) {
-            // call task to check
-        }
     }
 
     /**

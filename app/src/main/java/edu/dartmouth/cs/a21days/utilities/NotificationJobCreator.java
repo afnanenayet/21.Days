@@ -11,8 +11,8 @@ public class NotificationJobCreator implements JobCreator {
     // create job notification
     @Override
     public Job create(String tag) {
-        if (false) {
-            return new NotificationJob();
+        if (tag.equals(GoogleFitCompletionJob.TAG)) {
+            return new GoogleFitCompletionJob();
         } else if (!tag.isEmpty()) {
             return new NotificationJob();
         } else {

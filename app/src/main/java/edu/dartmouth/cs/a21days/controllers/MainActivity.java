@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.utilities.ApplicationContext;
 import edu.dartmouth.cs.a21days.utilities.Globals;
+import edu.dartmouth.cs.a21days.utilities.GoogleFitCompletionJob;
+import edu.dartmouth.cs.a21days.utilities.GoogleFitCompletionTask;
 import edu.dartmouth.cs.a21days.utilities.NotificationJobCreator;
 import edu.dartmouth.cs.a21days.utilities.PermissionsListener;
 import edu.dartmouth.cs.a21days.views.AnalyticsFragment;
@@ -99,12 +101,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         PermissionsListener permissionsListener = new PermissionsListener(this);
 
-        // TODO implement permissions when necessary
-        /* Dexter.withActivity(this)
-                .withPermissions()
-                .withListener(permissionsListener)
-                .check(); */
-
         // Setting up binding for Dexter to request permissions
         Dexter.withActivity(this).continueRequestingPendingPermissions(permissionsListener);
         // Initialize Google Fit connection
@@ -119,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Listview adapter needs new context on every orientation change because it outlives
         // MainActivity
         HabitsListFragment.getInstance().refreshAdapter(this);
+        GoogleFitCompletionJob.startJob(900_000);
     }
 
     @Override
@@ -169,11 +166,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
     /**
-     * Connects to Google Fit
+     * Connects to Google Fit and checks if habits have been completed
      */
     private void connectToGoogleFit() {
         GoogleFitController fitController = new GoogleFitController(this);
         fitController.buildFitnessClient();
+        GoogleFitController.getData();
+        new GoogleFitCompletionTask().execute();
     }
 
 
