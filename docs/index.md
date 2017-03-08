@@ -35,7 +35,7 @@ We believe in letting you see what you've accomplished. See how you're doing and
 
 # Our demo slides
 Some individuals who want to delve into the history of this venture have requested that we share a little of our archives. Our demo slides, including our original pitch, can be found here:
-[Pitch slides](https://docs.google.com/presentation/d/1jZVyAWzXpNxvboM9mWs4kSQBQadF9-X9Kso-EU4HQVo/edit?ts=58c0475d#slide=id.g1b23248d27_1_0)
+[Pitch slides](https://docs.google.com/presentation/d/1jZVyAWzXpNxvboM9mWs4kSQBQadF9-X9Kso-EU4HQVo/edit?usp=sharing)
 
 # MVC Diagram
 Below we present our MVC diagram, outlining the behind-the-scenes view for 21.Days.
