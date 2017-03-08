@@ -34,13 +34,15 @@ import edu.dartmouth.cs.a21days.R;
 import edu.dartmouth.cs.a21days.controllers.AddToDBThread;
 import edu.dartmouth.cs.a21days.controllers.HabitDataSource;
 import edu.dartmouth.cs.a21days.models.Habit;
+import edu.dartmouth.cs.a21days.utilities.Globals;
 import edu.dartmouth.cs.a21days.utilities.HabitUtility;
+import edu.dartmouth.cs.a21days.utilities.NotificationJob;
 
 /**
  * Dialog for creating a new habit. Is called from the habit list.
  */
 
-public class NewHabitDialogFragment extends DialogFragment {
+public class NewHabitDialogFragment extends DialogFragment implements TimePicker.OnTimeChangedListener{
     // list of habit categories
     private ArrayList<String> categoryList = new ArrayList<String>();
     // adapter from cursor to xml
@@ -51,6 +53,9 @@ public class NewHabitDialogFragment extends DialogFragment {
     private Location mLocation;
     // db helper to save habit with
     private HabitDataSource dbHelper;
+
+    private int habitHour;
+    private int habitMinute;
 
     // tag for debugging
     private static final String TAG = "NewHabitDialogFragment";
@@ -97,6 +102,9 @@ public class NewHabitDialogFragment extends DialogFragment {
 
         // Call helper function to set up switches
         setUpSwitches(view);
+
+        TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker_habit);
+        timePicker.setOnTimeChangedListener(this);
 
         // Set up autocomplete fragment
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
@@ -163,11 +171,14 @@ public class NewHabitDialogFragment extends DialogFragment {
         ArrayList<Integer> frequency = new ArrayList<>();
         frequency.addAll(toggleButtons.getCheckedPositions());
         mHabit.setFrequency(frequency);
+        mHabit.setTime(-1);
         if (!enableAllDay.isChecked()) {
-            String time = String.valueOf(timePicker.getHour())
-                    + String.valueOf(timePicker.getMinute());
+            String time = Integer.toString(habitHour)
+                    + Integer.toString(habitMinute);
+
             Log.i(TAG, "setHabitInfo:  " + time);
             mHabit.setTime(Integer.parseInt(time));
+            Log.i(TAG, "setHabitInfo: habitTime is " + mHabit.getTime());
         }
 
         // set location if option is enabled
@@ -210,6 +221,7 @@ public class NewHabitDialogFragment extends DialogFragment {
                 } else {
                     timePicker.setVisibility(View.VISIBLE);
                 }
+
             }
         });
 
@@ -313,4 +325,10 @@ public class NewHabitDialogFragment extends DialogFragment {
         mAdapter.changeCursor(c);
     }
 
+
+    @Override
+    public void onTimeChanged(TimePicker timePicker, int i, int i1) {
+        habitHour = i;
+        habitMinute = i1;
+    }
 }

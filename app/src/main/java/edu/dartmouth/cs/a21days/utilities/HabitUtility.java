@@ -5,6 +5,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import edu.dartmouth.cs.a21days.R;
@@ -105,6 +106,24 @@ public class HabitUtility {
      * @return an array of boolean values
      */
     public static boolean[] daysToBoolArray(Integer... days) {
+        boolean[] boolDays = new boolean[7];
+
+        // Bounds checking for array and setting bit flags to true in array
+        for (Integer day : days) {
+            if (day > 0 && day < 7) {
+                boolDays[day] = true;
+            }
+        }
+
+        return boolDays;
+    }
+
+    /**
+     * Converts day enumerators to a boolean array
+     * @param days The day(s) to put into the array from enums in {@link Globals}
+     * @return an array of boolean values
+     */
+    public static boolean[] daysToBoolArray(ArrayList<Integer> days) {
         boolean[] boolDays = new boolean[7];
 
         // Bounds checking for array and setting bit flags to true in array
