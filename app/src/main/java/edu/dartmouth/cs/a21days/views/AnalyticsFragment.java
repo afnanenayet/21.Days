@@ -137,6 +137,8 @@ public class AnalyticsFragment extends Fragment {
         longestStreakHabitNum = 0;
         mostNeglectedHabitNum = 0;
         numHabitsCompleted = 0;
+        mostNeglectedHabitName = "";
+        longestStreakHabitName = "";
 
         Log.d("TAG", "UpdateAnalyticView: ");
 
