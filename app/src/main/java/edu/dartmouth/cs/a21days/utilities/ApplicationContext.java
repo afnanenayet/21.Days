@@ -1,13 +1,8 @@
 package edu.dartmouth.cs.a21days.utilities;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import android.util.Log;
-
-import com.evernote.android.job.JobManager;
 
 /**
  * Provides method to access application context from utility classes

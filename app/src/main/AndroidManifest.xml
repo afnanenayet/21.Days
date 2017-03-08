@@ -19,7 +19,8 @@
             android:value="AIzaSyBQh-dElmVXw0ff6kwlhTRsGAHayEuL8y8" />
 
         <activity android:name=".controllers.MainActivity"
-            android:screenOrientation="portrait"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
         <activity android:name=".controllers.SignInActivity"
             android:screenOrientation="portrait">
             <intent-filter>

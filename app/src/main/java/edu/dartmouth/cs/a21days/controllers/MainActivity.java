@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         // Setting up binding for Dexter to request permissions
         Dexter.withActivity(this).continueRequestingPendingPermissions(permissionsListener);
-
         // Initialize Google Fit connection
         // connectToGoogleFit(); // todo get Fitness APIs
 
@@ -123,14 +122,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         Menu menu = mBottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(position);
         menuItem.setChecked(true);
-        AnalyticsFragment.getInstance().UpdateAnalyticView();
-
-        mFragments.clear();
-        mFragments.add(new HabitsListFragment());
-        mFragments.add(AnalyticsFragment.getInstance());
-        mFragments.add(new SettingsFragment());
-        mViewPageAdapter.notifyDataSetChanged();
-
     }
 
     @Override
