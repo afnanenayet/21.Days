@@ -140,11 +140,8 @@ public class AnalyticsFragment extends Fragment {
         numHabitsOngoing = 0;
         longestStreakHabitNum = 0;
         mostNeglectedHabitNum = 0;
+        numHabitsCompleted = 0;
 
-        if (habitList!=null)
-        {
-            Log.d("TTAG", "UpdateAnalyticView: Isn't null");
-        }
         // create hashmap
         HashMap<Integer, Integer> streakMap = new HashMap<Integer, Integer>();
 
