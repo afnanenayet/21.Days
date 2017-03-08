@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_habit_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,10 +22,10 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/detail_habit_name_card_view"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 card_view:cardCornerRadius="3sp"
-                card_view:cardElevation="3sp"
-                android:layout_height="wrap_content">
+                card_view:cardElevation="3sp">
 
                 <TextView
                     android:id="@+id/details_habit_name"
@@ -44,14 +43,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                app:buttonImage="@drawable/arrow"
-                app:buttonBackgroundColor="@color/colorPrimary"
-                app:slideBackgroundColor="@color/cardview_light_background"
-                app:slideTextColor="@color/colorSecondaryText"
-                app:slideText="Slide to Complete Habit"
                 app:animateSlideText="true"
-                app:reverseSlide="false" />
-
+                app:buttonBackgroundColor="@color/colorPrimary"
+                app:buttonImage="@drawable/arrow"
+                app:reverseSlide="false"
+                app:slideBackgroundColor="@color/cardview_light_background"
+                app:slideText="Slide to Complete Habit"
+                app:slideTextColor="@color/colorSecondaryText" />
 
 
             <LinearLayout
@@ -61,80 +59,80 @@
 
                 <!--Card View: days completed-->
                 <android.support.v7.widget.CardView
-                android:id="@+id/details_days_completed_card_view"
-                android:layout_margin="10dp"
-                android:layout_weight="0.5"
-                card_view:cardCornerRadius="3sp"
-                card_view:cardElevation="3sp"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp">
+                    android:id="@+id/details_days_completed_card_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.5"
+                    card_view:cardCornerRadius="3sp"
+                    card_view:cardElevation="3sp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="5sp">
-
-                    <TextView
-                        android:id="@+id/detail_days_completed_textview"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:drawableBottom="@drawable/textlines"
-                        android:layout_marginTop="10dp"
-                        android:text="Completed Streak"
-                        android:textSize="16sp" />
+                        android:layout_margin="5sp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/detail_days_completed_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:drawableBottom="@drawable/textlines"
+                            android:text="Completed Streak"
+                            android:textAlignment="center"
+                            android:textSize="16sp" />
 
 
-                    <TextView
-                        android:id="@+id/detail_days_completed"
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:layout_weight="0.5"
-                        android:text="11 Days"
-                        android:textSize="30sp"
-                        android:layout_height="200dp" />
+                        <TextView
+                            android:id="@+id/detail_days_completed"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:text="11 Days"
+                            android:textAlignment="center"
+                            android:textSize="30sp" />
 
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
                 <!--Card View: days left-->
                 <android.support.v7.widget.CardView
                     android:id="@+id/details_days_left_card_view"
                     android:layout_width="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="100dp"
                     android:layout_margin="10dp"
+                    android:layout_weight="0.5"
                     card_view:cardCornerRadius="3sp"
-                    card_view:cardElevation="3sp"
-                    android:layout_height="100dp">
+                    card_view:cardElevation="3sp">
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="5sp">
+                        android:layout_margin="5sp"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/detail_days_left_textview"
-                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
+                            android:layout_marginTop="10dp"
                             android:drawableBottom="@drawable/textlines"
                             android:text="Days Left"
+                            android:textAlignment="center"
                             android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/detail_days_left"
                             android:layout_width="match_parent"
-                            android:textAlignment="center"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
                             android:layout_weight="0.5"
+                            android:gravity="center"
                             android:text="10 Days"
-                            android:textSize="30sp"
-                            android:layout_height="wrap_content" />
+                            android:textAlignment="center"
+                            android:textSize="30sp" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
@@ -145,71 +143,71 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/detail_category_card_view"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 card_view:cardCornerRadius="3sp"
-                card_view:cardElevation="3sp"
-                android:layout_height="wrap_content">
+                card_view:cardElevation="3sp">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5sp">
+                    android:layout_margin="5sp"
+                    android:orientation="vertical">
 
                     <!--Category Text-->
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorSecondaryText"
-                            android:textSize="20sp"
-                            android:text="@string/category"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/category"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="20sp" />
                     <!--Category-->
                     <TextView
-                            android:id="@+id/details_category_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimaryText"
-                            android:textSize="21sp"
-                            android:gravity="center"
-                            android:text="Life"/>
+                        android:id="@+id/details_category_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Life"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="21sp" />
 
                     <!--Priority Text-->
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorSecondaryText"
-                            android:textSize="20sp"
-                            android:text="@string/priority"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/priority"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="20sp" />
                     <!--Priority-->
                     <TextView
-                            android:id="@+id/details_priority_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimaryText"
-                            android:textSize="21sp"
-                            android:gravity="center"
-                            android:text="High"/>
+                        android:id="@+id/details_priority_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="High"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="21sp" />
 
                     <!--Location Text-->
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorSecondaryText"
-                            android:textSize="20sp"
-                            android:text="@string/location"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/location"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="20sp" />
                     <!--Location-->
                     <TextView
                         android:id="@+id/details_location_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textSize="21sp"
                         android:gravity="center"
-                        android:text=""/>
+                        android:text=""
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="21sp" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
-            
+
 
             <!-- Delete button -->
             <Button
@@ -218,8 +216,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/delete"
-                android:theme="@style/ThemeOverlay.MyDarkButton"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:theme="@style/ThemeOverlay.MyDarkButton" />
 
         </LinearLayout>
 
