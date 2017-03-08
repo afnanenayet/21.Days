@@ -101,6 +101,7 @@ public class SignInActivity extends AppCompatActivity implements
                     // Launch main activity
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     // User is signed out
                     Log.d(DEBUG_TAG, "onAuthStateChanged:signed_out");
