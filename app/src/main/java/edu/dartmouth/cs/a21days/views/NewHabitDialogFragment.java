@@ -1,16 +1,19 @@
 package edu.dartmouth.cs.a21days.views;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.database.MatrixCursor;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TableRow;
 import android.widget.TimePicker;
 
 import com.google.android.gms.common.api.Status;
@@ -105,10 +109,8 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker_habit);
         timePicker.setOnTimeChangedListener(this);
 
-
-        GoogleFitController googleFit = new GoogleFitController((MainActivity)getActivity());
-        googleFit.buildFitnessClient();
-
+        TableRow googleFitOptions = (TableRow) view.findViewById(R.id.table_row_google_fit);
+        googleFitOptions.setVisibility(View.GONE);
 
 
         // Set up autocomplete fragment
@@ -165,6 +167,11 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         Switch enableAllDay = (Switch) view.findViewById(R.id.all_day_switch);
         // give habit name
         EditText habitName = (EditText) view.findViewById(R.id.habit_name_input);
+
+        Switch googleFitEnabled = (Switch) view.findViewById(R.id.google_fit);
+        Spinner googleFitSpinner = (Spinner) view.findViewById(R.id.google_fit_spinner);
+        EditText googleFitValue = (EditText) view.findViewById(R.id.google_fit_value);
+
         ToggleButtonGroup toggleButtons = (ToggleButtonGroup)
                 view.findViewById(R.id.multi_selection_group);
         Log.i(TAG, "setHabitInfo: " + toggleButtons.getCheckedPositions());
@@ -193,6 +200,12 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         }
         else {
             mHabit.setHasLocation(false);
+        }
+
+        if (googleFitEnabled.isChecked() && googleFitValue.getText() != null){
+            mHabit.setHasGoogleFit(true);
+            mHabit.setGoogleFitType(googleFitSpinner.getSelectedItem().toString());
+            mHabit.setGoogleFitValue(Integer.parseInt(googleFitValue.getText().toString()));
         }
 
     }
@@ -224,12 +237,35 @@ public class NewHabitDialogFragment extends DialogFragment implements TimePicker
         enableAllDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
                 TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker_habit);
                 if (compoundButton.isChecked()) {
                     timePicker.setVisibility(View.GONE);
                 } else {
                     timePicker.setVisibility(View.VISIBLE);
                 }
+
+            }
+        });
+
+        Switch enableGoogleFit = (Switch) view.findViewById(R.id.google_fit);
+        enableGoogleFit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                TableRow googleFitOptions = (TableRow) view.findViewById(R.id.table_row_google_fit);
+                if (compoundButton.isChecked()) {
+                    googleFitOptions.setVisibility(View.VISIBLE);
+                    GoogleFitController googleFit = new GoogleFitController((MainActivity)getActivity());
+                    googleFit.buildFitnessClient();
+                    Spinner googleFitSpinner = (Spinner) view.findViewById(R.id.google_fit_spinner);
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                            R.array.google_fit_array, android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    googleFitSpinner.setAdapter(adapter);
+                } else {
+                    googleFitOptions.setVisibility(View.INVISIBLE);
+                }
+
 
             }
         });

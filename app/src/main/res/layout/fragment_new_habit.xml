@@ -96,6 +96,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <Switch
+            android:id="@+id/google_fit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="15dp"
+            android:fontFamily="Arial"
+            android:switchPadding="15dp"
+            android:text="Enable Google Fit Integration"
+            android:textSize="18dp" />
+
+        <TableRow
+            android:id="@+id/table_row_google_fit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+
+            <Spinner
+                android:id="@+id/google_fit_spinner"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"></Spinner>
+
+            <EditText
+                android:id="@+id/google_fit_value"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:iconifiedByDefault="false"
+                android:queryHint="Category" />
+        </TableRow>
+
+
+
 
     </LinearLayout>
 </ScrollView>

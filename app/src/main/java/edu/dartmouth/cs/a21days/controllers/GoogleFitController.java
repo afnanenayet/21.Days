@@ -45,6 +45,8 @@ public class GoogleFitController {
 
 
 
+
+
     /**
      * Build a {@link GoogleApiClient} that will authenticate the user and allow the application
      * to connect to Fitness APIs. The scopes included should match the scopes your app needs
@@ -99,9 +101,9 @@ public class GoogleFitController {
                 public void run() {
 
                     int steps = 0;
-                    int calories = 0;
+                    float distance = 0;
 
-                    /*
+
                     PendingResult<DailyTotalResult> result = Fitness.HistoryApi.readDailyTotal(mClient, DataType.AGGREGATE_STEP_COUNT_DELTA);
                     DailyTotalResult totalResult = result.await(60, TimeUnit.SECONDS);
                     if (totalResult.getStatus().isSuccess()) {
@@ -110,21 +112,19 @@ public class GoogleFitController {
                         Log.i(TAG, "run: " + totalSet.getDataPoints().get(0).getDataType().getName());
                         steps = totalSet.isEmpty() ? -1 : totalSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
                     }
-                    */
 
+                    PendingResult<DailyTotalResult> distanceResult = Fitness.HistoryApi.readDailyTotal(mClient, DataType.AGGREGATE_DISTANCE_DELTA);
+                    DailyTotalResult totalDistanceResult = distanceResult.await(60, TimeUnit.SECONDS);
+                    if (totalDistanceResult.getStatus().isSuccess()) {
 
-                    PendingResult<DailyTotalResult> result = Fitness.HistoryApi.readDailyTotal(mClient, DataType.AGGREGATE_CALORIES_EXPENDED);
-                    DailyTotalResult totalResult = result.await(60, TimeUnit.SECONDS);
-                    if (totalResult.getStatus().isSuccess()) {
-
-                        DataSet totalSet = totalResult.getTotal();
-                        Log.i(TAG, "run: " + totalSet.getDataPoints().get(0).getDataType().getName());
-                        steps = totalSet.isEmpty() ? -1 : totalSet.getDataPoints().get(0).getValue(Field.FIELD_CALORIES).asInt();
+                        DataSet totalDistanceSet = totalDistanceResult.getTotal();
+                        Log.i(TAG, "run: " + totalDistanceSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE));
+                        distance = totalDistanceSet.isEmpty() ? -1 : totalDistanceSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE).asFloat();
                     }
 
 
 
-                    Log.i(TAG, "buildFitnessClient: " + steps + "  " + calories);
+                    Log.i(TAG, "buildFitnessClient: " + steps + "  " + distance);
                 }
             }).start();
 

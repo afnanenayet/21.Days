@@ -37,11 +37,39 @@ public class Habit {
     // The last time the habit was checked in
     private int timeStamp;
 
+    private boolean hasGoogleFit;
+    private int googleFitValue;
+    private String googleFitType;
+
     // Need empty constructor for Firebase serialization
     public Habit() { }
 
 
     /************************************** Getters and setters *********************************/
+
+    public boolean isHasGoogleFit() {
+        return hasGoogleFit;
+    }
+
+    public void setHasGoogleFit(boolean hasGoogleFit) {
+        this.hasGoogleFit = hasGoogleFit;
+    }
+
+    public int getGoogleFitValue() {
+        return googleFitValue;
+    }
+
+    public void setGoogleFitValue(int googleFitValue) {
+        this.googleFitValue = googleFitValue;
+    }
+
+    public String getGoogleFitType() {
+        return googleFitType;
+    }
+
+    public void setGoogleFitType(String googleFitType) {
+        this.googleFitType = googleFitType;
+    }
 
     public boolean isHasLocation() {
         return hasLocation;

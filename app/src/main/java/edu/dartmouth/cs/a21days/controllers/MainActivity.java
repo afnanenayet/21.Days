@@ -1,9 +1,12 @@
 package edu.dartmouth.cs.a21days.controllers;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +33,11 @@ import edu.dartmouth.cs.a21days.views.SettingsFragment;
  */
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
+
+    private String[] RequestString = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION};
+    private static final int PERMISSION_REQUEST_CODE = 0;
+
     // bottom navigation bar
     private BottomNavigationView mBottomNavigationView;
     // list of fragments attached to main activity
@@ -47,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ApplicationContext.setContext(getApplicationContext());
+
+        checkPermission();
 
         // Setting up bottom navigation view
         mBottomNavigationView = (BottomNavigationView)
@@ -164,5 +174,30 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private void connectToGoogleFit() {
         GoogleFitController fitController = new GoogleFitController(this);
         fitController.buildFitnessClient();
+    }
+
+
+    //To check location permission
+    private void checkPermission() {
+        if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, RequestString, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode){
+            case PERMISSION_REQUEST_CODE:{
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
+                        grantResults[1] != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, RequestString, PERMISSION_REQUEST_CODE);
+                }
+                //All the request permissions must be granted or the app cannot work!
+                //Keep asking the user if any request is denied
+            }
+        }
+
     }
 }

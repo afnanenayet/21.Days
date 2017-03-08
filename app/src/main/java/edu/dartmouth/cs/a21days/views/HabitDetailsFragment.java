@@ -140,8 +140,6 @@ public class HabitDetailsFragment extends DialogFragment {
             }
         });
 
-        checkPermission();
-
         if (mHabit.isHasLocation()) {
             locationcheckin = true;
             enablecheckin = false;
@@ -239,31 +237,5 @@ public class HabitDetailsFragment extends DialogFragment {
     private void EnableCheckin() {
         enablecheckin = true;
     }
-
-    //To check location permission
-    private void checkPermission() {
-        if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || getActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(getActivity(), RequestString, PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode){
-            case PERMISSION_REQUEST_CODE:{
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
-                        grantResults[1] != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), RequestString, PERMISSION_REQUEST_CODE);
-                }
-                //All the request permissions must be granted or the app cannot work!
-                //Keep asking the user if any request is denied
-            }
-        }
-
-    }
-
-    //Check-in Button Click listener
 
 }

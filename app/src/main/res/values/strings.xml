@@ -58,4 +58,9 @@
         <item>Medium</item>
         <item>High</item>
     </string-array>
+
+    <string-array name="google_fit_array">
+        <item>Distance Traveled Daily (Meters)</item>
+        <item>Steps Taken Daily</item>
+    </string-array>
 </resources>
