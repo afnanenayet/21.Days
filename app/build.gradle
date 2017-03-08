@@ -35,9 +35,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     // Required -- JUnit 4 framework
-    testCompile 'junit:junit:4.12'
     // Optional -- Mockito framework
-    testCompile 'org.mockito:mockito-core:1.10.19'
+    compile 'com.android.support:recyclerview-v7:25.2.0'
+    // https://mvnrepository.com/artifact/joda-time/joda-time
+    compile group: 'joda-time', name: 'joda-time', version: '2.3'
+    // Testing frameworks
+    // Optional -- Hamcrest library
+    // Optional -- UI testing with Espresso
+    // Optional -- UI testing with UI Automator
+    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:customtabs:25.2.0'
     compile 'com.android.support:design:25.2.0'
@@ -47,7 +53,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.android.support:cardview-v7:25.2.0'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
     compile 'com.jakewharton:butterknife:8.5.1'
     compile 'com.google.firebase:firebase-auth:10.2.0'
     compile 'com.google.android.gms:play-services-auth:10.2.0'
@@ -63,20 +68,17 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services-places:10.2.0'
     compile 'com.evernote:android-job:1.1.7'
-    // https://mvnrepository.com/artifact/joda-time/joda-time
-    compile group: 'joda-time', name: 'joda-time', version: '2.3'
-    // Testing frameworks
+    compile 'com.google.android.gms:play-services-fitness:10.2.0'
+    compile 'com.android.support.constraint:constraint-layout:+'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
     androidTestCompile 'com.android.support:support-annotations:25.2.0'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
-    // Optional -- Hamcrest library
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
-    // Optional -- UI testing with Espresso
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    // Optional -- UI testing with UI Automator
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    testCompile 'junit:junit:4.12'
 }
 
 apply plugin: 'com.google.gms.google-services'

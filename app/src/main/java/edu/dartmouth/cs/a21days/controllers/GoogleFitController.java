@@ -1,12 +1,14 @@
 package edu.dartmouth.cs.a21days.controllers;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.fitness.Fitness;
 
 /**
  * Controller that allows access to Google fit.
@@ -22,6 +24,7 @@ public class GoogleFitController {
         mActivity = mainActivity;
     }
 
+
     /**
      * Build a {@link GoogleApiClient} that will authenticate the user and allow the application
      * to connect to Fitness APIs. The scopes included should match the scopes your app needs
@@ -35,7 +38,8 @@ public class GoogleFitController {
         if (mClient == null) {
             // build new client
             mClient = new GoogleApiClient.Builder(mActivity.getApplicationContext())
-                    // .addApi()
+                    // add API
+                    .addApi(Fitness.GOALS_API)
                     .addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
                     .addConnectionCallbacks(
                             new GoogleApiClient.ConnectionCallbacks() {
