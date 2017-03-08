@@ -21,9 +21,10 @@
 
         <activity android:name=".controllers.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleInstance"
             />
         <activity android:name=".controllers.SignInActivity"
-            android:screenOrientation="portrait">
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
