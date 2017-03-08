@@ -25,7 +25,9 @@ import edu.dartmouth.cs.a21days.models.Habit;
 public class HabitsListFragment extends Fragment {
     // tag for debugging
     private static String TAG = "HabitsListFragment";
+    // instance of this fragment
     private static HabitsListFragment instance = null;
+    // ListView adapter
     HabitListviewAdapter adapter;
 
     // constructor
