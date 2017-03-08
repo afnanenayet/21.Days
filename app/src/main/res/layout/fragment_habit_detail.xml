@@ -19,6 +19,7 @@
             android:layout_margin="5sp"
             android:orientation="vertical">
 
+            <!--Card View: Habit Name-->
             <android.support.v7.widget.CardView
                 android:id="@+id/detail_habit_name_card_view"
                 android:layout_width="match_parent"
@@ -34,9 +35,10 @@
                     android:text="TextView"
                     android:textAlignment="center"
                     android:textSize="25sp" />
+
             </android.support.v7.widget.CardView>
 
-
+            <!--Slide View: a slide button to check in-->
             <ng.max.slideview.SlideView
                 android:id="@+id/slideView"
                 android:layout_width="match_parent"
@@ -57,8 +59,9 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
+                <!--Card View: days completed-->
                 <android.support.v7.widget.CardView
-                android:id="@+id/details_piechart_card_view"
+                android:id="@+id/details_days_completed_card_view"
                 android:layout_margin="10dp"
                 android:layout_weight="0.5"
                 card_view:cardCornerRadius="3sp"
@@ -97,7 +100,7 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-
+                <!--Card View: days left-->
                 <android.support.v7.widget.CardView
                     android:id="@+id/details_days_left_card_view"
                     android:layout_width="wrap_content"
@@ -138,7 +141,7 @@
             </LinearLayout>
 
 
-            <!-- Category -->
+            <!-- Card View: other habit info -->
             <android.support.v7.widget.CardView
                 android:id="@+id/detail_category_card_view"
                 android:layout_width="match_parent"
@@ -153,13 +156,14 @@
                     android:layout_height="match_parent"
                     android:layout_margin="5sp">
 
+                    <!--Category Text-->
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorSecondaryText"
                             android:textSize="20sp"
                             android:text="@string/category"/>
-
+                    <!--Category-->
                     <TextView
                             android:id="@+id/details_category_textview"
                             android:layout_width="match_parent"
@@ -169,14 +173,14 @@
                             android:gravity="center"
                             android:text="Life"/>
 
-
+                    <!--Priority Text-->
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorSecondaryText"
                             android:textSize="20sp"
                             android:text="@string/priority"/>
-
+                    <!--Priority-->
                     <TextView
                             android:id="@+id/details_priority_textview"
                             android:layout_width="match_parent"
@@ -186,13 +190,14 @@
                             android:gravity="center"
                             android:text="High"/>
 
-
+                    <!--Location Text-->
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorSecondaryText"
                             android:textSize="20sp"
                             android:text="@string/location"/>
+                    <!--Location-->
                     <TextView
                         android:id="@+id/details_location_textview"
                         android:layout_width="match_parent"

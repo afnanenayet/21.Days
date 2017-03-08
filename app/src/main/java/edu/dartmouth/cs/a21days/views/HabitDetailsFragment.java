@@ -8,13 +8,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,18 +42,33 @@ import static com.facebook.GraphRequest.TAG;
 public class HabitDetailsFragment extends DialogFragment {
 
     private static final int PERMISSION_REQUEST_CODE = 0;
-    Habit mHabit;
-    Geocoder geocoder;
+
+    // database helper instance
+    private HabitDataSource dbHelper;
+    // the habit to display
+    private Habit mHabit;
+    // Geocoder to decode the address info
+    private Geocoder geocoder;
+    // TextView of habit name
     private TextView HabitName;
+    // TextView of category
     private TextView Category;
+    // TextView of priority
     private TextView Priority;
+    // TextView of days completed
     private TextView Completed;
+    // TextView of days left
     private TextView Left;
+    // TextView of location
     private TextView Location;
+    // Intent to start the tracking service
     private Intent mService;
+
     private String[] RequestString = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION};
+    //Indicator of whether the location check in is required
     private boolean locationcheckin = false;
+    //Indicator of whether check in is allowed, set to true by default
     private boolean enablecheckin = true;
 
     //Get the current location and compare it with the setting location
@@ -69,8 +80,8 @@ public class HabitDetailsFragment extends DialogFragment {
         }
     };
 
+    //Positon of the habit in the habit list
     private int position;
-    private HabitDataSource dbHelper;
 
 
     @Override
@@ -195,15 +206,21 @@ public class HabitDetailsFragment extends DialogFragment {
         return builder.create();
     }
 
+    // Update the fragment view with data
     private void SetupFragment() {
+
+        //Update habit info
         HabitName.setText(mHabit.getName());
         Category.setText(mHabit.getCategory());
         Priority.setText(HabitUtility.getPriorityString(getContext(),mHabit.getPriority()));
+
         if (mHabit.getStreak()<=21)
             Left.setText(String.valueOf(21 - mHabit.getStreak())+" Days");
         else
             Left.setText("0 Days");
         Completed.setText(String.valueOf(mHabit.getStreak())+" Days");
+
+        //If the location is right, decode the address
         if (locationcheckin){
             Location mlocation = HabitUtility.latLngToLocation(mHabit.getLocation());
             try {
@@ -226,7 +243,7 @@ public class HabitDetailsFragment extends DialogFragment {
     private void CheckLocation(Location CurrentLocation) {
 
         Location HabitLocation = HabitUtility.latLngToLocation(mHabit.getLocation());
-        //If the current location is within 100 meters by the setting location,
+        //If the current location is within 400 meters by the setting location,
         //Set the check-in ability as true
         if (HabitLocation.distanceTo(CurrentLocation)<400){
             EnableCheckin();

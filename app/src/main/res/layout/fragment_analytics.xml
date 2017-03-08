@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- chart for habit streaks -->
+            <!-- Card view: chart for habit streaks -->
             <android.support.v7.widget.CardView
                 android:id="@+id/analytics_graph_card_view"
                 android:layout_width="match_parent"
@@ -32,6 +32,7 @@
 
             </android.support.v7.widget.CardView>
 
+            <!-- Card view: habit analysis data -->
             <android.support.v7.widget.CardView
                 android:id="@+id/habit_analysis_card_view"
                 android:layout_width="match_parent"
@@ -47,6 +48,7 @@
                     android:background="#ffffff"
                     android:orientation="vertical">
 
+                    <!--First row of data analysis-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -153,6 +155,7 @@
 
                     </LinearLayout>
 
+                    <!--Second row of data analysis-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -259,11 +262,12 @@
                             android:layout_weight="1" />
 
                     </LinearLayout>
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
-            <!-- encouraging comment -->
+            <!-- Card view: encouraging comment -->
             <android.support.v7.widget.CardView
                 android:id="@+id/analytics_comment_card_view"
                 android:layout_width="match_parent"

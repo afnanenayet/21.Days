@@ -139,7 +139,7 @@ public class AnalyticsFragment extends Fragment {
         longestStreakHabitNum = 0;
         mostNeglectedHabitNum = 0;
         numHabitsCompleted = 0;
-
+        Log.d("TAG", "UpdateAnalyticView: ");
 
         // create hashmap
         HashMap<Integer, Integer> streakMap = new HashMap<Integer, Integer>();
@@ -156,7 +156,6 @@ public class AnalyticsFragment extends Fragment {
             if (habitStreak >= longestStreakHabitNum) {
                 longestStreakHabitNum = habitStreak;
                 longestStreakHabitName = habit.getName();
-                Log.d("TTAG", "UpdateAnalyticView: longeststreak" + longestStreakHabitName + longestStreakHabitNum);
             }
             // check if streak is over 21 days
             if (habitStreak >= 21) {
@@ -182,11 +181,9 @@ public class AnalyticsFragment extends Fragment {
                 Calendar lastday = Calendar.getInstance();
                 lastday.setTime(d);
                 Calendar today = Calendar.getInstance();
-                Log.d("TTAG", "UpdateAnalyticView: " + timestamp + today.getTime().toString());
 
                 long diff = today.getTimeInMillis() - lastday.getTimeInMillis(); //result in millis
                 int days = (int) (diff / (24 * 60 * 60 * 1000));
-                Log.d("TTAG", habit.getName() + "UpdateAnalyticView: " + days + " Days");
 
                 //Get the most Neglected habit
                 if (days >= mostNeglectedHabitNum) {
@@ -195,7 +192,6 @@ public class AnalyticsFragment extends Fragment {
                 }
             }
         }
-        Log.d("TTAG", "UpdateAnalyticView: Outside loop");
 
         // go through each habit again to construct the map
         for (Habit habit:habitList) {
