@@ -44,24 +44,19 @@ public class NotificationJob extends Job {
         String startTime = prefs.getString("start_time", "0");
         String endTime = prefs.getString("end_time", "0");
         Calendar calendar = Calendar.getInstance();
-        if (checked){
+        if (checked) {
             int startHour = Integer.parseInt(startTime.split(":")[0]);
             int startMin = Integer.parseInt(startTime.split(":")[1]);
             int endHour = Integer.parseInt(endTime.split(":")[0]);
             int endMin = Integer.parseInt(endTime.split(":")[1]);
-            if ((calendar.get(Calendar.HOUR_OF_DAY)) > startHour && (calendar.get(Calendar.HOUR_OF_DAY)) < endHour){
-                withinQuietHours = true;
-            }
-            else if((calendar.get(Calendar.HOUR_OF_DAY)) == startHour && (calendar.get(Calendar.MINUTE)) > startMin){
-                withinQuietHours = true;
-            }
-            else if ((calendar.get(Calendar.HOUR_OF_DAY)) == endHour && (calendar.get(Calendar.MINUTE)) < endMin){
-                withinQuietHours = true;
-            }
-            else {
-                withinQuietHours = false;
-            }
 
+            // Check if within quiet hours
+            withinQuietHours = (calendar.get(Calendar.HOUR_OF_DAY)) > startHour &&
+                    (calendar.get(Calendar.HOUR_OF_DAY)) < endHour ||
+                    (calendar.get(Calendar.HOUR_OF_DAY)) == startHour
+                            && (calendar.get(Calendar.MINUTE)) > startMin ||
+                    (calendar.get(Calendar.HOUR_OF_DAY)) == endHour &&
+                            (calendar.get(Calendar.MINUTE)) < endMin;
         }
 
         Log.i(TAG, "onRunJob: " + checked);

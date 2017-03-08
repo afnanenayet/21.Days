@@ -11,7 +11,9 @@ public class NotificationJobCreator implements JobCreator {
     // create job notification
     @Override
     public Job create(String tag) {
-        if (!tag.isEmpty()) {
+        if (false) {
+            return new NotificationJob();
+        } else if (!tag.isEmpty()) {
             return new NotificationJob();
         } else {
             return null;
