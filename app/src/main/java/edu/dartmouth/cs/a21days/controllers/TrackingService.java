@@ -41,8 +41,7 @@ public class TrackingService extends Service implements LocationListener {
     public int onStartCommand(Intent intent, int flags, int startId) {
         StartLocationUpdate();
         Log.d("TTAG", "onStartCommand: ");
-        // We want this service to continue running until it is explicitly
-        // stopped, so return sticky.
+        // We want the service to continue running until it is explicitly stopped, so return sticky.
         return START_STICKY;
     }
 
@@ -59,19 +58,23 @@ public class TrackingService extends Service implements LocationListener {
         }
     }
 
+    // start location updates
     private void StartLocationUpdate() {
+        // set location criteria
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // get provider
         String provider = mLocationManager.getBestProvider(criteria, true);
 
-
+        // check location permissions
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+        // get location and keep on getting location updates
         Location location = mLocationManager.getLastKnownLocation(provider);
         onLocationChanged(location);
         mLocationManager.requestLocationUpdates(provider, 500, 0, this);
@@ -80,6 +83,7 @@ public class TrackingService extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        // broadcast intent when location is changed
         Intent onLocationUpdated = new Intent(TRACKING_ACTION);
         onLocationUpdated.putExtra(KEY_LOCATION, location);
         LocalBroadcastManager.getInstance(this).sendBroadcast(onLocationUpdated);
