@@ -33,6 +33,8 @@ import edu.dartmouth.cs.a21days.models.Habit;
  */
 public class AnalyticsFragment extends Fragment {
 
+    private static AnalyticsFragment instance;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,6 +78,15 @@ public class AnalyticsFragment extends Fragment {
     public AnalyticsFragment() {
        // empty, required
     }
+
+    public static AnalyticsFragment getInstance(){
+        if (instance == null){
+            instance = new AnalyticsFragment();
+        }
+
+        return instance;
+    }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -141,6 +152,7 @@ public class AnalyticsFragment extends Fragment {
         longestStreakHabitNum = 0;
         mostNeglectedHabitNum = 0;
         numHabitsCompleted = 0;
+
 
         // create hashmap
         HashMap<Integer, Integer> streakMap = new HashMap<Integer, Integer>();

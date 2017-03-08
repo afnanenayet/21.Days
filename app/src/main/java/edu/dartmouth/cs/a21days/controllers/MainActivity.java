@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     // bottom navigation bar
     private BottomNavigationView mBottomNavigationView;
     // list of fragments attached to main activity
-    public static ArrayList<Fragment> mFragments;
+    private ArrayList<Fragment> mFragments;
     // ViewPager and adapter
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPageAdapter;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Making list of fragments to swipe through
         mFragments = new ArrayList<>();
         mFragments.add(new HabitsListFragment());
-        mFragments.add(new AnalyticsFragment());
+        mFragments.add(AnalyticsFragment.getInstance());
         mFragments.add(new SettingsFragment());
 
         // ViewPage adapter so we can swipe through tabs with the bottom layout
@@ -123,6 +123,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         Menu menu = mBottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(position);
         menuItem.setChecked(true);
+        AnalyticsFragment.getInstance().UpdateAnalyticView();
+
+        mFragments.clear();
+        mFragments.add(new HabitsListFragment());
+        mFragments.add(AnalyticsFragment.getInstance());
+        mFragments.add(new SettingsFragment());
+        mViewPageAdapter.notifyDataSetChanged();
+
     }
 
     @Override
