@@ -2,7 +2,7 @@
 21.Days is, at its core, a habit-building application. 21.Days encourages user accountability and responsibility through its notification and location-checking system to ensure that users follow through with their habits. Building a habit is just that simple!
 
 # Download our app here:
-[21.Days](https://drive.google.com/open?id=0BzkkxO0hv42fN29RQlkwOU5TZWs)
+[21.Days](https://github.com/afnanenayet/21.Days/blob/master/app/app-release.apk?raw=true)
 
 
 # Features
