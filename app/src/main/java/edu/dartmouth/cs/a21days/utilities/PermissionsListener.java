@@ -25,7 +25,6 @@ public class PermissionsListener implements MultiplePermissionsListener {
 
     @Override
     public void onPermissionsChecked(MultiplePermissionsReport report) {
-        //TODO
     }
 
     /**

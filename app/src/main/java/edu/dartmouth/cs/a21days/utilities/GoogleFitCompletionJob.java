@@ -9,13 +9,10 @@ import com.evernote.android.job.JobRequest;
 import com.evernote.android.job.util.support.PersistableBundleCompat;
 
 /**
- * Created by aenayet on 3/8/17.
- */
-
-/**
- * Periodically checks Google Fit to see if user has completed habit
+ * Periodically checks Google Fit to see if user has completed a habit linked with Google Fit.
  */
 public class GoogleFitCompletionJob extends Job {
+    // debugging tag
     public static final String TAG = "GoogleFitCompletionJob";
 
     /**
@@ -27,8 +24,10 @@ public class GoogleFitCompletionJob extends Job {
         PersistableBundleCompat extras = params.getExtras();
         String userId = extras.getString(Globals.USER_ID_KEY, "");
 
+        // check if user ID exists
         if (!userId.isEmpty()) {
             Log.d(TAG, "Running job");
+            // create a task to check completion
             GoogleFitCompletionTask task = new GoogleFitCompletionTask(Globals.userId);
 
             try {

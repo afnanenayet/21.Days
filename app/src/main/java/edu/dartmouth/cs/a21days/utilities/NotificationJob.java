@@ -31,15 +31,17 @@ public class NotificationJob extends Job {
     @Override
     protected Result onRunJob(Params params) {
         Log.d(DEBUG_TAG, "Running job");
-
+        // boolean to see if it's quiet hours right now
         boolean withinQuietHours = false;
 
+        // get the quiet hours
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         boolean checked = prefs.getBoolean("quiet_hours_preference", false);
         String startTime = prefs.getString("start_time", "0");
         String endTime = prefs.getString("end_time", "0");
         Calendar calendar = Calendar.getInstance();
         if (checked) {
+            // get quiet hours start and end times
             int startHour = Integer.parseInt(startTime.split(":")[0]);
             int startMin = Integer.parseInt(startTime.split(":")[1]);
             int endHour = Integer.parseInt(endTime.split(":")[0]);
@@ -177,6 +179,7 @@ public class NotificationJob extends Job {
         params.putString(Globals.NOTIFICATION_MESSAGE_KEY, message);
         params.putString(Globals.NOTIFICATION_HABIT_ID, habitId);
 
+        // schedule new job
         return new JobRequest.Builder(habitId)
                 .setExact(offset)
                 .setExtras(params)
