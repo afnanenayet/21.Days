@@ -146,6 +146,10 @@ public class HabitDataSource {
         return instance;
     }
 
+    public static void setInstance(){
+        HabitDataSource.instance = null;
+    }
+
     /**
      * Puts an object into the database
      * @param value the value to put into the database

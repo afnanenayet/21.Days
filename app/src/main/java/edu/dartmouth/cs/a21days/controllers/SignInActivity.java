@@ -382,6 +382,7 @@ public class SignInActivity extends AppCompatActivity implements
         Log.d("TTAG", "onSkipClicked: " + Globals.localuserId);
 
         Globals.userId = Globals.localuserId;
+        HabitDataSource.getInstance(Globals.userId);
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         startActivity(intent);
     }
